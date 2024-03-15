@@ -33,4 +33,12 @@ class TImageString {
       "assets/images/categories/icons8-tailors-dummy-50.png";
   static const String toyCarImage =
       "assets/images/categories/icons8-toy-car-50.png";
+
+  // ! banner Image
+  static const String promoBanner1 = "assets/images/banner/30discount.jpg";
+  static const String promoBanner2 = "assets/images/banner/shoe_banner.jpg";
+  static const String promoBanner3 = "assets/images/banner/shop_banner.jpg";
+
+  // ! products image
+  static const String product1 = "assets/images/products/shoe_products.png";
 }

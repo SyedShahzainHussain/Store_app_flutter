@@ -63,6 +63,6 @@ class TSized {
   // ! loading indicator size
   static const double loadingIndicatorSize = 36.0;
 
-  // ! Grid vew spacing
+  // ! Grid view spacing
   static const double gridViewSpacing = 16.0;
 }

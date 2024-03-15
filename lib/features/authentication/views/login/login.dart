@@ -27,7 +27,10 @@ class Login extends StatelessWidget {
               const LoginForm(),
 
               // ! Divider
-              LoginDivider(isDark: isDark,title: TTexts.orSignInWith,),
+              LoginDivider(
+                isDark: isDark,
+                title: TTexts.orSignInWith,
+              ),
               const SizedBox(
                 height: TSized.spacebetweenItem,
               ),

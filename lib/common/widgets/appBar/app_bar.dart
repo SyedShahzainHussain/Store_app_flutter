@@ -8,13 +8,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? leadingOnPress;
   final List<Widget>? actions;
   final IconData? leadingIcon;
-  const CustomAppBar(
-      {super.key,
-      this.title,
-      this.showBackArrow = false,
-      this.leadingOnPress,
-      this.actions,
-      this.leadingIcon});
+  const CustomAppBar({
+    super.key,
+    this.title,
+    this.showBackArrow = false,
+    this.leadingOnPress,
+    this.actions,
+    this.leadingIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
