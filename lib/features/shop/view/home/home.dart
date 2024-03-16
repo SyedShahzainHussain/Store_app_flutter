@@ -12,8 +12,8 @@ import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,13 @@ class Home extends StatelessWidget {
                   height: TDeviceUtils.screenWidth(context) * 0.03,
                 ),
                 // ! Categories listview horizontal
-                TSectionHeading(
-                  title: "Popular Categories",
-                  showActionButton: false,
-                  textColor: isDark ? TColors.black : TColors.white,
+                Padding(
+                  padding: const EdgeInsets.only(left: TSized.defaultSpace),
+                  child: TSectionHeading(
+                    title: "Popular Categories",
+                    showActionButton: false,
+                    textColor: isDark ? TColors.black : TColors.white,
+                  ),
                 ),
                 SizedBox(
                   height: TDeviceUtils.screenWidth(context) * 0.05,
@@ -51,15 +54,24 @@ class Home extends StatelessWidget {
                 const CategoriesList(),
               ],
             )),
-            // ! CarouselSlider
             Padding(
               padding: const EdgeInsets.all(TSized.defaultSpace),
               child: Column(
                 children: [
+                  // ! CarouselSlider
+
                   const TBanners(),
                   const SizedBox(
                     height: TSized.spacebetweenItem,
                   ),
+                  // ! Heading
+                  TSectionHeading(
+                    title: "Popular Products",
+                  ),
+                  const SizedBox(
+                    height: TSized.spacebetweenItem,
+                  ),
+                  // ! Grid Layout
                   GridLayout(
                       itemBuilder: (context, index) {
                         return const TProductCartVertical();

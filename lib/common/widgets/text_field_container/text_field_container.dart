@@ -9,19 +9,21 @@ class TTextFieldContainer extends StatelessWidget {
   final String text;
   final IconData? icon;
   final bool showBackGround, showBorder;
+  final EdgeInsets padding;
   const TTextFieldContainer({
     super.key,
     required this.text,
     this.icon = Iconsax.search_normal,
     this.showBackGround = true,
     this.showBorder = true,
+    this.padding = const EdgeInsets.symmetric(horizontal: TSized.defaultSpace),
   });
 
   @override
   Widget build(BuildContext context) {
     bool isDark = THelperFunction.isDarkMode(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: TSized.defaultSpace),
+      padding: padding,
       child: Container(
         width: TDeviceUtils.screenWidth(context),
         padding: const EdgeInsets.all(TSized.md),

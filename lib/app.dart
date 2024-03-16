@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Store App',
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
       home: const OnBoard(),

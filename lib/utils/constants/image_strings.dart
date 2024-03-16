@@ -41,4 +41,11 @@ class TImageString {
 
   // ! products image
   static const String product1 = "assets/images/products/shoe_products.png";
+
+  // ! feature image
+  static const String clothIcon = "assets/images/features/cloth.png";
+  static const String adidasIcon = "assets/images/features/adidas.png";
+  static const String ikeaIcon = "assets/images/features/ikea.png";
+  static const String kenwoodIcon = "assets/images/features/kenwood.png";
+  static const String nikeIcon = "assets/images/features/nike.png";
 }

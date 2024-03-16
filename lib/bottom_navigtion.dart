@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:store/features/shop/view/home/home.dart';
+import 'package:store/features/shop/view/store/store.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
@@ -12,7 +13,7 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDark = THelperFunction.isDarkMode(context);
     return ChangeNotifierProvider(
-      create: (context)=>BottomNavigationController(),
+      create: (context) => BottomNavigationController(),
       child: Scaffold(
         bottomNavigationBar: Consumer<BottomNavigationController>(
           builder: (context, value, _) => NavigationBar(
@@ -50,10 +51,8 @@ class BottomNavigationController with ChangeNotifier {
   }
 
   List<Widget> screen = [
-    const Home(),
-    Container(
-      color: Colors.red,
-    ),
+    const HomeScreen(),
+    const StoreScreen(),
     Container(
       color: Colors.blue,
     ),

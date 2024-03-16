@@ -1,15 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:store/utils/constants/colors.dart';
 
 class ProductCartWidget extends StatelessWidget {
   final VoidCallback onPressed;
-  final Color color;
+  final Color? color;
   const ProductCartWidget({
     super.key,
-    required  this.onPressed,
-    required this.color,
+    required this.onPressed,
+    this.color,
   });
 
   @override
@@ -18,7 +17,7 @@ class ProductCartWidget extends StatelessWidget {
       children: [
         IconButton(
             onPressed: onPressed,
-            icon:  Icon(
+            icon: Icon(
               Iconsax.shopping_bag,
               color: color,
             )),

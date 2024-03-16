@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:store/common/styles/shadow.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
-import 'package:store/common/widgets/container/t_rounded_image.dart';
+import 'package:store/common/widgets/image/t_rounded_image.dart';
 import 'package:store/common/widgets/icons/t_circular_icons.dart';
 import 'package:store/common/widgets/product_price/t_product_price_text.dart';
+import 'package:store/common/widgets/texts/t_brand_verification.dart';
 import 'package:store/common/widgets/texts/t_product_title.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/image_strings.dart';
@@ -35,6 +36,8 @@ class TProductCartVertical extends StatelessWidget {
             padding: const EdgeInsets.all(TSized.md),
             backgroundColor: dark ? TColors.dark : TColors.light,
             child: Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.center,
               children: [
                 // ! Thumbnail Image
 
@@ -46,6 +49,7 @@ class TProductCartVertical extends StatelessWidget {
                 // ! Sale Tag
                 Positioned(
                   top: 12,
+                  left: 0,
                   child: TRoundedContainer(
                     radius: TSized.sm,
                     padding: const EdgeInsets.symmetric(
@@ -62,7 +66,7 @@ class TProductCartVertical extends StatelessWidget {
                 // ! create Icon
                 const Positioned(
                   top: 0,
-                  right: 0,
+                  right: -10,
                   child: TCircularIcons(
                     icon: Iconsax.heart5,
                     color: Colors.red,
@@ -76,68 +80,55 @@ class TProductCartVertical extends StatelessWidget {
           ),
           // ! Detail
 
-          Padding(
-            padding: const EdgeInsets.only(left: TSized.md),
+          const Padding(
+            padding: EdgeInsets.only(left: TSized.md),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const TProductTitle(
+                TProductTitle(
                   title: "Green Nike Air Shoes",
                   smallSize: true,
                 ),
-                const SizedBox(
+                SizedBox(
                   height: TSized.spacebetweenItem / 2,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "Nike",
-                      style: Theme.of(context).textTheme.labelMedium,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    const SizedBox(
-                      width: TSized.sm,
-                    ),
-                    const Icon(
-                      Iconsax.verify5,
-                      color: TColors.primary,
-                      size: TSized.iconXsm,
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // ! Price
-                   const TProductPriceText(price: "35.5"),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: TColors.dark,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(TSized.cardRadiusMd),
-                          bottomRight:
-                              Radius.circular(TSized.productImageRadius),
-                        ),
-                      ),
-                      child: const SizedBox(
-                        width: TSized.iconLg * 1.2,
-                        height: TSized.iconLg * 1.2,
-                        child: Center(
-                          child: Icon(
-                            Iconsax.add,
-                            color: TColors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
+                TBrandTitleAndVerification(title: "Nike",),
               ],
             ),
           ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // ! Price
+              const Padding(
+                padding: EdgeInsets.only(left: TSized.md),
+                child: TProductPriceText(price: "35.5"),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  color: TColors.dark,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(TSized.cardRadiusMd),
+                    bottomRight: Radius.circular(TSized.productImageRadius),
+                  ),
+                ),
+                child: const SizedBox(
+                  width: TSized.iconLg * 1.2,
+                  height: TSized.iconLg * 1.2,
+                  child: Center(
+                    child: Icon(
+                      Iconsax.add,
+                      color: TColors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
   }
 }
+

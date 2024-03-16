@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 
 class TRoundedImage extends StatelessWidget {
@@ -10,7 +9,7 @@ class TRoundedImage extends StatelessWidget {
     this.width,
     this.height,
     this.borderRadius = TSized.cardRadiusMd,
-    this.backgroundColor = TColors.white,
+    this.backgroundColor,
     this.applyImageRadius = true,
     this.border,
     this.fit = BoxFit.contain,
@@ -21,7 +20,7 @@ class TRoundedImage extends StatelessWidget {
   final bool isNetworkImage;
   final double? width, height;
   final double borderRadius;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final BoxBorder? border;
   final BoxFit? fit;
   final VoidCallback? onPressed;
