@@ -5,7 +5,7 @@ import 'package:store/common/widgets/products/t_cart_products_vertical.dart';
 import 'package:store/common/widgets/text_field_container/text_field_container.dart';
 import 'package:store/features/shop/view/home/widget/categories_list.dart';
 import 'package:store/features/shop/view/home/widget/home_app_bar.dart';
-import 'package:store/features/shop/view/home/widget/t_primary_header_container.dart';
+import 'package:store/common/widgets/container/t_primary_header_container.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
@@ -52,6 +52,9 @@ class HomeScreen extends StatelessWidget {
                 ),
                 // ! Categories
                 const CategoriesList(),
+                const SizedBox(
+                  height: TSized.spacebetweenSections,
+                )
               ],
             )),
             Padding(

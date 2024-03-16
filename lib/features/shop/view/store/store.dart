@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
+import 'package:store/common/widgets/appBar/tapbar.dart';
 import 'package:store/common/widgets/layouts/grid_layout.dart';
 import 'package:store/common/widgets/product_cart/product_cart_widget.dart';
 import 'package:store/common/widgets/text_field_container/text_field_container.dart';
 import 'package:store/features/shop/model/feature_model/feature_model.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
+import 'package:store/features/shop/view/store/widget/categories_tap.dart';
 import 'package:store/features/shop/view/store/widget/feature_brand_widget.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
@@ -73,6 +75,7 @@ class StoreScreen extends StatelessWidget {
                           title: featureBrands[index].title,
                           subTitle: featureBrands[index].subTitle.toString(),
                           onTap: featureBrands[index].onTap!,
+                          showBorder: false,
                         );
                       },
                       itemCount: featureBrands.length,
@@ -80,34 +83,34 @@ class StoreScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              bottom: TabBar(
-                  unselectedLabelColor: TColors.darkGrey,
-                  indicatorColor: TColors.primary,
-                  isScrollable: true,
-                  labelColor: THelperFunction.isDarkMode(context)
-                      ? TColors.white
-                      : TColors.black,
-                      tabAlignment: TabAlignment.start,
-                  tabs: const [
-                    Tab(
-                      text: "Sports",
-                    ),
-                    Tab(
-                      text: "Furniture",
-                    ),
-                    Tab(
-                      text: "Electronics",
-                    ),
-                    Tab(
-                      text: "Clothes",
-                    ),
-                    Tab(
-                      text: "Cosmetics",
-                    )
-                  ]),
+              bottom: const TabBars(
+                tabs: [
+                  Tab(
+                    text: "Sports",
+                  ),
+                  Tab(
+                    text: "Furniture",
+                  ),
+                  Tab(
+                    text: "Electronics",
+                  ),
+                  Tab(
+                    text: "Clothes",
+                  ),
+                  Tab(
+                    text: "Cosmetics",
+                  )
+                ],
+              ),
             ),
           ],
-          body: Container(),
+          body: const TabBarView(children: [
+            CategoryTab(),
+            CategoryTab(),
+            CategoryTab(),
+            CategoryTab(),
+            CategoryTab()
+          ]),
         ),
       ),
     );

@@ -93,7 +93,7 @@ class LoginForm extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       THelperFunction.navigatedToScreen(
-                          context, const BottomNavigation());
+                          context, const BottomNavigationScreen());
                     },
                     child: const Text(TTexts.signIn))),
             const SizedBox(

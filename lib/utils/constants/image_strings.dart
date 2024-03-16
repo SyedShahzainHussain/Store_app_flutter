@@ -34,6 +34,11 @@ class TImageString {
   static const String toyCarImage =
       "assets/images/categories/icons8-toy-car-50.png";
 
+ // ! User
+   static const String userImage =
+      "assets/images/auth/user.png";
+
+
   // ! banner Image
   static const String promoBanner1 = "assets/images/banner/30discount.jpg";
   static const String promoBanner2 = "assets/images/banner/shoe_banner.jpg";

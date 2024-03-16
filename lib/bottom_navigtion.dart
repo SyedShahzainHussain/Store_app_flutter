@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
+import 'package:store/features/personalizations/view/setting/setting.dart';
 import 'package:store/features/shop/view/home/home.dart';
 import 'package:store/features/shop/view/store/store.dart';
+import 'package:store/features/shop/view/wishList/wiishList.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
-class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({super.key});
+class BottomNavigationScreen extends StatelessWidget {
+  const BottomNavigationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +55,7 @@ class BottomNavigationController with ChangeNotifier {
   List<Widget> screen = [
     const HomeScreen(),
     const StoreScreen(),
-    Container(
-      color: Colors.blue,
-    ),
-    Container(
-      color: Colors.green,
-    ),
+    const WishListScreen(),
+    const SettingScreen()
   ];
 }

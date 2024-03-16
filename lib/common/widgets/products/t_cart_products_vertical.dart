@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:store/common/styles/shadow.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/common/widgets/image/t_rounded_image.dart';
 import 'package:store/common/widgets/icons/t_circular_icons.dart';
@@ -22,9 +21,9 @@ class TProductCartVertical extends StatelessWidget {
       width: 180,
       padding: const EdgeInsets.all(1),
       decoration: BoxDecoration(
-        boxShadow: [
-          TShadowStyle.verticalProductShadow,
-        ],
+        // boxShadow: [
+        //   TShadowStyle.verticalProductShadow,
+        // ],
         borderRadius: BorderRadius.circular(TSized.productImageRadius),
         color: dark ? TColors.darkGrey : TColors.white,
       ),

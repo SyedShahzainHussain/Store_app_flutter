@@ -11,13 +11,14 @@ class FeatureBrandGridWidget extends StatelessWidget {
   final String title;
   final String subTitle;
   final String image;
-  final Function()?  onTap;
+  final Function()? onTap;
+  final bool showBorder;
   const FeatureBrandGridWidget(
       {super.key,
       required this.image,
       required this.subTitle,
       required this.title,
-      required this.onTap});
+      required this.onTap,required this.showBorder});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class FeatureBrandGridWidget extends StatelessWidget {
       onTap: onTap,
       child: TRoundedContainer(
         padding: const EdgeInsets.all(TSized.sm),
-        showBorder: true,
+        showBorder: showBorder,
         backgroundColor: Colors.transparent,
         child: Row(
           children: [

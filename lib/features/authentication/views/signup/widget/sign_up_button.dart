@@ -14,7 +14,7 @@ class SignUpButton extends StatelessWidget {
       child: ElevatedButton(
         child: const Text("Create Account"),
         onPressed: () {
-          THelperFunction.navigatedToScreen(context, VerifyEmail());
+          THelperFunction.navigatedToScreen(context, const VerifyEmail());
         },
       ),
     );
