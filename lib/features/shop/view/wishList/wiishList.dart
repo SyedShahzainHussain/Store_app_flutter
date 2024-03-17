@@ -5,6 +5,7 @@ import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/icons/t_circular_icons.dart';
 import 'package:store/common/widgets/layouts/grid_layout.dart';
 import 'package:store/common/widgets/products/t_cart_products_vertical.dart';
+import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
@@ -14,6 +15,8 @@ class WishListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       backgroundColor:
+            THelperFunction.isDarkMode(context) ? TColors.black : TColors.white,
       appBar: CustomAppBar(
         title: Text(
           "WishList",

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:store/common/widgets/image/t_circular_image.dart';
+import 'package:store/features/personalizations/view/profile/profile.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/image_strings.dart';
+import 'package:store/utils/helper/helper_function.dart';
 
 class TUserProdileTile extends StatelessWidget {
   const TUserProdileTile({
@@ -31,7 +33,9 @@ class TUserProdileTile extends StatelessWidget {
             Theme.of(context).textTheme.bodySmall!.apply(color: TColors.white),
       ),
       trailing: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            THelperFunction.navigatedToScreen(context, const ProfileScreen());
+          },
           icon: const Icon(
             Iconsax.edit,
             color: TColors.white,

@@ -24,7 +24,7 @@ class TRoundedImage extends StatelessWidget {
   final BoxBorder? border;
   final BoxFit? fit;
   final VoidCallback? onPressed;
-  final double? padding;
+  final EdgeInsets? padding;
   final bool applyImageRadius;
 
   @override
@@ -32,6 +32,7 @@ class TRoundedImage extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
+        padding: padding,
         height: height,
         width: width,
         decoration: BoxDecoration(
