@@ -36,20 +36,21 @@ class TProductCartVertical extends StatelessWidget {
           children: [
             // ! Thumnail  WhishList Button Discount Tag
             TRoundedContainer(
+              width: double.infinity,
               height: 180,
               padding: const EdgeInsets.all(TSized.md),
               backgroundColor: dark ? TColors.dark : TColors.light,
               child: Stack(
                 clipBehavior: Clip.none,
-                alignment: Alignment.center,
+                alignment: Alignment.bottomCenter,
                 children: [
                   // ! Thumbnail Image
-
+      
                   const TRoundedImage(
                     imageUrl: TImageString.product1,
                     applyImageRadius: true,
                   ),
-
+      
                   // ! Sale Tag
                   Positioned(
                     top: 12,
@@ -83,7 +84,7 @@ class TProductCartVertical extends StatelessWidget {
               height: TSized.spacebetweenItem / 2,
             ),
             // ! Detail
-
+      
             const Padding(
               padding: EdgeInsets.only(left: TSized.md),
               child: Column(

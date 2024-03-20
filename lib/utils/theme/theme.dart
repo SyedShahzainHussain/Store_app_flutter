@@ -20,6 +20,7 @@ class TAppTheme {
     primaryColor: Colors.blue,
     fontFamily: "Poppins",
     textTheme: TTextTheme.lightTextTheme,
+    
     appBarTheme: TAppBarTheme.lightAppBarTheme,
     elevatedButtonTheme: TElevatedTheme.lightElevatedTheme,
     bottomSheetTheme: TBottomSheetTheme.lightBottomSheetTheme,

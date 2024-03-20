@@ -3,8 +3,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/container/t_primary_header_container.dart';
 import 'package:store/common/widgets/listtile/list_tile.dart';
+import 'package:store/features/personalizations/view/address/address.dart';
 import 'package:store/features/personalizations/view/setting/widget/t_setting_menu_tile.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
+import 'package:store/features/shop/view/orders/orders.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
@@ -50,7 +52,7 @@ class SettingScreen extends StatelessWidget {
               children: [
                 // ! Account Setting
                 TSectionHeading(
-                  title: "Account Setting",
+                  title: "Account Settings",
                   showActionButton: false,
                 ),
                 const SizedBox(
@@ -60,7 +62,10 @@ class SettingScreen extends StatelessWidget {
                   icon: Iconsax.safe_home,
                   title: "My Address",
                   subTitle: "Set shoping delivery address",
-                  onTap: () {},
+                  onTap: () {
+                    THelperFunction.navigatedToScreen(
+                        context, const AddressScreen());
+                  },
                 ),
                 TSettingListTile(
                     icon: Iconsax.shopping_cart,
@@ -71,7 +76,10 @@ class SettingScreen extends StatelessWidget {
                     icon: Iconsax.bag_tick,
                     title: "My Orders",
                     subTitle: "In-progress and Completed Orders",
-                    onTap: () {}),
+                    onTap: () {
+                      THelperFunction.navigatedToScreen(
+                          context, const OrderScreen());
+                    }),
                 TSettingListTile(
                     icon: Iconsax.bank,
                     title: "Bank Account",
@@ -136,11 +144,11 @@ class SettingScreen extends StatelessWidget {
                 ),
                 SizedBox(
                   width: double.infinity,
-                  child:
-                      OutlinedButton(onPressed: () {}, child: const Text("Logout")),
+                  child: OutlinedButton(
+                      onPressed: () {}, child: const Text("Logout")),
                 ),
                 const SizedBox(
-                  height: TSized.spacebetweenSections *2.5,
+                  height: TSized.spacebetweenSections * 2.5,
                 ),
               ],
             ),

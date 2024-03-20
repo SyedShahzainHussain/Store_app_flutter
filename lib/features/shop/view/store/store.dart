@@ -85,6 +85,7 @@ class StoreScreen extends StatelessWidget {
               ),
               bottom: const TabBars(
                 tabs: [
+                  
                   Tab(
                     text: "Sports",
                   ),

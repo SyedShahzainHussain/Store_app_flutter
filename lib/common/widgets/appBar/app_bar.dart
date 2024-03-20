@@ -30,7 +30,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: actions,
         leading: showBackArrow
             ? IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 icon: Icon(
                   Iconsax.arrow_left,
                   color: dark ? TColors.white : TColors.black,

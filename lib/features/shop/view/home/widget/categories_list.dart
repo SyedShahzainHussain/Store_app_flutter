@@ -17,8 +17,8 @@ class CategoriesList extends StatelessWidget {
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (contect, index) => TVerticalImageText(
-            onTap: categories[index].onTap,
+          itemBuilder: (context, index) => TVerticalImageText(
+            onTap: () => categories[index].onTap!(context),
             image: categories[index].image,
             title: categories[index].title,
           ),

@@ -34,10 +34,8 @@ class TImageString {
   static const String toyCarImage =
       "assets/images/categories/icons8-toy-car-50.png";
 
- // ! User
-   static const String userImage =
-      "assets/images/auth/user.png";
-
+  // ! User
+  static const String userImage = "assets/images/auth/user.png";
 
   // ! banner Image
   static const String promoBanner1 = "assets/images/banner/30discount.jpg";
@@ -53,4 +51,19 @@ class TImageString {
   static const String ikeaIcon = "assets/images/features/ikea.png";
   static const String kenwoodIcon = "assets/images/features/kenwood.png";
   static const String nikeIcon = "assets/images/features/nike.png";
+
+  // ! Payment ethod
+
+  static const String applePay = "assets/images/payment_method/applepay.png";
+  static const String googlePay = "assets/images/payment_method/googleplay.png";
+  static const String masterCard =
+      "assets/images/payment_method/mastercard.png";
+  static const String visaCard = "assets/images/payment_method/visa.png";
+  static const String payPal = "assets/images/payment_method/paypal.png";
+  static const String payTm = "assets/images/payment_method/paytm.png";
+  static const String creditCard =
+      "assets/images/payment_method/creditcard.png";
+  static const String paymentSuccess =
+      "assets/images/payment_method/verified_payment.png";
+
 }

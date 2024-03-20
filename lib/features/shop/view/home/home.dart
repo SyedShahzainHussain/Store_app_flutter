@@ -3,6 +3,7 @@ import 'package:store/common/widgets/banners/t_banners.dart';
 import 'package:store/common/widgets/layouts/grid_layout.dart';
 import 'package:store/common/widgets/products/t_cart_products_vertical.dart';
 import 'package:store/common/widgets/text_field_container/text_field_container.dart';
+import 'package:store/features/shop/view/allProducts/all_products.dart';
 import 'package:store/features/shop/view/home/widget/categories_list.dart';
 import 'package:store/features/shop/view/home/widget/home_app_bar.dart';
 import 'package:store/common/widgets/container/t_primary_header_container.dart';
@@ -70,6 +71,10 @@ class HomeScreen extends StatelessWidget {
                   // ! Heading
                   TSectionHeading(
                     title: "Popular Products",
+                    onPressed: () {
+                      THelperFunction.navigatedToScreen(
+                          context, const AllProducts());
+                    },
                   ),
                   const SizedBox(
                     height: TSized.spacebetweenItem,

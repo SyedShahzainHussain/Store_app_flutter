@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store/utils/constants/size.dart';
 
 class TFieldTheme {
   TFieldTheme._();
@@ -15,23 +16,23 @@ class TFieldTheme {
       color: Colors.black.withOpacity(0.8),
     ),
     border: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.grey),
     ),
     enabledBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.grey),
     ),
     errorBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.red),
     ),
     focusedErrorBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.orange),
     ),
     focusedBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.black12),
     ),
   );
@@ -47,23 +48,23 @@ class TFieldTheme {
       color: Colors.white.withOpacity(0.8),
     ),
     border: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.grey),
     ),
     enabledBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.grey),
     ),
     errorBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.red),
     ),
     focusedErrorBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.orange),
     ),
     focusedBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(TSized.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: Colors.white),
     ),
   );

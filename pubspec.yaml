@@ -40,6 +40,8 @@ dependencies:
   flutter_native_splash: 
   smooth_page_indicator: 
   carousel_slider: ^4.2.1
+  readmore: ^2.2.0
+  flutter_rating_bar: ^4.0.1
 # ------------------------ End-packages --------------------------- #
 dev_dependencies:
   flutter_test:
@@ -62,6 +64,7 @@ flutter:
     - assets/images/banner/
     - assets/images/products/
     - assets/images/features/
+    - assets/images/payment_method/
 
 
 # ------------------------ Local Fonts --------------------------- #
