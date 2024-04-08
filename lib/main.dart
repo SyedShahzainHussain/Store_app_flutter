@@ -6,6 +6,7 @@ import 'package:store/app.dart';
 import 'package:provider/provider.dart';
 import 'package:store/bloc/authentication/authentication_bloc.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
+import 'package:store/bloc/google/google_bloc.dart';
 import 'package:store/bloc/login/login_bloc.dart';
 import 'package:store/bloc/register/register_bloc.dart';
 import 'package:store/bloc/verification/verification_bloc.dart';
@@ -47,6 +48,7 @@ Future<void> main() async {
         BlocProvider(create: (context) => RegisterBloc()),
         BlocProvider(create: (context) => VerificationBloc()),
         BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => GoogleAuthBloc()),
       ], child: const MyApp()),
     ),
   );

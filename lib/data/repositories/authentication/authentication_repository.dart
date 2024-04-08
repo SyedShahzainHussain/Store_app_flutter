@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:store/data/exception/exception.dart';
 import 'package:store/features/authentication/views/login/login.dart';
 import 'package:store/utils/global_context/context_utils.dart';
@@ -81,8 +82,39 @@ class AuthenticationRepository {
   Future<void> logout() async {
     try {
       await _auth.signOut();
+      
       Navigator.pushAndRemoveUntil(ContextUtility.context,
           MaterialPageRoute(builder: (_) => const Login()), (route) => false);
+    } on FirebaseAuthException catch (e) {
+      throw SFirebaseAuthException(e.code).messages;
+    } on FirebaseException catch (e) {
+      throw SFirebaseException(e.code).message!;
+    } on PlatformException catch (e) {
+      throw SPlatformException(e.code).message!;
+    } on FormatException catch (e) {
+      throw SFormatException(e.message);
+    } catch (e) {
+      throw "SomeThing went wrong. Please try again.";
+    }
+  }
+
+  // ! google sign in
+
+  Future<UserCredential> googleSignIn() async {
+    try {
+      // * Trigger the authentication flow
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+
+      // * Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await userAccount?.authentication;
+
+      // * create a new Credential
+      final credentials = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+
+      // * Once sign in return the credentials
+      return _auth.signInWithCredential(credentials);
     } on FirebaseAuthException catch (e) {
       throw SFirebaseAuthException(e.code).messages;
     } on FirebaseException catch (e) {

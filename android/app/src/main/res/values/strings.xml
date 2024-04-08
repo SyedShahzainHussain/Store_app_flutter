@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">olx-app</string>
+    <string name="facebook_app_id">3525550004170130</string>
+    <string name="fb_login_protocol_scheme">fb3525550004170130</string>
+    <string name="facebook_client_token">cc872108f0b301f47aa5badc99d404f0</string>
+</resources>

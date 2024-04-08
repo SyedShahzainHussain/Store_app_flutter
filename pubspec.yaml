@@ -26,6 +26,7 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   firebase_storage:
+  google_sign_in: ^6.2.1
   # Loading
   flutter_spinkit:
   modal_progress_hud_nsn:
@@ -49,6 +50,7 @@ dependencies:
   connectivity_plus: ^6.0.1
   delightful_toast: ^1.1.0
   restart_app: ^1.2.1
+  flutter_facebook_auth: ^6.2.0
 # ------------------------ End-packages --------------------------- #
 dev_dependencies:
   flutter_test:

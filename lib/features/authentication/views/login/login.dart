@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:store/bloc/google/google_bloc.dart';
+import 'package:store/bloc/google/google_state.dart';
 import 'package:store/bloc/login/login_bloc.dart';
 import 'package:store/bloc/login/login_state.dart';
 import 'package:store/bottom_navigtion.dart';
@@ -22,25 +24,51 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDark = THelperFunction.isDarkMode(context);
     return Scaffold(
-      body: BlocListener<LoginBloc, LoginState>(
-        listener: (context, state) {
-          if (state is LoginLoading) {
-            TFullScreenLoader.openLoadingDialog(
-              "We are processing your information...",
-              TImageString.loaderJson,
-            );
-          } else if (state is LoginError) {
-            THelperFunction.showDelightToast(
-                state.message, Icons.error, Colors.red);
-          } else {
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => const BottomNavigationScreen()),
-                (route) => false);
-                  THelperFunction.showDelightToast(
-                "Login Success", Iconsax.copy_success, Colors.green);
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<LoginBloc, LoginState>(
+            listener: (context, state) {
+              if (state is LoginLoading) {
+                TFullScreenLoader.openLoadingDialog(
+                  "We are processing your information...",
+                  TImageString.loaderJson,
+                );
+              } else if (state is LoginError) {
+                THelperFunction.showDelightToast(
+                    state.message, Icons.error, Colors.red);
+              } else {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const BottomNavigationScreen()),
+                    (route) => false);
+                THelperFunction.showDelightToast(
+                    "Login Success", Iconsax.copy_success, Colors.green);
+              }
+            },
+          ),
+          BlocListener<GoogleAuthBloc, GoogleAuthState>(
+            listener: (context, state) {
+              if (state is GoogleAuthLoading) {
+                TFullScreenLoader.openLoadingDialog(
+                  "Logging you in...",
+                  TImageString.loaderJson,
+                );
+              } else if (state is GoogleAuthError) {
+                THelperFunction.showDelightToast(
+                    state.error, Icons.error, Colors.red);
+              } else {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const BottomNavigationScreen()),
+                    (route) => false);
+                THelperFunction.showDelightToast(
+                    "Login Success", Iconsax.copy_success, Colors.green);
+              }
+            },
+          ),
+        ],
         child: SingleChildScrollView(
           child: Padding(
             padding: TextStyleCommon.paddingWithAppBar,
