@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
+import 'package:store/bloc/fetch_user/fetch_user_event.dart';
 import 'package:store/common/widgets/banners/t_banners.dart';
 import 'package:store/common/widgets/layouts/grid_layout.dart';
 import 'package:store/common/widgets/products/t_cart_products_vertical.dart';
@@ -13,8 +16,19 @@ import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<FetchUserBloc>().add(FetchUser());
+  }
 
   @override
   Widget build(BuildContext context) {

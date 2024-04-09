@@ -1,24 +1,45 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/bloc/forgot_password/forgot_password_bloc.dart';
+import 'package:store/bloc/forgot_password/forgot_password_event.dart';
 import 'package:store/features/authentication/views/login/login.dart';
+import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/constants/texts.dart';
 import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/helper/helper_function.dart';
+
 class ResetButton extends StatelessWidget {
-  const ResetButton({
-    super.key,
-  });
+  final String email;
+  const ResetButton({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () {
-          THelperFunction.navigatedToScreenWithPop(context, const Login());
-        },
-        child: Text(TTexts.done.capitalize()),
-      ),
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              THelperFunction.navigatedToScreenWithPop(context, const Login());
+            },
+            child: Text(TTexts.done.capitalize()),
+          ),
+        ),
+        const SizedBox(
+          height: TSized.spacebetweenItem,
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton(
+            onPressed: () {
+              context
+                  .read<ForgotPasswordBloc>()
+                  .add(ForgotPasswordResentEmailEvent(email));
+            },
+            child: Text(TTexts.resendEmail.capitalize()),
+          ),
+        ),
+      ],
     );
   }
 }

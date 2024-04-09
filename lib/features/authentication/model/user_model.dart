@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:store/utils/format/format_utility.dart';
 
 class UserModel {
@@ -24,6 +25,32 @@ class UserModel {
       "profilePicture": profilePicture
     };
   }
+
+  factory UserModel.fromJson(DocumentSnapshot<Map<String, dynamic>> document) {
+    if (document.data() != null) {
+      final data = document.data();
+      return UserModel(
+        id: document.id,
+        userName: data?["userName"] ?? "",
+        firstName: data?["firstName"] ?? "",
+        lastName: data?["lastName"] ?? "",
+        email: data?["email"] ?? "",
+        phoneNumber: data?["phoneNumber"] ?? "",
+        profilePicture: data?["profilePicture"] ?? "",
+      );
+    } else {
+      return empty();
+    }
+  }
+
+  static UserModel empty() => UserModel(
+      id: "",
+      userName: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      profilePicture: "");
 
   // Helper function to get the full name
   String get fullName => '$firstName $lastName';

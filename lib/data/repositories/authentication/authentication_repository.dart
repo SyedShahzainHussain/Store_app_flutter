@@ -78,11 +78,30 @@ class AuthenticationRepository {
     }
   }
 
+
+  // ! forgot password
+   Future<void> forgotPasswordSendWithEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw SFirebaseAuthException(e.code).messages;
+    } on FirebaseException catch (e) {
+      throw SFirebaseException(e.code).message!;
+    } on PlatformException catch (e) {
+      throw SPlatformException(e.code).message!;
+    } on FormatException catch (e) {
+      throw SFormatException(e.message);
+    } catch (e) {
+      throw "SomeThing went wrong. Please try again.";
+    }
+  }
+
   // ! logout
   Future<void> logout() async {
     try {
       await _auth.signOut();
-      
+      await GoogleSignIn().signOut();
+
       Navigator.pushAndRemoveUntil(ContextUtility.context,
           MaterialPageRoute(builder: (_) => const Login()), (route) => false);
     } on FirebaseAuthException catch (e) {

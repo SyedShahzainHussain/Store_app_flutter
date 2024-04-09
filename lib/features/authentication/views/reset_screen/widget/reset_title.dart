@@ -11,6 +11,7 @@ class ResetTitleSubTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        
         Text(
           TTexts.changeYourPasswordTitle,
           style: Theme.of(context).textTheme.headlineMedium,

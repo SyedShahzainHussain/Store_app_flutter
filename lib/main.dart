@@ -6,6 +6,8 @@ import 'package:store/app.dart';
 import 'package:provider/provider.dart';
 import 'package:store/bloc/authentication/authentication_bloc.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
+import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
+import 'package:store/bloc/forgot_password/forgot_password_bloc.dart';
 import 'package:store/bloc/google/google_bloc.dart';
 import 'package:store/bloc/login/login_bloc.dart';
 import 'package:store/bloc/register/register_bloc.dart';
@@ -36,7 +38,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(
           create: (context) => OnBoardController(),
-        ),
+        ), 
         ChangeNotifierProvider(
           create: (context) => HomeController(),
         )
@@ -49,6 +51,8 @@ Future<void> main() async {
         BlocProvider(create: (context) => VerificationBloc()),
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => GoogleAuthBloc()),
+        BlocProvider(create: (context) => ForgotPasswordBloc()),
+        BlocProvider(create: (context) => FetchUserBloc()),
       ], child: const MyApp()),
     ),
   );
