@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_event.dart';
+import 'package:store/bloc/togglelist/togglelist_bloc.dart';
+import 'package:store/bloc/togglelist/togglelist_event.dart';
+import 'package:store/bloc/togglelist/togglelist_state.dart';
 import 'package:store/common/widgets/banners/t_banners.dart';
 import 'package:store/common/widgets/layouts/grid_layout.dart';
+import 'package:store/common/widgets/products/t_cart_procucts_horizontal.dart';
 import 'package:store/common/widgets/products/t_cart_products_vertical.dart';
 import 'package:store/common/widgets/text_field_container/text_field_container.dart';
 import 'package:store/features/shop/view/allProducts/all_products.dart';
@@ -82,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: TSized.spacebetweenItem,
                   ),
+
                   // ! Heading
                   TSectionHeading(
                     title: "Popular Products",
@@ -90,15 +95,65 @@ class _HomeScreenState extends State<HomeScreen> {
                           context, const AllProducts());
                     },
                   ),
-                  const SizedBox(
-                    height: TSized.spacebetweenItem,
+                  BlocBuilder<ViewModeBloc, ViewModeState>(
+                    builder: (context, state) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.view_list,
+                              size: 15,
+                            ),
+                            onPressed: () {
+                              context
+                                  .read<ViewModeBloc>()
+                                  .add(const ToggleViewModeEvent(true));
+                            },
+                            color: state.isListView
+                                ? Colors.white
+                                : Colors.grey, // Highlight the active icon
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.grid_view, size: 15),
+                            onPressed: () {
+                              context
+                                  .read<ViewModeBloc>()
+                                  .add(const ToggleViewModeEvent(false));
+                            },
+                            color: !state.isListView
+                                ? Colors.white
+                                : Colors.grey, // Highlight the active icon
+                          ),
+                        ],
+                      );
+                    },
                   ),
+                  const SizedBox(
+                    height: TSized.sm,
+                  ),
+
                   // ! Grid Layout
-                  GridLayout(
-                      itemBuilder: (context, index) {
-                        return const TProductCartVertical();
-                      },
-                      itemCount: 10)
+
+                  BlocBuilder<ViewModeBloc, ViewModeState>(
+                      builder: (context, state) {
+                    if (state.isListView) {
+                      return GridLayout(
+                          itemBuilder: (context, index) {
+                            return const TProductCartVertical();
+                          },
+                          itemCount: 10);
+                    } else {
+                      return GridLayout(
+                        itemBuilder: (context, index) {
+                          return const TProductCartHorizontal();
+                        },
+                        itemCount: 10,
+                        mainAxisExtent: 120,
+                        crossAxisCount: 1,
+                      );
+                    }
+                  }),
                 ],
               ),
             )

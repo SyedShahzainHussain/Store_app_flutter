@@ -30,56 +30,58 @@ class TProductCartHorizontal extends StatelessWidget {
         children: [
           // ! Thumnail  WhishList Button Discount Tag
           TRoundedContainer(
-              height: 120,
-              padding: const EdgeInsets.all(TSized.md),
-              backgroundColor: dark ? TColors.dark : TColors.white,
-              child: Stack(
-                children: [
-                  // ! Thumbnail Image
+            height: 120,
+            padding: const EdgeInsets.all(TSized.md),
+            backgroundColor: dark ? TColors.dark : TColors.white,
+            child: Stack(
+              children: [
+                // ! Thumbnail Image
 
-                  const SizedBox(
-                    height: 120,
-                    width: 120,
-                    child: TRoundedImage(
-                      imageUrl: TImageString.product1,
-                      applyImageRadius: true,
+                const SizedBox(
+                  height: 120,
+                  width: 120,
+                  child: TRoundedImage(
+                    imageUrl: TImageString.product1,
+                    applyImageRadius: true,
+                  ),
+                ),
+                // ! Sale Tag
+                Positioned(
+                  top: 12,
+                  child: TRoundedContainer(
+                    radius: TSized.sm,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: TSized.sm, vertical: TSized.xsm),
+                    backgroundColor: TColors.secondary.withOpacity(0.8),
+                    child: Text(
+                      "25%",
+                      style: Theme.of(context).textTheme.labelLarge!.apply(
+                            color: TColors.black,
+                          ),
                     ),
                   ),
-                  // ! Sale Tag
-                  Positioned(
-                    top: 12,
-                    child: TRoundedContainer(
-                      radius: TSized.sm,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: TSized.sm, vertical: TSized.xsm),
-                      backgroundColor: TColors.secondary.withOpacity(0.8),
-                      child: Text(
-                        "25%",
-                        style: Theme.of(context).textTheme.labelLarge!.apply(
-                              color: TColors.black,
-                            ),
-                      ),
-                    ),
+                ),
+                // ! create Icon
+                const Positioned(
+                  top: 0,
+                  right: 0,
+                  child: TCircularIcons(
+                    icon: Iconsax.heart5,
+                    color: Colors.red,
                   ),
-                  // ! create Icon
-                  const Positioned(
-                    top: 0,
-                    right: 0,
-                    child: TCircularIcons(
-                      icon: Iconsax.heart5,
-                      color: Colors.red,
-                    ),
-                  )
-                ],
-              ))
+                )
+              ],
+            ),
+          ),
 
           // ! Details
-          ,
+
           SizedBox(
-            width: 172,
+            width: 152,
             child: Padding(
               padding: const EdgeInsets.only(left: TSized.sm, top: TSized.sm),
               child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

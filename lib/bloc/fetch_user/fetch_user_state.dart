@@ -9,7 +9,7 @@ class FetchUserInitial extends FetchUserState {
 }
 
 class FetchUserLoaded extends FetchUserState {
-  final UserModel user;
+  final UserModel? user;
 
   FetchUserLoaded(this.user);
 

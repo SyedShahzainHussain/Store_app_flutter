@@ -4,13 +4,14 @@ import 'package:store/utils/constants/size.dart';
 class GridLayout extends StatelessWidget {
   final int itemCount;
   final double? mainAxisExtent;
+  final int crossAxisCount;
   final Widget? Function(BuildContext, int) itemBuilder;
 
   const GridLayout(
       {super.key,
       required this.itemBuilder,
       required this.itemCount,
-      this.mainAxisExtent = 288});
+      this.mainAxisExtent = 268,this.crossAxisCount =2});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class GridLayout extends StatelessWidget {
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: crossAxisCount,
         mainAxisSpacing: TSized.gridViewSpacing,
         crossAxisSpacing: TSized.gridViewSpacing,
         mainAxisExtent: mainAxisExtent,

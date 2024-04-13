@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/image/t_rounded_image.dart';
 import 'package:store/common/widgets/products/t_cart_procucts_horizontal.dart';
@@ -33,49 +31,51 @@ class SubCategory extends StatelessWidget {
               ),
 
               // ! Sub Category
-              Column(children: [
-                // ! Heading
-                TSectionHeading(
-                  title: "Sport Shirts",
-                  onPressed: () {},
-                ),
-                const SizedBox(
-                  height: TSized.spacebetweenSections / 2,
-                ),
-                SizedBox(
-                  height: 120,
-                  child: ListView.separated(
-                      separatorBuilder: (context, index) => const SizedBox(
-                            width: TSized.spacebetweenItem,
-                          ),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 4,
-                      itemBuilder: (context, index) =>
-                          const TProductCartHorizontal()),
-                ),
-                const SizedBox(
-                  height: TSized.spacebetweenSections,
-                ),
-                // ! Heading
-                TSectionHeading(
-                  title: "Sport Shirts",
-                  onPressed: () {},
-                ),
-                const SizedBox(
-                  height: TSized.spacebetweenSections / 2,
-                ),
-                SizedBox(
-                  height: 120,
-                  child: ListView.separated(
-                      separatorBuilder: (context, index) => const SizedBox(
-                            width: TSized.spacebetweenItem,
-                          ),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 4,
-                      itemBuilder: (context, index) =>
-                          const TProductCartHorizontal()),
-                )
-              ])
+              Column(
+                children: [
+                  // ! Heading
+                  TSectionHeading(
+                    title: "Sport Shirts",
+                    onPressed: () {},
+                  ),
+                  const SizedBox(
+                    height: TSized.spacebetweenSections / 2,
+                  ),
+                  SizedBox(
+                    height: 120,
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) => const SizedBox(
+                              width: TSized.spacebetweenItem,
+                            ),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 4,
+                        itemBuilder: (context, index) =>
+                            const TProductCartHorizontal()),
+                  ),
+                  const SizedBox(
+                    height: TSized.spacebetweenSections,
+                  ),
+                  // ! Heading
+                  TSectionHeading(
+                    title: "Sport Shirts",
+                    onPressed: () {},
+                  ),
+                  const SizedBox(
+                    height: TSized.spacebetweenSections / 2,
+                  ),
+                  SizedBox(
+                    height: 120,
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) => const SizedBox(
+                              width: TSized.spacebetweenItem,
+                            ),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 4,
+                        itemBuilder: (context, index) =>
+                            const TProductCartHorizontal()),
+                  )
+                ],
+              )
             ],
           ),
         ),

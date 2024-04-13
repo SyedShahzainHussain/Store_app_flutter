@@ -22,7 +22,7 @@ class ProviderRepository {
           lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : "",
           email: userCredential.user!.email ?? "",
           phoneNumber: userCredential.user?.phoneNumber ?? "",
-          profilePicture: userCredential.user?.phoneNumber ?? "",
+          profilePicture: userCredential.user?.photoURL ?? "",
         );
 
         // ! Save User
