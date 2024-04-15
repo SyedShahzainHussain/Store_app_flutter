@@ -2,6 +2,7 @@ import 'package:delightful_toast/delight_toast.dart';
 import 'package:delightful_toast/toast/components/toast_card.dart';
 import 'package:delightful_toast/toast/utils/enums.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 
 class THelperFunction {
@@ -39,18 +40,22 @@ class THelperFunction {
   }
 
   static void showAlertDialog(
-      String title, String message, BuildContext context) {
+      String title, String message, BuildContext context,
+      [bool isAction = false, void Function()? onPressed]) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
               title: Text(title),
               content: Text(message),
               actions: [
-                TextButton(
+                OutlinedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Ok"))
+                    child: const Text("Cancel")),
+                if (isAction)
+                  ElevatedButton(
+                      onPressed: onPressed, child: const Text("Delete")),
               ],
             ));
   }
@@ -112,5 +117,14 @@ class THelperFunction {
     var emailcharacter = email.replaceRange(
         2, nameuser[0].length, "#" * (nameuser[0].length - 2));
     return emailcharacter;
+  }
+
+  static Future<XFile?> pickgalleryImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      return image;
+    } else {
+      return null;
+    }
   }
 }

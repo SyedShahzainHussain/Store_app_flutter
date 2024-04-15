@@ -29,7 +29,7 @@ class TFullScreenLoader {
   }
 
   static stopLoading() {
-    Navigator.of(ContextUtility.navigator!.overlay!.context)
+    Navigator.of(ContextUtility.context)
         .pop(); // Close the Dialog using the Navigator
   }
 }

@@ -111,18 +111,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .add(const ToggleViewModeEvent(true));
                             },
                             color: state.isListView
-                                ? Colors.white
+                                ? TColors.darkerGrey
                                 : Colors.grey, // Highlight the active icon
                           ),
                           IconButton(
-                            icon: const Icon(Icons.grid_view, size: 15),
+                            icon: const Icon(Icons.grid_view, size: 15,),
                             onPressed: () {
                               context
                                   .read<ViewModeBloc>()
                                   .add(const ToggleViewModeEvent(false));
                             },
                             color: !state.isListView
-                                ? Colors.white
+                                ? TColors.darkerGrey
                                 : Colors.grey, // Highlight the active icon
                           ),
                         ],

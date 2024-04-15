@@ -5,6 +5,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:store/data/exception/exception.dart';
+import 'package:store/data/repositories/user/user_repository.dart';
 import 'package:store/features/authentication/views/login/login.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 
@@ -78,9 +79,8 @@ class AuthenticationRepository {
     }
   }
 
-
   // ! forgot password
-   Future<void> forgotPasswordSendWithEmail(String email) async {
+  Future<void> forgotPasswordSendWithEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
@@ -146,4 +146,46 @@ class AuthenticationRepository {
       throw "SomeThing went wrong. Please try again.";
     }
   }
+
+  // ! Re Authenticated User
+  Future<void> reAuthenticatedUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      // ! Create a credential
+      AuthCredential authCredential =
+          EmailAuthProvider.credential(email: email, password: password);
+
+      await _auth.currentUser!.reauthenticateWithCredential(authCredential);
+    } on FirebaseAuthException catch (e) {
+      throw SFirebaseAuthException(e.code).messages;
+    } on FirebaseException catch (e) {
+      throw SFirebaseException(e.code).message!;
+    } on PlatformException catch (e) {
+      throw SPlatformException(e.code).message!;
+    } on FormatException catch (e) {
+      throw SFormatException(e.message);
+    } catch (e) {
+      throw "SomeThing went wrong. Please try again.";
+    }
+  }
+
+  // ! Delete User - Remove user Auth and Firestore Account.
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository().removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser!.delete();
+    } on FirebaseAuthException catch (e) {
+      throw SFirebaseAuthException(e.code).messages;
+    } on FirebaseException catch (e) {
+      throw SFirebaseException(e.code).message!;
+    } on PlatformException catch (e) {
+      throw SPlatformException(e.code).message!;
+    } on FormatException catch (e) {
+      throw SFormatException(e.message);
+    } catch (e) {
+      throw "SomeThing went wrong. Please try again.";
+    }
+  }
+
+ 
 }

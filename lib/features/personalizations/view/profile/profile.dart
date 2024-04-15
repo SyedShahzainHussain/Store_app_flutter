@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:store/bloc/authentication/authentication_bloc.dart';
+import 'package:store/bloc/authentication/authentication_events.dart';
 import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_state.dart';
+import 'package:store/bloc/upload_image/upload_image_bloc.dart';
+import 'package:store/bloc/upload_image/upload_image_event.dart';
+import 'package:store/bloc/upload_image/upload_image_state.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/image/t_circular_image.dart';
 import 'package:store/features/personalizations/view/profile/change_name.dart';
 import 'package:store/features/personalizations/view/profile/widget/profile_menu.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
+import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/shimmer/shimmer.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -25,6 +33,10 @@ class ProfileScreen extends StatelessWidget {
       body: BlocBuilder<FetchUserBloc, FetchUserState>(
         builder: (context, state) {
           if (state is FetchUserLoaded) {
+            final networkImage = state.user?.profilePicture;
+            final image = networkImage!.isNotEmpty
+                ? networkImage
+                : TImageString.userImage;
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(TSized.defaultSpace),
@@ -35,14 +47,32 @@ class ProfileScreen extends StatelessWidget {
                       width: double.infinity,
                       child: Column(
                         children: [
-                          TCircularImage(
-                            isNetworkImage: true,
-                            image: state.user?.profilePicture ?? "",
-                            width: 80,
-                            height: 80,
+                          BlocBuilder<UploadImageBloc, UploadImageState>(
+                            builder: (context, state) {
+                              if (state is UploadImageLoading) {
+                                return const ShimmerEffect(
+                                  width: 80,
+                                  height: 80,
+                                  radius: 80,
+                                );
+                              } else {
+                                return TCircularImage(
+                                  isNetworkImage: networkImage.isNotEmpty,
+                                  image: image,
+                                  width: 80,
+                                  height: 80,
+                                );
+                              }
+                            },
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              final XFile? image =
+                                  await THelperFunction.pickgalleryImage();
+                              context
+                                  .read<UploadImageBloc>()
+                                  .add(UploadImage(image));
+                            },
                             child: const Text("Change Profile Picture"),
                           ),
                         ],
@@ -71,7 +101,11 @@ class ProfileScreen extends StatelessWidget {
                       value: state.user?.fullName ?? "",
                       onPressed: () {
                         THelperFunction.navigatedToScreen(
-                            context,  ChangeName(firstName: state.user?.firstName??"",lastName: state.user?.lastName??"",));
+                            context,
+                            ChangeName(
+                              firstName: state.user?.firstName ?? "",
+                              lastName: state.user?.lastName ?? "",
+                            ));
                       },
                     ),
                     TProfileMenu(
@@ -132,7 +166,17 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     Center(
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          THelperFunction.showAlertDialog(
+                              "Delete Account",
+                              "Are you sure you want to delete your account permanently? This action is not reversable and all your data will be remove permanently.",
+                              context,
+                              true, () {
+                            context
+                                .read<AuthenticationBloc>()
+                                .add(DeleteAccountEvent());
+                          });
+                        },
                         child: const Text(
                           "Close Account",
                           style: TextStyle(color: Colors.red),

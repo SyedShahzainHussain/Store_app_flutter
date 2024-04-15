@@ -7,6 +7,8 @@ import 'package:store/app.dart';
 import 'package:provider/provider.dart';
 import 'package:store/bloc/authentication/authentication_bloc.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
+import 'package:store/bloc/fetch_banners/fetch_banners_bloc.dart';
+import 'package:store/bloc/fetch_categories/fetch_categories_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
 import 'package:store/bloc/forgot_password/forgot_password_bloc.dart';
 import 'package:store/bloc/google/google_bloc.dart';
@@ -14,6 +16,7 @@ import 'package:store/bloc/login/login_bloc.dart';
 import 'package:store/bloc/register/register_bloc.dart';
 import 'package:store/bloc/togglelist/togglelist_bloc.dart';
 import 'package:store/bloc/update_name/update_name_bloc.dart';
+import 'package:store/bloc/upload_image/upload_image_bloc.dart';
 import 'package:store/bloc/verification/verification_bloc.dart';
 import 'package:store/features/authentication/controller/onBoard_controller.dart';
 import 'package:store/features/shop/controller/home_controller.dart';
@@ -65,6 +68,9 @@ Future<void> main() async {
         BlocProvider(create: (context) => FetchUserBloc()),
         BlocProvider(create: (context) => ViewModeBloc()),
         BlocProvider(create: (context) => UpdateNameBloc()),
+        BlocProvider(create: (context) => UploadImageBloc()),
+        BlocProvider(create: (context) => FetchCategoriesBloc()),
+        BlocProvider(create: (context) => FetchBannersBloc()),
       ], child: const MyApp()),
     ),
   );

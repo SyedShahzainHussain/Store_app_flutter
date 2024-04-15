@@ -4,8 +4,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:store/bloc/update_name/update_name_bloc.dart';
 import 'package:store/bloc/update_name/update_name_event.dart';
 import 'package:store/bloc/update_name/update_name_state.dart';
+import 'package:store/bottom_navigtion.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
-import 'package:store/features/personalizations/view/profile/profile.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/constants/texts.dart';
@@ -64,8 +64,8 @@ class _ChangeNameState extends State<ChangeName> {
           } else if (state is UpdateNameFailed) {
             THelperFunction.showDelightToast(state.message);
           } else if (state is UpdateNameSuccess) {
-            THelperFunction.navigatedToScreenWithPop(context, const ProfileScreen());
-            THelperFunction.showDelightToast("Update Username");
+            THelperFunction.navigatedToScreenWithPop(context, const BottomNavigationScreen());
+            THelperFunction.showDelightToast("Update Username",Iconsax.copy_success,Colors.green);
           }
         },
         child: Padding(

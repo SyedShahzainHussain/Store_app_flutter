@@ -1,29 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:store/features/shop/model/categories_model/categories_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/bloc/fetch_categories/fetch_categories_bloc.dart';
+import 'package:store/bloc/fetch_categories/fetch_categories_event.dart';
+import 'package:store/bloc/fetch_categories/fetch_categories_state.dart';
+import 'package:store/data/status/status.dart';
 import 'package:store/features/shop/view/home/widget/t_vertical_image_text.dart';
+import 'package:store/features/shop/view/subCategory/sub_category.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/shimmer/category_shimmer.dart';
 
-class CategoriesList extends StatelessWidget {
+class CategoriesList extends StatefulWidget {
   const CategoriesList({
     super.key,
   });
 
   @override
+  State<CategoriesList> createState() => _CategoriesListState();
+}
+
+class _CategoriesListState extends State<CategoriesList> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<FetchCategoriesBloc>().add(GetCategoriesEvent());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: TSized.defaultSpace),
-      child: SizedBox(
-        height: 100,
-        child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => TVerticalImageText(
-            onTap: () => categories[index].onTap!(context),
-            image: categories[index].image,
-            title: categories[index].title,
-          ),
-          itemCount: categories.length,
-        ),
+      child: BlocBuilder<FetchCategoriesBloc, FetchCategoriesState>(
+        builder: (context, state) {
+          switch (state.status) {
+            case Status.loading:
+              return const CategoryShimmer();
+            case Status.failure:
+              return Center(
+                child: Text(state.message),
+              );
+            case Status.success:
+              return SizedBox(
+                height: 100,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => TVerticalImageText(
+                    onTap: () => THelperFunction.navigatedToScreen(
+                        context, const SubCategory()),
+                    image: state.featuresCategories[index].image,
+                    title: state.featuresCategories[index].name,
+                  ),
+                  itemCount: state.featuresCategories.length,
+                ),
+              );
+          }
+        },
       ),
     );
   }

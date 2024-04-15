@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/shimmer/shimmer.dart';
 
 class TCircularImage extends StatelessWidget {
   const TCircularImage({
@@ -17,7 +19,7 @@ class TCircularImage extends StatelessWidget {
   });
 
   final BoxFit? boxFit;
-  final String image;
+  final String? image;
   final bool isNetworkImage;
   final Color? overlayColor;
   final Color? backgroundColor;
@@ -35,16 +37,30 @@ class TCircularImage extends StatelessWidget {
                   ? TColors.black
                   : TColors.white),
           borderRadius: BorderRadius.circular(100)),
-      child: Center(
-        child: ClipRRect(
-               borderRadius: BorderRadius.circular(100),
-          child: Image(
-            fit: boxFit,
-            image: isNetworkImage
-                ? NetworkImage(image)
-                : AssetImage(image) as ImageProvider,
-            color: overlayColor,
-          ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: Center(
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  width: double.infinity,
+                  imageUrl: image!,
+                  fit: boxFit,
+                  color: overlayColor,
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      const ShimmerEffect(
+                    width: 80,
+                    height: 80,
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  ),
+                )
+              : Image(
+                  fit: boxFit,
+                  image: AssetImage(image!),
+                  color: overlayColor,
+                ),
         ),
       ),
     );

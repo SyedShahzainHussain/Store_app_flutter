@@ -6,6 +6,7 @@ import 'package:store/bloc/fetch_user/fetch_user_state.dart';
 import 'package:store/common/widgets/image/t_circular_image.dart';
 import 'package:store/features/personalizations/view/profile/profile.dart';
 import 'package:store/utils/constants/colors.dart';
+import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
 class TUserProdileTile extends StatelessWidget {
@@ -18,23 +19,26 @@ class TUserProdileTile extends StatelessWidget {
     return BlocBuilder<FetchUserBloc, FetchUserState>(
       builder: (context, state) {
         if (state is FetchUserLoaded) {
+                     final networkImage = state.user?.profilePicture;
+            final image =
+                networkImage!.isNotEmpty ? networkImage : TImageString.userImage;
           return ListTile(
             leading: TCircularImage(
-              image: state.user?.profilePicture??"",
+              image: image,
               width: 50,
               height: 50,
               padding: 0,
-              isNetworkImage: true,
+              isNetworkImage: networkImage.isNotEmpty,
             ),
             title: Text(
-             state.user?.fullName??"",
+              state.user?.fullName ?? "",
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall!
                   .apply(color: TColors.white),
             ),
             subtitle: Text(
-              state.user?.email??"",
+              state.user?.email ?? "",
               style: Theme.of(context)
                   .textTheme
                   .bodySmall!

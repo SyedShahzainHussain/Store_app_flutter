@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:store/utils/format/format_utility.dart';
 
 class UserModel {
-  String id, userName, firstName, lastName, email, phoneNumber, profilePicture;
+  String? id, userName, firstName, lastName, email, phoneNumber, profilePicture;
 
   UserModel({
     required this.id,
@@ -56,7 +56,7 @@ class UserModel {
   String get fullName => '$firstName $lastName';
 
   // Helper function to format phone number
-  String get formattedPhone => TFormatUtils.formattedPhoneNumber(phoneNumber);
+  String get formattedPhone => TFormatUtils.formattedPhoneNumber(phoneNumber??"");
 
   // static function to split full name into first and last name
   static List<String> nameParts(String fullName) => fullName.split(" ");

@@ -1,23 +1,38 @@
-import 'package:store/features/shop/view/subCategory/sub_category.dart';
-import 'package:store/utils/constants/image_strings.dart';
-import 'package:store/utils/helper/helper_function.dart';
-import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 class CategoryModel {
-  String image;
-  String title;
-  Function(BuildContext?)? onTap;
+  String id, name, image, parentId;
+  bool isFeatured;
+  CategoryModel({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.isFeatured,
+    this.parentId = '',
+  });
 
-  CategoryModel(this.image, this.title, this.onTap);
+  // ! Empty Helper Function
+  static CategoryModel empty() => CategoryModel(
+        id: "",
+        name: "",
+        image: "",
+        isFeatured: false,
+        parentId: "",
+      );
+
+  // ! Map Json oriented document snapshot from firebase to usermodel
+  factory CategoryModel.fromSnapShot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    if (document.data() != null) {
+      final data = document.data()!;
+      return CategoryModel(
+        id: document.id,
+        name: data["Name"]??"",
+        image: data["Image"]??"",
+        isFeatured: data["IsFeatured"] ?? false,
+        parentId: data["ParentId"] ?? "",
+      );
+    } else {
+      return empty();
+    }
+  }
 }
-
-List<CategoryModel> categories = [
-  CategoryModel(TImageString.bowlingImage, "Bowling", (context) {
-    THelperFunction.navigatedToScreen(context!, const SubCategory());
-  }),
-  CategoryModel(TImageString.shoeImage, "Shoe", (context) {}),
-  CategoryModel(TImageString.cosmeticsImage, "Costemetic", (context) {}),
-  CategoryModel(TImageString.dogImage, "Dog", (context) {}),
-  CategoryModel(TImageString.tailorsImage, "Tailors", (context) {}),
-  CategoryModel(TImageString.toyCarImage, "Toy", (context) {}),
-];

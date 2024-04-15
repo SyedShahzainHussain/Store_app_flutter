@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/shimmer/shimmer.dart';
 
 class TVerticalImageText extends StatelessWidget {
   final String title;
@@ -29,29 +31,33 @@ class TVerticalImageText extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              width: 56,
-              height: 56,
-              padding: const EdgeInsets.all(TSized.sm),
-              decoration: BoxDecoration(
-                  color: (THelperFunction.isDarkMode(context)
-                      ? TColors.black
-                      : TColors.white),
-                  borderRadius: BorderRadius.circular(100)),
-              child: Image(
-                image: AssetImage(
-                  image,
-                ),
-                fit: BoxFit.cover,
-                color: THelperFunction.isDarkMode(context)
-                    ? TColors.light
-                    : TColors.dark,
-              ),
-            ),
+                width: 56,
+                height: 56,
+                padding: const EdgeInsets.all(TSized.sm),
+                decoration: BoxDecoration(
+                    color: (THelperFunction.isDarkMode(context)
+                        ? TColors.black
+                        : TColors.white),
+                    borderRadius: BorderRadius.circular(100)),
+                child: CachedNetworkImage(
+                  imageUrl: image,
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      const ShimmerEffect(
+                    width: 50,
+                    height: 50,
+                  ),
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.error, color: Colors.red),
+                  color: THelperFunction.isDarkMode(context)
+                      ? TColors.light
+                      : TColors.dark,
+                )),
             // ! Text
             const SizedBox(
               height: TSized.spacebetweenItem / 2,
-            ), 
-            
+            ),
+
             SizedBox(
               width: 55,
               child: Text(

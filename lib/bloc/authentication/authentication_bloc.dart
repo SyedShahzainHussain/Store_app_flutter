@@ -4,6 +4,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
 import 'package:store/bloc/authentication/authentication_state.dart';
 import 'package:store/data/repositories/authentication/authentication_repository.dart';
+import 'package:store/features/personalizations/view/profile/re_auth_login_form.dart';
+import 'package:store/utils/global_context/context_utils.dart';
+import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/network/network_manager.dart';
+import 'package:store/utils/popups/full_screen_loader.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
@@ -11,7 +16,11 @@ class AuthenticationBloc
       AuthenticationRepository();
   AuthenticationBloc() : super(AuthenticationInitialState()) {
     on<CheckAuthentication>(_checkAuthentication);
+    on<DeleteAccountEvent>(_deleteAccount);
+    on<DeleteReAuthenticatedEvent>(_reAuthenticatedEmailAndPassword);
   }
+
+  // ! check Authentication
   _checkAuthentication(
       CheckAuthentication event, Emitter<AuthenticationState> emit) async {
     emit(AuthenticationInitialState());
@@ -28,7 +37,7 @@ class AuthenticationBloc
         final deviceStorage = GetStorage();
         await authenticationRepository.onReady();
         final isFirstTime = await deviceStorage.read("IsFirstTime");
-      
+
         if (isFirstTime) {
           emit(OnBoardUnAuthenticatedState());
         } else {
@@ -39,4 +48,72 @@ class AuthenticationBloc
       emit(OnBoardUnAuthenticatedState());
     }
   }
+
+  // ! delete account
+  _deleteAccount(
+      DeleteAccountEvent event, Emitter<AuthenticationState> emit) async {
+    try {
+      // ! initial loading
+      emit(DeleteAccountLoading());
+      final isConnected = await NetworkManager().isConnected();
+      // ! if no network then show error and stop the other other code
+      if (!isConnected) {
+        emit(AuthenticationError(
+            "Network Error! Please check your internet connection."));
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+      // ! First Re-authenticated user
+      final auth = FirebaseAuth.instance;
+      final provider =
+          auth.currentUser!.providerData.map((e) => e.providerId).first;
+      if (provider.isNotEmpty) {
+        // ! Re verify Auth Email
+        if (provider == 'google.com') {
+          await authenticationRepository.googleSignIn();
+          await authenticationRepository.deleteAccount();
+          TFullScreenLoader.stopLoading();
+          emit(DeleteAccountSuccess());
+        } else if (provider == 'password') {
+          TFullScreenLoader.stopLoading();
+          THelperFunction.navigatedToScreen(
+              ContextUtility.context, const ReAuthLoginForm());
+        }
+      } else {
+        TFullScreenLoader.stopLoading();
+        emit(AuthenticationError("Error Occured"));
+      }
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      emit(AuthenticationError(e.toString()));
+    }
+  }
+
+  // ! re-authenticated before deleting
+  Future<void> _reAuthenticatedEmailAndPassword(
+      DeleteReAuthenticatedEvent event,
+      Emitter<AuthenticationState> emit) async {
+    try {
+      // ! initial loading
+      emit(DeleteAccountLoading());
+      final isConnected = await NetworkManager().isConnected();
+      // ! if no network then show error and stop the other other code
+      if (!isConnected) {
+        emit(AuthenticationError(
+            "Network Error! Please check your internet connection."));
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+      await authenticationRepository.reAuthenticatedUserWithEmailAndPassword(
+          event.email, event.password);
+      await authenticationRepository.deleteAccount();
+      TFullScreenLoader.stopLoading();
+      emit(DeleteAccountSuccess());
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      emit(AuthenticationError(e.toString()));
+    } 
+  }
+
+
 }
