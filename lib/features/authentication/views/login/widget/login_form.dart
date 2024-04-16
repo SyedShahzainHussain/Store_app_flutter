@@ -21,14 +21,13 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  
   ValueNotifier<bool> isObsecure = ValueNotifier<bool>(true);
   ValueNotifier<bool> isCheck = ValueNotifier<bool>(false);
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GetStorage localStorage = GetStorage();
-  
+
   void save() {
     final validate = _formKey.currentState!.validate();
 
@@ -45,8 +44,8 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     super.initState();
-    emailController.text = localStorage.read("REMEMBER_ME_EMAIL")??"";
-    passwordController.text = localStorage.read("REMEMBER_ME_PASSWORD")??"";
+    emailController.text = localStorage.read("REMEMBER_ME_EMAIL") ?? "";
+    passwordController.text = localStorage.read("REMEMBER_ME_PASSWORD") ?? "";
   }
 
   @override

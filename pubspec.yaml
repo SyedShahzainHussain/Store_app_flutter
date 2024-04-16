@@ -52,7 +52,7 @@ dependencies:
   restart_app: ^1.2.1
   flutter_facebook_auth: ^6.2.0
   image_picker: ^1.0.8
-  cached_network_image: ^3.3.1  
+  cached_network_image: ^3.3.1
 # ------------------------ End-packages --------------------------- #
 dev_dependencies:
   flutter_test:

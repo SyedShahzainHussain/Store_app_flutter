@@ -9,6 +9,7 @@ import 'package:store/bloc/authentication/authentication_bloc.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
 import 'package:store/bloc/fetch_banners/fetch_banners_bloc.dart';
 import 'package:store/bloc/fetch_categories/fetch_categories_bloc.dart';
+import 'package:store/bloc/fetch_products/fetch_products_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
 import 'package:store/bloc/forgot_password/forgot_password_bloc.dart';
 import 'package:store/bloc/google/google_bloc.dart';
@@ -71,6 +72,7 @@ Future<void> main() async {
         BlocProvider(create: (context) => UploadImageBloc()),
         BlocProvider(create: (context) => FetchCategoriesBloc()),
         BlocProvider(create: (context) => FetchBannersBloc()),
+        BlocProvider(create: (context) => FetchProductsBloc()),
       ], child: const MyApp()),
     ),
   );

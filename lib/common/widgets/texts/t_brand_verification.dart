@@ -43,7 +43,8 @@ class TBrandTitleAndVerification extends StatelessWidget {
           Iconsax.verify5,
           color: TColors.primary,
           size: TSized.iconXsm,
-        )
+        ),
+        
       ],
     );
   }

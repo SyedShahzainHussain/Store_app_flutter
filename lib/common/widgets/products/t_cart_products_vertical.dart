@@ -1,34 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:store/common/styles/shadow.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/common/widgets/image/t_rounded_image.dart';
 import 'package:store/common/widgets/icons/t_circular_icons.dart';
 import 'package:store/common/widgets/product_price/t_product_price_text.dart';
 import 'package:store/common/widgets/texts/t_brand_verification.dart';
 import 'package:store/common/widgets/texts/t_product_title.dart';
+import 'package:store/features/shop/model/product_model/product_model.dart';
 import 'package:store/features/shop/view/produt_detail/product_details.dart';
 import 'package:store/utils/constants/colors.dart';
+import 'package:store/utils/constants/enum.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/helper/product_helper.dart';
 
 class TProductCartVertical extends StatelessWidget {
-  const TProductCartVertical({super.key});
+  final ProductModel? productModel;
+
+  const TProductCartVertical({super.key, this.productModel});
 
   @override
   Widget build(BuildContext context) {
+    final networkImage = productModel?.thumbnail;
+    final image =
+        networkImage!.isNotEmpty ? networkImage : TImageString.product1;
     final dark = THelperFunction.isDarkMode(context);
     return GestureDetector(
       onTap: () {
-        THelperFunction.navigatedToScreen(context, const ProductDetails());
+        THelperFunction.navigatedToScreen(
+            context,
+            ProductDetails(
+              productModel: productModel,
+            ));
       },
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-          // boxShadow: [
-          //   TShadowStyle.verticalProductShadow,
-          // ],
+          boxShadow: [
+            TShadowStyle.verticalProductShadow,
+          ],
           borderRadius: BorderRadius.circular(TSized.productImageRadius),
           color: dark ? TColors.darkGrey : TColors.white,
         ),
@@ -37,7 +50,7 @@ class TProductCartVertical extends StatelessWidget {
           children: [
             // ! Thumnail  WhishList Button Discount Tag
             TRoundedContainer(
-              width: double.infinity,
+              width: 180,
               height: 150,
               padding: const EdgeInsets.all(TSized.md),
               backgroundColor: dark ? TColors.dark : TColors.light,
@@ -47,9 +60,12 @@ class TProductCartVertical extends StatelessWidget {
                 children: [
                   // ! Thumbnail Image
 
-                  const TRoundedImage(
-                    imageUrl: TImageString.product1,
-                    applyImageRadius: true,
+                  Center(
+                    child: TRoundedImage(
+                      imageUrl: image,
+                      applyImageRadius: true,
+                      isNetworkImage: networkImage.isNotEmpty,
+                    ),
                   ),
 
                   // ! Sale Tag
@@ -62,7 +78,7 @@ class TProductCartVertical extends StatelessWidget {
                           horizontal: TSized.sm, vertical: TSized.xsm),
                       backgroundColor: TColors.secondary.withOpacity(0.8),
                       child: Text(
-                        "25%",
+                        "${ProductHelper.calculatedSalePercentage(productModel!.price, productModel!.salePrice)}%",
                         style: Theme.of(context).textTheme.labelLarge!.apply(
                               color: TColors.black,
                             ),
@@ -86,20 +102,20 @@ class TProductCartVertical extends StatelessWidget {
             ),
             // ! Detail
 
-            const Padding(
-              padding: EdgeInsets.only(left: TSized.md),
+            Padding(
+              padding: const EdgeInsets.only(left: TSized.md),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TProductTitle(
-                    title: "Green Nike Air Shoes",
+                    title: productModel!.title,
                     smallSize: true,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSized.spacebetweenItem / 2,
                   ),
                   TBrandTitleAndVerification(
-                    title: "Nike",
+                    title: productModel!.brand!.name.toString(),
                   ),
                 ],
               ),
@@ -109,9 +125,30 @@ class TProductCartVertical extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // ! Price
-                const Padding(
-                  padding: EdgeInsets.only(left: TSized.md),
-                  child: TProductPriceText(price: "35.5"),
+                Flexible(
+                  child: Column(
+                    children: [
+                      if (productModel!.productType ==
+                              ProductType.single.toString() &&
+                          productModel!.salePrice > 0)
+                        Padding(
+                          padding: const EdgeInsets.only(left: TSized.sm),
+                          child: Text(
+                            productModel!.price.toString(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium!
+                                .apply(decoration: TextDecoration.lineThrough),
+                          ),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: TSized.sm),
+                        child: TProductPriceText(
+                            price:
+                                ProductHelper.getProductsPrice(productModel!)),
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   decoration: const BoxDecoration(

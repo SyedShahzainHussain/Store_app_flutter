@@ -36,7 +36,7 @@ class _TBannersState extends State<TBanners> {
       builder: (context, state) {
         switch (state.status) {
           case Status.loading:
-            return const ShimmerEffect(width: double.infinity, height: 190);
+            return const ShimmerEffect(width: double.infinity, height: 190,radius: TSized.cardRadiusMd,);
           case Status.failure:
             return Center(
               child: Text(state.message),
