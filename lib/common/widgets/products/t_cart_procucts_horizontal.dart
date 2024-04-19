@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:store/common/styles/shadow.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
-import 'package:store/common/widgets/icons/t_circular_icons.dart';
+import 'package:store/common/widgets/favourite_icon/favourite_icon.dart';
+
 import 'package:store/common/widgets/image/t_rounded_image.dart';
 import 'package:store/common/widgets/product_price/t_product_price_text.dart';
 import 'package:store/common/widgets/texts/t_brand_verification.dart';
@@ -27,10 +26,16 @@ class TProductCartHorizontal extends StatelessWidget {
     final networkImage = productModel?.thumbnail;
     final image =
         networkImage!.isNotEmpty ? networkImage : TImageString.product1;
+    final salePercentage = ProductHelper.calculatedSalePercentage(
+        productModel!.price, productModel!.salePrice);
     final dark = THelperFunction.isDarkMode(context);
     return GestureDetector(
-      onTap: (){
-          THelperFunction.navigatedToScreen(context, const ProductDetails());
+      onTap: () {
+        THelperFunction.navigatedToScreen(
+            context,
+            ProductDetails(
+              productModel: productModel,
+            ));
       },
       child: Container(
         padding: const EdgeInsets.all(1),
@@ -53,7 +58,7 @@ class TProductCartHorizontal extends StatelessWidget {
                   child: Stack(
                     children: [
                       // ! Thumbnail Image
-      
+
                       Center(
                         child: SizedBox(
                           height: 120,
@@ -65,30 +70,29 @@ class TProductCartHorizontal extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // ! Sale Tag
-                      Positioned(
-                        top: 12,
-                        child: TRoundedContainer(
-                          radius: TSized.sm,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: TSized.sm, vertical: TSized.xsm),
-                          backgroundColor: TColors.secondary.withOpacity(0.8),
-                          child: Text(
-                            "${ProductHelper.calculatedSalePercentage(productModel!.price, productModel!.salePrice)}%",
-                            style: Theme.of(context).textTheme.labelLarge!.apply(
-                                  color: TColors.black,
-                                ),
+                      if (salePercentage != null)
+                        // ! Sale Tag
+                        Positioned(
+                          top: 12,
+                          child: TRoundedContainer(
+                            radius: TSized.sm,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: TSized.sm, vertical: TSized.xsm),
+                            backgroundColor: TColors.secondary.withOpacity(0.8),
+                            child: Text(
+                              "$salePercentage%",
+                              style:
+                                  Theme.of(context).textTheme.labelLarge!.apply(
+                                        color: TColors.black,
+                                      ),
+                            ),
                           ),
                         ),
-                      ),
                       // ! create Icon
-                      const Positioned(
+                      Positioned(
                         top: 0,
                         right: 0,
-                        child: TCircularIcons(
-                          icon: Iconsax.heart5,
-                          color: Colors.red,
-                        ),
+                        child: FavouriteIcon(productId: productModel!.id),
                       )
                     ],
                   ),
@@ -124,6 +128,7 @@ class TProductCartHorizontal extends StatelessWidget {
                         // ! Price
                         Flexible(
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               if (productModel!.productType ==
                                       ProductType.single.toString() &&

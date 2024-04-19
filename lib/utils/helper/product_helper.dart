@@ -50,7 +50,7 @@ class ProductHelper {
   }
 
   // ! Check Product Stock Status
-  String getProductStockStatus(int stock) {
+ static String getProductStockStatus(int stock) {
     return stock > 0 ? 'In Stock' : 'Out of Stock';
   }
 }

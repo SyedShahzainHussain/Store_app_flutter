@@ -101,9 +101,10 @@ class AuthenticationRepository {
     try {
       await _auth.signOut();
       await GoogleSignIn().signOut();
-
-      Navigator.pushAndRemoveUntil(ContextUtility.context,
-          MaterialPageRoute(builder: (_) => const Login()), (route) => false);
+      if (ContextUtility.context.mounted) {
+        Navigator.pushAndRemoveUntil(ContextUtility.context,
+            MaterialPageRoute(builder: (_) => const Login()), (route) => false);
+      }
     } on FirebaseAuthException catch (e) {
       throw SFirebaseAuthException(e.code).messages;
     } on FirebaseException catch (e) {
@@ -186,6 +187,4 @@ class AuthenticationRepository {
       throw "SomeThing went wrong. Please try again.";
     }
   }
-
- 
 }

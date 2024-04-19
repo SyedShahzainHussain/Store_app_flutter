@@ -24,12 +24,14 @@ class UploadImageBloc extends Bloc<UploadImageEvent, UploadImageState> {
         TFullScreenLoader.stopLoading();
         return;
       }
-      final imageUrl =
-          await userRepository.uploadImage("Users/Images/Profile/", event.image!);
+      final imageUrl = await userRepository.uploadImage(
+          "Users/Images/Profile/", event.image!);
       // ! Update User Image Record
       Map<String, dynamic> json = {"profilePicture": imageUrl};
       await userRepository.updateSingleField(json);
-      BlocProvider.of<FetchUserBloc>(ContextUtility.context).add(FetchUser());
+      if (ContextUtility.context.mounted) {
+        BlocProvider.of<FetchUserBloc>(ContextUtility.context).add(FetchUser());
+      }
       TFullScreenLoader.stopLoading();
       emit(UploadImageSuccess());
     } catch (e) {

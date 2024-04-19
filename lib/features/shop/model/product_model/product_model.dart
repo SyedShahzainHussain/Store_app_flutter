@@ -41,13 +41,23 @@ class ProductModel {
   });
 
   static ProductModel empty() => ProductModel(
-      id: '',
-      stock: 0,
-      price: 0.0,
-      thumbnail: '',
-      title: '',
-      productType: '',
-      images: []);
+        id: '',
+        stock: 0,
+        price: 0.0,
+        thumbnail: '',
+        title: '',
+        productType: '',
+        images: [],
+        productAttributeModel: [],
+        productVariationModel: [],
+        categoryId: "",
+        description: "",
+        brand: BrandModel.empty(),
+        isFeatured: false,
+        salePrice: 0.0,
+        sku: "",
+        time: null,
+      );
 
   factory ProductModel.fromSnapShot(
       DocumentSnapshot<Map<String, dynamic>> documents) {
@@ -55,7 +65,7 @@ class ProductModel {
     final data = documents.data()!;
     return ProductModel(
       id: documents.id,
-      time: data["Time"],
+      time: data["Time"] ?? DateTime.now(),
       stock: data["Stock"] ?? "",
       price: double.parse((data["Price"] ?? 0).toString()),
       thumbnail: data["Thumbnail"] ?? "",
@@ -66,14 +76,56 @@ class ProductModel {
       sku: data["SKU"] ?? "",
       salePrice: double.parse((data["SalePrice"] ?? 0.0).toString()),
       isFeatured: data["IsFeatured"] ?? false,
-      productAttributeModel: (data["ProductAttributes"] as List<dynamic>)
-          .map((e) => ProductAttributeModel.fromJson(e))
-          .toList(),
-      productVariationModel: (data["ProductVariation"] as List<dynamic>)
-          .map((e) => ProductVariationModel.fromJson(e))
-          .toList(),
-      brand: BrandModel.fromJson(data["Brand"]),
+      productAttributeModel: (data["ProductAttributes"] != null)
+          ? (data["ProductAttributes"] as List<dynamic>)
+              .map((e) => ProductAttributeModel.fromJson(e))
+              .toList()
+          : [],
+      productVariationModel: (data["ProductVariation"] != null)
+          ? (data["ProductVariation"] as List<dynamic>)
+              .map((e) => ProductVariationModel.fromJson(e))
+              .toList()
+          : [],
+      brand: (data["Brand"] != null)
+          ? BrandModel.fromJson(data["Brand"])
+          : BrandModel.empty(),
       images: data["Images"] != null ? List<String>.from(data["Images"]) : [],
     );
+  }
+  factory ProductModel.fromDocuments(QueryDocumentSnapshot<Object?> documents) {
+    final data = documents.data() as Map<String, dynamic>;
+    return ProductModel(
+      id: documents.id,
+      time: data["Time"] ?? DateTime.now(),
+      stock: data["Stock"] ?? "",
+      price: double.parse((data["Price"] ?? 0).toString()),
+      thumbnail: data["Thumbnail"] ?? "",
+      title: data["Title"] ?? "",
+      productType: data["ProductType"] ?? "",
+      categoryId: data["CategoryId"] ?? "",
+      description: data["Description"] ?? "",
+      sku: data["SKU"] ?? "",
+      salePrice: double.parse((data["SalePrice"] ?? 0.0).toString()),
+      isFeatured: data["IsFeatured"] ?? false,
+      productAttributeModel: (data["ProductAttributes"] != null)
+          ? (data["ProductAttributes"] as List<dynamic>)
+              .map((e) => ProductAttributeModel.fromJson(e))
+              .toList()
+          : [],
+      productVariationModel: (data["ProductVariation"] != null)
+          ? (data["ProductVariation"] as List<dynamic>)
+              .map((e) => ProductVariationModel.fromJson(e))
+              .toList()
+          : [],
+      brand: (data["Brand"] != null)
+          ? BrandModel.fromJson(data["Brand"])
+          : BrandModel.empty(),
+      images: data["Images"] != null ? List<String>.from(data["Images"]) : [],
+    );
+  }
+
+  @override
+  String toString() {
+    return 'ProductModel{id: $id, title: $title, stock: $stock, price: $price, salePrice: $salePrice, thumbnail: $thumbnail, productType: $productType, isFeatured: $isFeatured, brand: ${brand?.toString()}, description: $description, categoryId: $categoryId, sku: $sku, time: $time, productAttributes: ${productAttributeModel?.toString()}, productVariations: ${productVariationModel?.toString()}, images: $images}';
   }
 }

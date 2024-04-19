@@ -8,19 +8,22 @@ import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
 class FeatureBrandGridWidget extends StatelessWidget {
+  final String id;
   final String title;
   final String subTitle;
   final String image;
   final Function()? onTap;
   final bool showBorder;
-  const FeatureBrandGridWidget({
-    super.key,
-    required this.image,
-    required this.subTitle,
-    required this.title,
-    required this.onTap,
-    required this.showBorder,
-  });
+  final bool isNetworkImage;
+  const FeatureBrandGridWidget(
+      {super.key,
+      required this.id,
+      required this.image,
+      required this.subTitle,
+      required this.title,
+      required this.onTap,
+      required this.showBorder,
+      required this.isNetworkImage});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,7 @@ class FeatureBrandGridWidget extends StatelessWidget {
             Flexible(
               child: TCircularImage(
                 image: image,
+                isNetworkImage: isNetworkImage,
                 backgroundColor: Colors.transparent,
                 overlayColor: THelperFunction.isDarkMode(context)
                     ? TColors.white

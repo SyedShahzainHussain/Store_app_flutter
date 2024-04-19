@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:store/features/shop/view/cart/cart.dart';
 import 'package:store/utils/constants/colors.dart';
-import 'package:store/utils/helper/helper_function.dart';
 
 class ProductCartWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -18,9 +16,7 @@ class ProductCartWidget extends StatelessWidget {
     return Stack(
       children: [
         IconButton(
-            onPressed: () {
-              THelperFunction.navigatedToScreen(context, const CartScreen());
-            },
+            onPressed: onPressed,
             icon: Icon(
               Iconsax.shopping_bag,
               color: color,

@@ -69,6 +69,7 @@ class ProfileScreen extends StatelessWidget {
                             onPressed: () async {
                               final XFile? image =
                                   await THelperFunction.pickgalleryImage();
+                              // ignore: use_build_context_synchronously
                               context
                                   .read<UploadImageBloc>()
                                   .add(UploadImage(image));

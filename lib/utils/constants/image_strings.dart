@@ -72,5 +72,8 @@ class TImageString {
 // ! loader json
 
   static const String loaderJson = "assets/images/network/loader.json";
-  static const String verificationJson = "assets/images/auth/check_verification.json";
+  static const String wishList =
+      "assets/images/network/wishlist_animation.json";
+  static const String verificationJson =
+      "assets/images/auth/check_verification.json";
 }

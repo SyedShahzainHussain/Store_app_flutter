@@ -15,5 +15,4 @@ class UpdateDetailImageBloc
       UpdateDetailImage events, Emitter<UpdateDetailImageState> emit) async {
     emit(state.copyWith(selectedProductImage: events.image));
   }
-
 }

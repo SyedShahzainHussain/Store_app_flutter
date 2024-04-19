@@ -1,6 +1,6 @@
 class ProductAttributeModel {
   String? name;
-   List<String>? values;
+  List<String>? values;
   ProductAttributeModel({this.name, this.values});
 
   toJson() {

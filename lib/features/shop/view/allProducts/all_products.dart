@@ -1,23 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/bloc/all_products/all_product_bloc.dart';
+import 'package:store/bloc/all_products/all_product_event.dart';
+import 'package:store/bloc/all_products/all_product_state.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/products/sortable_products.dart';
+import 'package:store/data/status/status.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/shimmer/vertical_product_shimmer.dart';
 
-class AllProducts extends StatelessWidget {
+class AllProducts extends StatefulWidget {
   const AllProducts({super.key});
 
   @override
+  State<AllProducts> createState() => _AllProductsState();
+}
+
+class _AllProductsState extends State<AllProducts> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AllProductBloc>().add(GetAllProduct());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: Text("Popular Products"),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSized.defaultSpace),
-          child: SortableProducts(),
-        ),
+            padding: const EdgeInsets.all(TSized.defaultSpace),
+            child: BlocBuilder<AllProductBloc, AllProductState>(
+              builder: (context, state) {
+                switch (state.status) {
+                  case Status.loading:
+                    return const VerticalProductShimmer(
+                      itemCount: 6,
+                    );
+                  case Status.failure:
+                    return Center(
+                      child: Text(state.message),
+                    );
+                  case Status.success:
+                    return state.productModel.isEmpty
+                        ? const Center(
+                            child: Text("No Products Found"),
+                          )
+                        : SortableProducts(
+                            productModel: state.productModel,
+                          );
+                }
+              },
+            )),
       ),
     );
   }

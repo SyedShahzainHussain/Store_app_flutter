@@ -30,7 +30,7 @@ class HomeAppBar extends StatelessWidget {
             builder: (context, state) {
               if (state is FetchUserLoaded) {
                 return Text(
-                  state.user?.fullName??"",
+                  state.user?.fullName ?? "",
                   style: Theme.of(context)
                       .textTheme
                       .headlineSmall!
@@ -46,7 +46,8 @@ class HomeAppBar extends StatelessWidget {
       actions: [
         ProductCartWidget(
           color: TColors.white,
-          onPressed: () {},
+          onPressed: () {
+          },
         ),
       ],
     );

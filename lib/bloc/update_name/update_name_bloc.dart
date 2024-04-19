@@ -37,7 +37,9 @@ class UpdateNameBloc extends Bloc<UpdateNameEvents, UpdateNameState> {
       await userRepository.updateSingleField(name);
 
       TFullScreenLoader.stopLoading();
-      BlocProvider.of<FetchUserBloc>(ContextUtility.context).add(FetchUser());
+      if (ContextUtility.context.mounted) {
+        BlocProvider.of<FetchUserBloc>(ContextUtility.context).add(FetchUser());
+      }
       emit(UpdateNameSuccess());
     } catch (e) {
       TFullScreenLoader.stopLoading();

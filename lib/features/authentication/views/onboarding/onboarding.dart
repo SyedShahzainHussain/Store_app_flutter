@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:store/features/authentication/controller/onBoard_controller.dart';
+import 'package:store/features/authentication/controller/on_board_controller.dart';
 import 'package:store/features/authentication/views/onboarding/widget/dot_indicator.dart';
 import 'package:store/features/authentication/views/onboarding/widget/on_board_button.dart';
 import 'package:store/features/authentication/views/onboarding/widget/on_boarding_skip.dart';

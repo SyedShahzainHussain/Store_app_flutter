@@ -15,7 +15,7 @@ class CategoryModel {
         id: "",
         name: "",
         image: "",
-        isFeatured: false,
+        isFeatured: false, 
         parentId: "",
       );
 

@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:delightful_toast/delight_toast.dart';
 import 'package:delightful_toast/toast/components/toast_card.dart';
 import 'package:delightful_toast/toast/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 
 class THelperFunction {
@@ -126,5 +128,38 @@ class THelperFunction {
     } else {
       return null;
     }
+  }
+
+  static showFullScreenDialog(String imageUrl) {
+    Navigator.of(ContextUtility.context).push(MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (_) => Scaffold(
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: TSized.defaultSpace * 2,
+                        horizontal: TSized.defaultSpace),
+                    child: CachedNetworkImage(imageUrl: imageUrl),
+                  ),
+                  const SizedBox(
+                    height: TSized.spacebetweenItem,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      width: 150,
+                      child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.pop(ContextUtility.context);
+                          },
+                          child: const Text("Close")),
+                    ),
+                  )
+                ],
+              ),
+            )));
   }
 }

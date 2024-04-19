@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -14,7 +15,9 @@ import 'package:store/features/authentication/views/login/widget/login_title.dar
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/global_context/context_utils.dart';
 import 'package:store/utils/helper/helper_function.dart';
+
 import 'package:store/utils/popups/full_screen_loader.dart';
 
 class Login extends StatelessWidget {
@@ -27,7 +30,7 @@ class Login extends StatelessWidget {
       body: MultiBlocListener(
         listeners: [
           BlocListener<LoginBloc, LoginState>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is LoginLoading) {
                 TFullScreenLoader.openLoadingDialog(
                   "We are processing your information...",
@@ -37,13 +40,22 @@ class Login extends StatelessWidget {
                 THelperFunction.showDelightToast(
                     state.message, Icons.error, Colors.red);
               } else {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => const BottomNavigationScreen()),
-                    (route) => false);
-                THelperFunction.showDelightToast(
-                    "Login Success", Iconsax.copy_success, Colors.green);
+                final user = FirebaseAuth.instance.currentUser;
+                if (user!.emailVerified) {
+                  if (ContextUtility.context.mounted) {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const BottomNavigationScreen()),
+                        (route) => false);
+
+                    THelperFunction.showDelightToast(
+                        "Login Success", Iconsax.copy_success, Colors.green);
+                  }
+                } else {
+                  THelperFunction.showDelightToast("Verify Your Account",
+                      Iconsax.copy_success, Colors.green);
+                }
               }
             },
           ),

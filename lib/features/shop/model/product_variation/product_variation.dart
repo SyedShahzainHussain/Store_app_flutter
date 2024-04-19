@@ -1,15 +1,14 @@
-
 class ProductVariationModel {
   final String id;
-  String sku;
-  String image;
-  String? description;
-  double price;
-  double salePrice;
-  int stock;
-  Map<String, String> attributeValues;
+  final String sku;
+  final String image;
+  final String? description;
+  final double price;
+  final double salePrice;
+  final int stock;
+  final Map<String, String> attributeValues;
 
-  ProductVariationModel({
+  const ProductVariationModel({
     required this.id,
     this.sku = "",
     this.description = "",
@@ -20,8 +19,15 @@ class ProductVariationModel {
     required this.attributeValues,
   });
 
-  static ProductVariationModel empty() =>
-      ProductVariationModel(id: "", attributeValues: {});
+  static ProductVariationModel empty() => const ProductVariationModel(
+      id: "",
+      attributeValues: {},
+      description: "",
+      image: "",
+      price: 0.0,
+      salePrice: 0.0,
+      sku: "",
+      stock: 0);
 
   toJson() {
     return {

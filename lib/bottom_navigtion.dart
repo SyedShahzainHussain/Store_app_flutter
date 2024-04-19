@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:store/features/personalizations/view/setting/setting.dart';
 import 'package:store/features/shop/view/home/home.dart';
 import 'package:store/features/shop/view/store/store.dart';
-import 'package:store/features/shop/view/wishList/wiishList.dart';
+import 'package:store/features/shop/view/wishList/wiish_list.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/helper/helper_function.dart';
 

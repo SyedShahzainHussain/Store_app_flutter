@@ -7,6 +7,7 @@ import 'package:store/data/repositories/authentication/authentication_repository
 import 'package:store/features/personalizations/view/profile/re_auth_login_form.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/local_storage/storage_utility.dart';
 import 'package:store/utils/network/network_manager.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
 
@@ -28,6 +29,7 @@ class AuthenticationBloc
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         if (user.emailVerified) {
+          await LocalStorage.init(user.uid);
           emit(AuthenticatedVerified());
         } else {
           emit(UnAuthenticatedVerified());
@@ -76,8 +78,10 @@ class AuthenticationBloc
           emit(DeleteAccountSuccess());
         } else if (provider == 'password') {
           TFullScreenLoader.stopLoading();
-          THelperFunction.navigatedToScreen(
-              ContextUtility.context, const ReAuthLoginForm());
+          if (ContextUtility.context.mounted) {
+            THelperFunction.navigatedToScreen(
+                ContextUtility.context, const ReAuthLoginForm());
+          }
         }
       } else {
         TFullScreenLoader.stopLoading();
@@ -112,8 +116,6 @@ class AuthenticationBloc
     } catch (e) {
       TFullScreenLoader.stopLoading();
       emit(AuthenticationError(e.toString()));
-    } 
+    }
   }
-
-
 }

@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Store App',
       theme: TAppTheme.lightTheme,
-      themeMode: ThemeMode.dark,
       darkTheme: TAppTheme.darkTheme,
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {

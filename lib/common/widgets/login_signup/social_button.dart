@@ -44,10 +44,7 @@ class SoicalButton extends StatelessWidget {
                  FacebookAuth.instance.login(
                   permissions: ["public_profile", "email"]).then((value) {
                   FacebookAuth.instance.getUserData().then((userData) async {
-                    print(userData["name"]);
-                    print(userData["email"]);
                   }).onError((error, stackTrace) {
-                    print(error);
                   });
                 });
               },
