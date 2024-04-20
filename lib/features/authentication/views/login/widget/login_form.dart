@@ -8,6 +8,7 @@ import 'package:store/features/authentication/views/forgotpassword/forgot_passwo
 import 'package:store/features/authentication/views/signup/signup.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/device/devices_utility.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/validator/validation.dart';
 
@@ -34,6 +35,7 @@ class _LoginFormState extends State<LoginForm> {
     if (!validate) {
       return;
     }
+    TDeviceUtils.hideKeyboard(context);
     context.read<LoginBloc>().add(LoginWithEmailAndPasswordEvent(
           emailController.text.trim(),
           passwordController.text.toString(),
@@ -44,6 +46,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     super.initState();
+    GetStorage localStorage = GetStorage();
     emailController.text = localStorage.read("REMEMBER_ME_EMAIL") ?? "";
     passwordController.text = localStorage.read("REMEMBER_ME_PASSWORD") ?? "";
   }

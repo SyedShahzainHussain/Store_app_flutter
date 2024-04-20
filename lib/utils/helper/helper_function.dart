@@ -4,6 +4,7 @@ import 'package:delightful_toast/toast/components/toast_card.dart';
 import 'package:delightful_toast/toast/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 
@@ -161,5 +162,28 @@ class THelperFunction {
                 ],
               ),
             )));
+  }
+
+  static showToaster({required message}) {
+    ScaffoldMessenger.of(ContextUtility.context).showSnackBar(SnackBar(
+      elevation: 0,
+      duration: const Duration(seconds: 2),
+      backgroundColor: Colors.transparent,
+        content: Container(
+      padding: const EdgeInsets.all(12.0),
+      margin: const EdgeInsets.symmetric(horizontal: 30),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: THelperFunction.isDarkMode(ContextUtility.context)
+            ? TColors.darkerGrey.withOpacity(0.9)
+            : TColors.grey.withOpacity(0.9),
+      ),
+      child: Center(
+        child: Text(
+          message,
+          style: Theme.of(ContextUtility.context).textTheme.labelLarge,
+        ),
+      ),
+    )));
   }
 }

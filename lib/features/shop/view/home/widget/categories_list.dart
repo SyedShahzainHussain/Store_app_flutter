@@ -6,6 +6,7 @@ import 'package:store/bloc/fetch_categories/fetch_categories_state.dart';
 import 'package:store/data/status/status.dart';
 import 'package:store/features/shop/view/home/widget/t_vertical_image_text.dart';
 import 'package:store/features/shop/view/subCategory/sub_category.dart';
+import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/shimmer/category_shimmer.dart';
@@ -47,9 +48,12 @@ class _CategoriesListState extends State<CategoriesList> {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => TVerticalImageText(
                     onTap: () => THelperFunction.navigatedToScreen(
-                        context, const SubCategory()),
+                        context,
+                        SubCategory(
+                          categoryModel: state.featuresCategories[index],
+                        )),
                     image: state.featuresCategories[index].image,
-                    title: state.featuresCategories[index].name,
+                    title: state.featuresCategories[index].name.capitalize(),
                   ),
                   itemCount: state.featuresCategories.length,
                 ),

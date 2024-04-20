@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/image/t_rounded_image.dart';
 import 'package:store/common/widgets/products/t_cart_procucts_horizontal.dart';
+import 'package:store/features/shop/model/categories_model/categories_model.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
+import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
 
 class SubCategory extends StatelessWidget {
-  const SubCategory({super.key});
+  final CategoryModel categoryModel;
+  const SubCategory({super.key,required this.categoryModel});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: Text("Sports"), showBackArrow: true),
+      appBar:  CustomAppBar(title: Text(categoryModel.name.capitalize()), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSized.defaultSpace),

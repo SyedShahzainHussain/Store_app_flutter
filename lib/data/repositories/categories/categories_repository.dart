@@ -278,4 +278,28 @@ class CategoriesRepository {
       throw "SomeThing went wrong. Please try again.";
     }
   }
+
+  // ! Get Sub Category
+  Future<List<CategoryModel>> getSubCategory(String categoryId) async {
+    try {
+      final snapshot = await _db
+          .collection("Categories")
+          .where("ParentId", isEqualTo: categoryId)
+          .get();
+      final List<CategoryModel> product = snapshot.docs
+          .map((documents) => CategoryModel.fromSnapShot(documents))
+          .toList();
+      return product;
+    } on FirebaseAuthException catch (e) {
+      throw SFirebaseAuthException(e.code).messages;
+    } on FirebaseException catch (e) {
+      throw SFirebaseException(e.code).message!;
+    } on PlatformException catch (e) {
+      throw SPlatformException(e.code).message!;
+    } on FormatException catch (e) {
+      throw SFormatException(e.message);
+    } catch (e) {
+      throw "SomeThing went wrong. Please try again.";
+    }
+  }
 }

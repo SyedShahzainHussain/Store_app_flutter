@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
 import 'package:store/bloc/authentication/authentication_state.dart';
+
 import 'package:store/data/repositories/authentication/authentication_repository.dart';
 import 'package:store/features/personalizations/view/profile/re_auth_login_form.dart';
 import 'package:store/utils/global_context/context_utils.dart';
@@ -30,6 +32,8 @@ class AuthenticationBloc
       if (user != null) {
         if (user.emailVerified) {
           await LocalStorage.init(user.uid);
+          if (ContextUtility.context.mounted) {
+          }
           emit(AuthenticatedVerified());
         } else {
           emit(UnAuthenticatedVerified());

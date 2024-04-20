@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restart_app/restart_app.dart';
+import 'package:store/bloc/favourite/favourite_bloc.dart';
+import 'package:store/bloc/favourite/favourite_event.dart';
 import 'package:store/bloc/fetch_products/fetch_products_bloc.dart';
 import 'package:store/bloc/fetch_products/fetch_products_event.dart';
 import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
@@ -17,6 +19,7 @@ import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/local_storage/storage_utility.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,8 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<FetchUserBloc>().add(FetchUser());
     // ! fetch products
     context.read<FetchProductsBloc>().add(GetProductsEvent());
-
-    // Restart.restartApp();
+    // ! Fetch Wishlist And Also add user id to storage container
+    LocalStorage.init(FirebaseAuth.instance.currentUser!.uid).then((value) {
+      context.read<FavouriteBloc>().add(GetAllFavourite());
+    });
   }
 
   @override

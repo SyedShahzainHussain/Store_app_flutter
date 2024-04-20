@@ -4,6 +4,7 @@ import 'package:store/bloc/favourite/favourite_state.dart';
 import 'package:store/data/repositories/categories/categories_repository.dart';
 import 'package:store/data/status/status.dart';
 import 'package:store/utils/global_context/context_utils.dart';
+import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/local_storage/storage_utility.dart';
 
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
@@ -19,6 +20,8 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       final json = LocalStorage.instance().readData("favourite");
       if (json != null) {
         emit(state.copyWith(favourite: json));
+      } else {
+        emit(state.copyWith(favourite: {}));
       }
     } catch (_) {}
   }
@@ -28,10 +31,14 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
     if (!favourite.containsKey(event.productId)) {
       favourite[event.productId] = true;
+
       await LocalStorage.instance().saveData("favourite", favourite);
+
+      THelperFunction.showToaster(message: "Products Add To Wishlist");
     } else {
       favourite.remove(event.productId);
       await LocalStorage.instance().saveData("favourite", favourite);
+      THelperFunction.showToaster(message: "Products Remove From Wishlist");
     }
     if (ContextUtility.context.mounted) {
       ContextUtility.context.read<FavouriteBloc>().add(GetFavourite());

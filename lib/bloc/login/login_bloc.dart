@@ -30,6 +30,7 @@ class LoginBloc extends Bloc<LoginEvents, LoginState> {
 
       if (events.isRemember) {
         GetStorage localStorage = GetStorage();
+
         localStorage.write("REMEMBER_ME_EMAIL", events.email.trim());
         localStorage.write("REMEMBER_ME_PASSWORD", events.password.trim());
       }
@@ -41,7 +42,7 @@ class LoginBloc extends Bloc<LoginEvents, LoginState> {
       TFullScreenLoader.stopLoading();
       emit(LoginSuccess());
     } catch (e) {
-      TFullScreenLoader.stopLoading();
+      TFullScreenLoader.stopLoading(); 
       emit(LoginError(e.toString()));
     }
   }
