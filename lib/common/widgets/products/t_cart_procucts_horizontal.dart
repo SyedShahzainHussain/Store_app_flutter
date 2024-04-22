@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:store/common/styles/shadow.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/common/widgets/favourite_icon/favourite_icon.dart';
 
@@ -40,9 +39,6 @@ class TProductCartHorizontal extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-          boxShadow: [
-            TShadowStyle.verticalProductShadow,
-          ],
           borderRadius: BorderRadius.circular(TSized.productImageRadius),
           color: dark ? TColors.darkerGrey : TColors.softGrey,
         ),
@@ -100,7 +96,8 @@ class TProductCartHorizontal extends StatelessWidget {
               ],
             ),
             // ! Details
-            Expanded(
+            SizedBox(
+              width: 172,
               child: Padding(
                 padding: const EdgeInsets.only(left: TSized.sm, top: TSized.sm),
                 child: Column(
@@ -110,14 +107,14 @@ class TProductCartHorizontal extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TProductTitle(
-                          title: productModel!.title,
+                          title: productModel?.title ?? "",
                           smallSize: true,
                         ),
                         const SizedBox(
                           height: TSized.spacebetweenItem / 2,
                         ),
                         TBrandTitleAndVerification(
-                          title: productModel!.brand!.name.toString(),
+                          title: productModel?.brand?.name ?? "",
                         ),
                       ],
                     ),

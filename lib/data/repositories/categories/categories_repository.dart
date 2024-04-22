@@ -10,9 +10,11 @@ import 'package:store/features/shop/model/product_model/product_model.dart';
 class CategoriesRepository {
   final _db = FirebaseFirestore.instance;
 
+  
+
   // ! Fetch All Categories
   Future<List<CategoryModel>> getAllCategories() async {
-    try {
+    try { 
       final snapshot = await _db.collection("Categories").get();
       final list = snapshot.docs
           .map((documents) => CategoryModel.fromSnapShot(documents))
@@ -302,4 +304,9 @@ class CategoriesRepository {
       throw "SomeThing went wrong. Please try again.";
     }
   }
+
+
+
+  
+
 }

@@ -19,7 +19,7 @@ class FetchCategoriesBloc
     try {
       // ! get all categories
       categoriesList = await categoriesRepository.getAllCategories();
-      // ! get features categories only 8 
+      // ! get features categories only 8
       featuresCategories = categoriesList
           .where((e) => e.isFeatured && e.parentId.isEmpty)
           .take(8)
@@ -34,7 +34,11 @@ class FetchCategoriesBloc
       );
     } catch (e) {
       emit(
-        state.copyWith(status: Status.failure, message: e.toString(),categoriesList: [],featuresCategories: []),
+        state.copyWith(
+            status: Status.failure,
+            message: e.toString(),
+            categoriesList: [],
+            featuresCategories: []),
       );
     }
   }

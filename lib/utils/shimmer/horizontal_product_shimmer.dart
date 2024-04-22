@@ -1,37 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:store/common/widgets/layouts/grid_layout.dart';
+import 'package:flutter/widgets.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/shimmer/shimmer.dart';
 
-class HotizontalProductShimmer extends StatelessWidget {
-  const HotizontalProductShimmer({super.key, this.itemCount = 4});
+class HorizontalProductShimmer extends StatelessWidget {
+  const HorizontalProductShimmer({super.key, this.itemCount = 4});
   final int itemCount;
 
   @override
-  Widget build(BuildContext context) { 
-    return GridLayout(
-        mainAxisExtent: 120,
-        itemBuilder: (_, __) => const SizedBox(
-              width: 180,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 120,
+      child: ListView.separated(
+          separatorBuilder: (context, index) => const SizedBox(
+                width: TSized.spacebetweenItem,
+              ),
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (_, __) => const Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ShimmerEffect(width: 180, height: 180),
-                  SizedBox(
-                    height: TSized.spacebetweenItem,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ShimmerEffect(width: 100, height: 100),
+                    ],
                   ),
-
-                  // ! Text
-
-                  ShimmerEffect(width: 160, height: 15),
                   SizedBox(
-                    height: TSized.spacebetweenItem / 2,
+                    width: TSized.spacebetweenItem,
                   ),
-
-                  ShimmerEffect(width: 110, height: 15),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ShimmerEffect(width: 160, height: 15),
+                      SizedBox(
+                        height: TSized.spacebetweenItem / 2,
+                      ),
+                      ShimmerEffect(width: 110, height: 15),
+                    ],
+                  ),
                 ],
               ),
-            ),
-        itemCount: itemCount);
+          itemCount: itemCount),
+    );
   }
 }
