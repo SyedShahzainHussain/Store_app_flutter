@@ -6,8 +6,13 @@ import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
 class ProductCartAddAndRemoveButton extends StatelessWidget {
+  final int quantity;
+  final VoidCallback? add, remove;
   const ProductCartAddAndRemoveButton({
     super.key,
+    required this.quantity,
+    this.add,
+    this.remove,
   });
 
   @override
@@ -16,6 +21,7 @@ class ProductCartAddAndRemoveButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         TCircularIcons(
+          onPressed: remove,
           icon: Iconsax.minus,
           width: 32,
           height: 32,
@@ -30,11 +36,12 @@ class ProductCartAddAndRemoveButton extends StatelessWidget {
         const SizedBox(
           width: TSized.spacebetweenItem,
         ),
-        const Text("2"),
+        Text(quantity.toString()),
         const SizedBox(
           width: TSized.spacebetweenItem,
         ),
-        const TCircularIcons(
+        TCircularIcons(
+          onPressed: add,
           icon: Iconsax.add,
           width: 32,
           height: 32,

@@ -9,6 +9,7 @@ import 'package:store/utils/global_context/context_utils.dart';
 class VariationBloc extends Bloc<VariationEvents, VariationState> {
   VariationBloc() : super(VariationState()) {
     on<Variation>(_variation);
+    on<ClearVariation>(_clearVariation);
   }
 
   // ! seleted variation
@@ -34,10 +35,11 @@ class VariationBloc extends Bloc<VariationEvents, VariationState> {
 
     // Update the state with the new selected attributes and variation
     emit(state.copyWith(
-        selectedAttributes: modifiableSelectedAttributes,
-        selectedVariation: isSelectedVariation,
-        variationStockStatus:
-            isSelectedVariation.stock > 0 ? "In Stock" : "Out of Stock"));
+      selectedAttributes: modifiableSelectedAttributes,
+      selectedVariation: isSelectedVariation,
+      variationStockStatus:
+          isSelectedVariation.stock > 0 ? "In Stock" : "Out of Stock",
+    ));
   }
 
   // ! check if the key is not same and the length is not same return false else return true
@@ -66,5 +68,14 @@ class VariationBloc extends Bloc<VariationEvents, VariationState> {
         .map((variations) => variations.attributeValues[attributeName])
         .toSet();
     return avalible;
+  }
+
+  void _clearVariation(ClearVariation event, Emitter<VariationState> emit) {
+    emit(state.copyWith(
+      selectedAttributes: {},
+      selectedVariation: ProductVariationModel.empty(),
+      variationStockStatus:
+          "Out of Stock", // Assuming stock status should be "Out of Stock" when variation is cleared
+    ));
   }
 }

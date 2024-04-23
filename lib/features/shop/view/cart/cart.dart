@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:store/features/shop/view/cart/widget/cart_tem.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/bloc/cart_item/cart_item_bloc.dart';
+import 'package:store/bloc/cart_item/cart_item_state.dart';
+import 'package:store/features/shop/view/cart/widget/cart_item.dart';
 import 'package:store/features/shop/view/checkout/checkout.dart';
 
 import 'package:store/utils/constants/size.dart';
@@ -13,13 +16,18 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(TSized.defaultSpace),
-        child: ElevatedButton(
-            onPressed: () {
-              THelperFunction.navigatedToScreen(context, const CheckOutScreen());
-            },
-            child: const Text("Checkout \$256.0")),
+      bottomNavigationBar: BlocBuilder<CartItemBloc, CartItemState>(
+        builder: (context, state) {
+          return Container(
+            margin: const EdgeInsets.all(TSized.defaultSpace),
+            child: ElevatedButton(
+                onPressed: () {
+                  THelperFunction.navigatedToScreen(
+                      context, const CheckOutScreen());
+                },
+                child:  Text("Checkout \$${state.totalCartPrice}")),
+          );
+        },
       ),
       appBar: const CustomAppBar(
         title: Text("Cart"),

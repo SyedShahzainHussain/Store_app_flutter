@@ -4,8 +4,10 @@ import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_state.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/product_cart/product_cart_widget.dart';
+import 'package:store/features/shop/view/cart/cart.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/shimmer/shimmer.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -47,6 +49,7 @@ class HomeAppBar extends StatelessWidget {
         ProductCartWidget(
           color: TColors.white,
           onPressed: () {
+            THelperFunction.navigatedToScreen(context, const CartScreen());
           },
         ),
       ],

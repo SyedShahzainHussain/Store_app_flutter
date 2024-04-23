@@ -20,7 +20,7 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const TBottomNavigationCard(),
+      bottomNavigationBar: TBottomNavigationCard(productModel: productModel!),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -86,7 +86,7 @@ class ProductDetails extends StatelessWidget {
                   const SizedBox(
                     height: TSized.spacebetweenItem,
                   ),
-
+      
                   // ! Reviews
                   const Divider(),
                   const SizedBox(
@@ -108,7 +108,7 @@ class ProductDetails extends StatelessWidget {
                           icon: const Icon(Iconsax.arrow_right_3))
                     ],
                   ),
-
+      
                   const SizedBox(
                     height: TSized.spacebetweenSections,
                   ),

@@ -14,3 +14,10 @@ class Variation extends VariationEvents {
   String attributeValue;
   Variation(this.productModel, this.attributeName, this.attributeValue);
 }
+
+class ClearVariation extends VariationEvents {
+  ClearVariation();
+
+  @override
+  List<Object?> get props => [];
+}

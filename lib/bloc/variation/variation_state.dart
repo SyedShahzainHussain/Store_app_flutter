@@ -5,7 +5,7 @@ import 'package:store/features/shop/model/product_variation/product_variation.da
 class VariationState extends Equatable {
   final Map<String, dynamic> selectedAttributes;
   final String variationStockStatus;
-  ProductVariationModel? selectedVariation = ProductVariationModel.empty();
+  ProductVariationModel? selectedVariation;
 
   VariationState({
     this.selectedVariation,

@@ -11,6 +11,7 @@ import 'package:store/bloc/authentication/authentication_bloc.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
 import 'package:store/bloc/brand/brand_bloc.dart';
 import 'package:store/bloc/brand_products/brand_products_bloc.dart';
+import 'package:store/bloc/cart_item/cart_item_bloc.dart';
 import 'package:store/bloc/favourite/favourite_bloc.dart';
 import 'package:store/bloc/favourite/favourite_event.dart';
 import 'package:store/bloc/fetch_address/fetch_address_bloc.dart';
@@ -95,6 +96,7 @@ Future<void> main() async {
         BlocProvider(create: (context) => FetchAddressBloc()),
         BlocProvider(create: (context) => AddAddressBloc()),
         BlocProvider(create: (context) => SelectedAddressBloc()),
+        BlocProvider(create: (context) => CartItemBloc()),
         BlocProvider(
             create: (context) => FavouriteBloc()..add(GetAllFavourite())),
       ], child: const MyApp()),

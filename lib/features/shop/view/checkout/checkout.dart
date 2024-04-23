@@ -4,7 +4,7 @@ import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/common/widgets/product_cart/product_coupon_code.dart';
 import 'package:store/common/widgets/success_screen/success_screen.dart';
-import 'package:store/features/shop/view/cart/widget/cart_tem.dart';
+import 'package:store/features/shop/view/cart/widget/cart_item.dart';
 import 'package:store/features/shop/view/checkout/widget/product_billing_address_section.dart';
 import 'package:store/features/shop/view/checkout/widget/product_billing_amount_section.dart';
 import 'package:store/features/shop/view/checkout/widget/product_billing_payment_section.dart';
