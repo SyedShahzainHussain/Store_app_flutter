@@ -122,7 +122,6 @@ class TProductAttributes extends StatelessWidget {
                       children: attribute.values!.map((value) {
                         final isSeltected =
                             state.selectedAttributes[attribute.name] == value;
-
                         final available = context
                             .read<VariationBloc>()
                             .getAttributesAvailabilityInVariation(

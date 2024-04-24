@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/bloc/cart_item/cart_item_bloc.dart';
+import 'package:store/bloc/cart_item/cart_item_event.dart';
 import 'package:store/bloc/favourite/favourite_bloc.dart';
 import 'package:store/bloc/favourite/favourite_event.dart';
 import 'package:store/bloc/fetch_products/fetch_products_bloc.dart';
@@ -39,6 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
     // ! Fetch Wishlist And Also add user id to storage container
     LocalStorage.init(FirebaseAuth.instance.currentUser!.uid).then((value) {
       context.read<FavouriteBloc>().add(GetAllFavourite());
+      context.read<CartItemBloc>().add(LoadCartItem());
+
     });
   }
 

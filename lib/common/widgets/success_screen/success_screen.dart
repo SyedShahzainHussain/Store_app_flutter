@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:store/common/styles/text_style_common.dart';
 import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/constants/texts.dart';
-import 'package:store/utils/device/devices_utility.dart';
 
 class SuccessScreen extends StatelessWidget {
   final String title, subTitle, image;
@@ -25,10 +23,11 @@ class SuccessScreen extends StatelessWidget {
           child: Column(
             children: [
               // ! Image
-              LottieBuilder.asset(
-                image,
-                width: TDeviceUtils.screenWidth(context) * 0.6,
-              ),
+              // LottieBuilder.asset(
+              //   image,
+              //   width: TDeviceUtils.screenWidth(context) * 0.6,
+              // ),
+              Image.asset(image),
               const SizedBox(
                 height: TSized.spacebetweenSections,
               ),

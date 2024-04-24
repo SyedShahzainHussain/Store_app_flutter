@@ -80,21 +80,21 @@ class TBottomNavigationCard extends StatelessWidget {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed:state.productQuantityInCart<1?null: () {
-                      
-                      context
-                          .read<CartItemBloc>()
-                          .add(AddItemToCart(productModel, variation));
-                    },
+                    onPressed: state.productQuantityInCart < 1
+                        ? null
+                        : () {
+                            context
+                                .read<CartItemBloc>()
+                                .add(AddItemToCart(productModel, variation));
+                          },
                     style: ElevatedButton.styleFrom(
-                      
                         padding: const EdgeInsets.all(TSized.md),
                         backgroundColor: TColors.black,
                         side: const BorderSide(color: TColors.black)),
                     child: const Text("Add to Cart"),
                   )
                 ],
-              ); 
+              );
             },
           ),
         );

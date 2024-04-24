@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
-import 'package:store/features/shop/view/orders/widget/order_lise_item.dart';
+import 'package:store/features/shop/view/orders/widget/order_list_item.dart';
 import 'package:store/utils/constants/size.dart';
 
 class OrderScreen extends StatelessWidget {

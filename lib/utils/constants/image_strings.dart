@@ -76,4 +76,6 @@ class TImageString {
       "assets/images/network/wishlist_animation.json";
   static const String verificationJson =
       "assets/images/auth/check_verification.json";
+  static const String cartEmpty = "assets/images/auth/cart_empty.json";
+  static const String noOrders = "assets/images/auth/no_order.json";
 }

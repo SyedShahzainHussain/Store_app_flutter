@@ -1,4 +1,4 @@
-class TPricingCalculator {
+class PricingCalculator {
   static double calculatedTotalAmount(double productPrice, String location) {
     double taxRate = getTaxRates(location);
     double taxAmount = productPrice * taxRate;
@@ -8,14 +8,14 @@ class TPricingCalculator {
     return totalPrice;
   }
 
-  static String calculatedShippingCose(double productPrice, String location) {
+  static String calculatedShippingCost(double productPrice, String location) {
     double shippingCost = getShippingCost(location);
     return shippingCost.toStringAsFixed(2);
   }
 
   static String calculatedTax(double productPrice, String location) {
     double taxRates = getTaxRates(location);
-    double taxAmount = productPrice + taxRates;
+    double taxAmount = productPrice * taxRates;
     return taxAmount.toStringAsFixed(2);
   }
 

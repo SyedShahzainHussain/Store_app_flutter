@@ -3,8 +3,23 @@ import 'package:delightful_toast/delight_toast.dart';
 import 'package:delightful_toast/toast/components/toast_card.dart';
 import 'package:delightful_toast/toast/utils/enums.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:store/bloc/fetch_address/fetch_address_bloc.dart';
+import 'package:store/bloc/fetch_address/fetch_address_state.dart';
+import 'package:store/bloc/selected_address/selected_bloc.dart';
+import 'package:store/bloc/selected_address/selected_event.dart';
+import 'package:store/bloc/selected_address/selected_state.dart';
+import 'package:store/common/widgets/container/t_rounded_container.dart';
+import 'package:store/data/status/status.dart';
+import 'package:store/features/personalizations/view/address/add_new__address_screen.dart';
+import 'package:store/features/personalizations/view/address/widget/single_address.dart';
+import 'package:store/features/shop/model/payment_model/payment_model.dart';
+import 'package:store/features/shop/view/checkout/widget/list_tile_payment.dart';
+import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/utils/constants/colors.dart';
+import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 
@@ -130,6 +145,9 @@ class THelperFunction {
       return null;
     }
   }
+  static String formatDeliveryDate(DateTime deliveryDate) {
+  return DateFormat('dd MMM yyyy').format(deliveryDate);
+}
 
   static showFullScreenDialog(String imageUrl) {
     Navigator.of(ContextUtility.context).push(MaterialPageRoute<void>(
@@ -166,24 +184,196 @@ class THelperFunction {
 
   static showToaster({required message}) {
     ScaffoldMessenger.of(ContextUtility.context).showSnackBar(SnackBar(
-      elevation: 0,
-      duration: const Duration(seconds: 2),
-      backgroundColor: Colors.transparent,
+        elevation: 0,
+        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.transparent,
         content: Container(
-      padding: const EdgeInsets.all(12.0),
-      margin: const EdgeInsets.symmetric(horizontal: 30),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        color: THelperFunction.isDarkMode(ContextUtility.context)
-            ? TColors.darkerGrey.withOpacity(0.9)
-            : TColors.grey.withOpacity(0.9),
-      ),
-      child: Center(
-        child: Text(
-          message,
-          style: Theme.of(ContextUtility.context).textTheme.labelLarge,
-        ),
-      ),
-    )));
+          padding: const EdgeInsets.all(12.0),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: THelperFunction.isDarkMode(ContextUtility.context)
+                ? TColors.darkerGrey.withOpacity(0.9)
+                : TColors.grey.withOpacity(0.9),
+          ),
+          child: Center(
+            child: Text(
+              message,
+              style: Theme.of(ContextUtility.context).textTheme.labelLarge,
+            ),
+          ),
+        )));
+  }
+
+  static showPaymentDialog() {
+    showModalBottomSheet(
+        context: ContextUtility.context,
+        builder: (_) => SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(TSized.lg),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TSectionHeading(
+                      title: "Select Payment Method",
+                      showActionButton: false,
+                    ),
+                    const SizedBox(
+                      height: TSized.spacebetweenSections,
+                    ),
+                    PaymentTile(
+                      paymentModel: PaymentModel(
+                          name: "Paypal", image: TImageString.payPal),
+                    ),
+                    const SizedBox(
+                      height: TSized.spacebetweenSections / 2,
+                    ),
+                    PaymentTile(
+                      paymentModel: PaymentModel(
+                          name: "Google Pay", image: TImageString.googlePay),
+                    ),
+                    const SizedBox(
+                      height: TSized.spacebetweenSections / 2,
+                    ),
+                    PaymentTile(
+                      paymentModel: PaymentModel(
+                          name: "Apple Pay", image: TImageString.applePay),
+                    ),
+                    const SizedBox(
+                      height: TSized.spacebetweenSections / 2,
+                    ),
+                    PaymentTile(
+                      paymentModel: PaymentModel(
+                          name: "Visa Card", image: TImageString.visaCard),
+                    ),
+                    const SizedBox(
+                      height: TSized.spacebetweenSections / 2,
+                    ),
+                    PaymentTile(
+                      paymentModel: PaymentModel(
+                          name: "Master Card", image: TImageString.masterCard),
+                    ),
+                    const SizedBox(
+                      height: TSized.spacebetweenSections / 2,
+                    ),
+                    PaymentTile(
+                      paymentModel: PaymentModel(
+                          name: "Paytm", image: TImageString.payTm),
+                    ),
+                    const SizedBox(
+                      height: TSized.spacebetweenSections / 2,
+                    ),
+                    PaymentTile(
+                      paymentModel: PaymentModel(
+                          name: "Credit Card", image: TImageString.creditCard),
+                    ),
+                    const SizedBox(
+                      height: TSized.spacebetweenSections,
+                    ),
+                  ],
+                ),
+              ),
+            ));
+  }
+
+  static Future showAddressDialog() async {
+    await showModalBottomSheet(
+        context: ContextUtility.context,
+        builder: (_) => Container(
+              padding: const EdgeInsets.all(TSized.lg),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TSectionHeading(
+                    title: "Select Address",
+                    showActionButton: false,
+                  ),
+                  BlocBuilder<FetchAddressBloc, FetchAddressState>(
+                    builder: (context, state) {
+                      switch (state.status) {
+                        case Status.loading:
+                          return const Center(
+                            child: TRoundedContainer(
+                              padding: EdgeInsets.all(12),
+                              width: 50,
+                              height: 50,
+                              backgroundColor: TColors.primary,
+                              showBorder: true,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeCap: StrokeCap.round,
+                                strokeWidth: 3.0,
+                              ),
+                            ),
+                          );
+                        case Status.failure:
+                          return Center(
+                            child: Text(state.message),
+                          );
+                        case Status.success:
+                          if (state.addressList.isEmpty) {
+                            return const Center(
+                              child: Text("No Address Found!"),
+                            );
+                          } else {
+                            return BlocBuilder<SelectedAddressBloc,
+                                SelectedAddressState>(
+                              builder: (context, state2) {
+                                if (state2.status == Status.loading) {
+                                  return const Center(
+                                    child: TRoundedContainer(
+                                      padding: EdgeInsets.all(12),
+                                      width: 50,
+                                      height: 50,
+                                      backgroundColor: TColors.primary,
+                                      showBorder: true,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeCap: StrokeCap.round,
+                                        strokeWidth: 3.0,
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      return SingleAddress(
+                                        selectedAddress:
+                                            state.addressList[index],
+                                        onTap: () {
+                                          context
+                                              .read<SelectedAddressBloc>()
+                                              .add(SeletectAddress(
+                                                  state.addressList[index]));
+                                          Navigator.pop(context);
+                                        },
+                                      );
+                                    },
+                                    itemCount: state.addressList.length,
+                                  );
+                                }
+                              },
+                            );
+                          }
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: TSized.defaultSpace,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          THelperFunction.navigatedToScreen(
+                              ContextUtility.context,
+                              const AddNewAddressScreen());
+                        },
+                        child: const Text("Add new address")),
+                  )
+                ],
+              ),
+            ));
   }
 }

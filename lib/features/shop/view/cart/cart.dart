@@ -18,7 +18,7 @@ class CartScreen extends StatelessWidget {
       extendBody: true,
       bottomNavigationBar: BlocBuilder<CartItemBloc, CartItemState>(
         builder: (context, state) {
-          return Container(
+          return state.cartItem.isEmpty ? const SizedBox(): Container(
             margin: const EdgeInsets.all(TSized.defaultSpace),
             child: ElevatedButton(
                 onPressed: () {

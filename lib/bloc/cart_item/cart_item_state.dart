@@ -5,12 +5,12 @@ import 'package:store/features/shop/model/cart_item_model/cart_item_model.dart';
 class CartItemState extends Equatable {
   final int noOfCartItem;
   final double totalCartPrice;
-  double productQuantityInCart;
+  int productQuantityInCart;
   final List<CartItemModel> cartItem;
 
   CartItemState({
     this.noOfCartItem = 0,
-    this.productQuantityInCart = 0.0,
+    this.productQuantityInCart = 0,
     this.totalCartPrice = 0,
     this.cartItem = const [],
   });
@@ -18,7 +18,7 @@ class CartItemState extends Equatable {
   CartItemState copyWith({
     int? noOfCartItem,
     double? totalCartPrice,
-    double? productQuantityInCart,
+    int? productQuantityInCart,
     List<CartItemModel>? cartItem,
   }) {
     return CartItemState(

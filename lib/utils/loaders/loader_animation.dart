@@ -28,7 +28,7 @@ class AnimationLoaderWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Lottie.asset(animation,
-              width: MediaQuery.sizeOf(context).width * 0.8),
+              width: MediaQuery.sizeOf(context).width * 0.5),
           const SizedBox(
             height: TSized.defaultSpace,
           ),
@@ -46,7 +46,6 @@ class AnimationLoaderWidget extends StatelessWidget {
                   child: OutlinedButton(
                       onPressed: onActionPressed,
                       style: OutlinedButton.styleFrom(
-                        
                           backgroundColor: TColors.dark),
                       child: Text(
                         actionText!,

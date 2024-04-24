@@ -9,6 +9,7 @@ import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/appBar/tapbar.dart';
 import 'package:store/common/widgets/product_cart/product_cart_widget.dart';
 import 'package:store/data/status/status.dart';
+import 'package:store/features/shop/view/cart/cart.dart';
 import 'package:store/features/shop/view/store/widget/bottom_tab_bar.dart';
 import 'package:store/features/shop/view/store/widget/sliver_app_bar.dart';
 import 'package:store/utils/constants/colors.dart';
@@ -56,7 +57,9 @@ class _StoreScreenState extends State<StoreScreen>
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 actions: [
-                  ProductCartWidget(onPressed: () {}),
+                  ProductCartWidget(onPressed: () {
+                    THelperFunction.navigatedToScreen(context, const CartScreen());
+                  }),
                 ],
               ),
               body: NestedScrollView(

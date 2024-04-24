@@ -44,3 +44,11 @@ class AddProductCount extends CartItemEvent {
 class DeleteProductCount extends CartItemEvent {
   DeleteProductCount();
 }
+
+class ClearCart extends CartItemEvent {
+  ClearCart();
+}
+
+class LoadCartItem extends CartItemEvent {
+  LoadCartItem();
+}

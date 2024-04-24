@@ -6,6 +6,7 @@ import 'package:store/common/widgets/listtile/list_tile.dart';
 import 'package:store/data/repositories/authentication/authentication_repository.dart';
 import 'package:store/features/personalizations/view/address/address.dart';
 import 'package:store/features/personalizations/view/setting/widget/t_setting_menu_tile.dart';
+import 'package:store/features/shop/view/cart/cart.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/features/shop/view/orders/orders.dart';
 import 'package:store/utils/constants/colors.dart';
@@ -72,7 +73,9 @@ class SettingScreen extends StatelessWidget {
                     icon: Iconsax.shopping_cart,
                     title: "My Cart",
                     subTitle: "Add, remove products and move to checkout",
-                    onTap: () {}),
+                    onTap: () {
+                      THelperFunction.navigatedToScreen(context, const CartScreen());
+                    }),
                 TSettingListTile(
                     icon: Iconsax.bag_tick,
                     title: "My Orders",

@@ -40,15 +40,21 @@ class CartItemModel {
   }
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
-    return CartItemModel(
-      productId: json["ProductId"],
-      quantity: json["Quantity"],
-      brandName: json["BrandName"],
-      image: json["Image"],
-      price: json["Price"],
-      selectedVariation: json["SelectedVariation"],
-      title: json["Title"],
-      variationId: json["VariationId"],
-    );
+  // Convert selectedVariation to Map<String, String> explicitly
+  Map<String, String>? selectedVariation;
+  if (json["SelectedVariation"] != null) {
+    selectedVariation = Map<String, String>.from(json["SelectedVariation"]);
   }
+
+  return CartItemModel(
+    productId: json["ProductId"],
+    quantity: json["Quantity"],
+    brandName: json["BrandName"],
+    image: json["Image"],
+    price: json["Price"],
+    selectedVariation: selectedVariation,
+    title: json["Title"],
+    variationId: json["VariationId"],
+  );
+}
 }

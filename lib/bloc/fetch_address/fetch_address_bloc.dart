@@ -16,7 +16,7 @@ class FetchAddressBloc extends Bloc<FetchAddressEvent, FetchAddressState> {
       FetchAddress event, Emitter<FetchAddressState> emit) async {
     try {
       final List<AddressModel> addresses = await addressRepository.getAddress();
-      final seletecdAddress = addresses.firstWhere(
+      final selectedAddress = addresses.firstWhere(
         (element) => element.selectedAddress,
         orElse: () => AddressModel.empty(),
       );
@@ -30,7 +30,7 @@ class FetchAddressBloc extends Bloc<FetchAddressEvent, FetchAddressState> {
         ContextUtility.context
             .read<SelectedAddressBloc>()
             .state
-            .isAddressSeleted = seletecdAddress;
+            .isAddressSeleted = selectedAddress;
       }
     } catch (e) {
       emit(state.copyWith(

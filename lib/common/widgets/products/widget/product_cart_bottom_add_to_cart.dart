@@ -33,8 +33,12 @@ class ProductCartAddToCart extends StatelessWidget {
             return InkWell(
               onTap: () {
                 if (productModel.productType == ProductType.single.toString()) {
-                  final cartItem = BlocProvider.of<CartItemBloc>(context)
-                      .convertCartItem(productModel, 1, variation);
+                  final cartItem =
+                      BlocProvider.of<CartItemBloc>(context).convertCartItem(
+                    productModel,
+                    1,
+                  );
+
                   BlocProvider.of<CartItemBloc>(context)
                       .add(IncrementProduct(cartItem));
                 } else {

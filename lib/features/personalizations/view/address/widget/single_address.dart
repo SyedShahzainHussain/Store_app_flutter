@@ -73,11 +73,10 @@ class SingleAddress extends StatelessWidget {
                     const SizedBox(
                       height: TSized.sm / 2,
                     ),
-                    //  Text(
-                    //   selectedAddress.postalCode
-                    //   "22323 Saddar Karchi Pakistan Town",
-                    //   softWrap: true,
-                    // )
+                     Text(
+                      '${selectedAddress.postalCode} ${selectedAddress.street} ${selectedAddress.city} ${selectedAddress.country}',
+                      softWrap: true,
+                    )
                   ],
                 )
               ],

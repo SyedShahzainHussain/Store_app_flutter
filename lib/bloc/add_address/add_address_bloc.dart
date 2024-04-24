@@ -27,13 +27,13 @@ class AddAddressBloc extends Bloc<AddAddressEvent, AddAddressState> {
         return;
       }
 
-      final data = await addressRepository.addAddress(events.addressModel);
+      final newAddressId = await addressRepository.addAddress(events.addressModel);
       if (ContextUtility.context.mounted) {
         ContextUtility.context
             .read<SelectedAddressBloc>()
             .state
             .isAddressSeleted!
-            .id = data;
+            .id = newAddressId;
       }
       TFullScreenLoader.stopLoading();
       emit(AddAddressSuccessState());

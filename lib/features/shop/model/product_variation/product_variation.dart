@@ -19,6 +19,11 @@ class ProductVariationModel {
     required this.attributeValues,
   });
 
+  @override
+  String toString() {
+    return "Id:$id,Attributes:$attributeValues";
+  }
+
   static ProductVariationModel empty() => const ProductVariationModel(
       id: "",
       attributeValues: {},

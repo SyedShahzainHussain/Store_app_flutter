@@ -3,10 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/bloc/cart_item/cart_item_bloc.dart';
 import 'package:store/bloc/cart_item/cart_item_event.dart';
 import 'package:store/bloc/cart_item/cart_item_state.dart';
+import 'package:store/bottom_navigtion.dart';
 import 'package:store/common/widgets/product_cart/product_cart_add_delete_button.dart';
 import 'package:store/common/widgets/product_cart/product_cart_item.dart';
 import 'package:store/common/widgets/product_price/t_product_price_text.dart';
+import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/loaders/loader_animation.dart';
 
 class CartListItem extends StatelessWidget {
   final bool isShowAddOrRemove;
@@ -16,54 +20,69 @@ class CartListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartItemBloc, CartItemState>(
       builder: (context, state) {
-        return ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(
-            height: TSized.spacebetweenItem,
-          ),
-          shrinkWrap: true,
-          itemCount: state.cartItem.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                CartItem(cartItem: state.cartItem[index]),
-                if (isShowAddOrRemove)
-                  const SizedBox(
-                    height: TSized.spacebetweenItem,
-                  ),
-                if (isShowAddOrRemove)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return state.cartItem.isEmpty
+            ? Center(
+                child: AnimationLoaderWidget(
+                  text: "Whoops! Cart is Empty...",
+                  animation: TImageString.cartEmpty,
+                  showAction: true,
+                  actionText: "Let's fill it",
+                  onActionPressed: () {
+                    THelperFunction.navigatedToScreen(
+                        context, const BottomNavigationScreen());
+                  },
+                ),
+              )
+            : ListView.separated(
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: TSized.spacebetweenItem,
+                ),
+                shrinkWrap: true,
+                itemCount: state.cartItem.length,
+                itemBuilder: (context, index) {
+                  return Column(
                     children: [
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 70,
-                          ),
-                          // ! Add Remove Buttons
-                          ProductCartAddAndRemoveButton(
-                            quantity: state.cartItem[index].quantity,
-                            add: () {
-                              BlocProvider.of<CartItemBloc>(context)
-                                  .add(IncrementProduct(state.cartItem[index]));
-                            },
-                            remove: () {
-                              BlocProvider.of<CartItemBloc>(context)
-                                  .add(DecrementProduct(state.cartItem[index]));
-                            },
-                          ),
-                        ],
-                      ),
-                      // ! Product Total Price
-                      TProductPriceText(
-                          price: (state.cartItem[index].price *
-                                  state.cartItem[index].quantity)
-                              .toStringAsFixed(1)),
+                      CartItem(cartItem: state.cartItem[index]),
+                      if (isShowAddOrRemove)
+                        const SizedBox(
+                          height: TSized.spacebetweenItem,
+                        ),
+                      if (isShowAddOrRemove)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 70,
+                                ),
+                                // ! Add Remove Buttons
+                                ProductCartAddAndRemoveButton(
+                                  quantity: state.cartItem[index].quantity,
+                                  add: () {
+                                    BlocProvider.of<CartItemBloc>(context).add(
+                                        IncrementProduct(
+                                            state.cartItem[index]));
+                                  },
+                                  remove: () {
+                                    BlocProvider.of<CartItemBloc>(context).add(
+                                        DecrementProduct(
+                                            state.cartItem[index]));
+                                  },
+                                ),
+                              ],
+                            ),
+                            // ! Product Total Price
+                            TProductPriceText(
+                                price: (state.cartItem[index].price *
+                                        state.cartItem[index].quantity)
+                                    .toStringAsFixed(1)),
+                          ],
+                        ),
                     ],
-                  ),
-              ],
-            );
-          },
-        );
+                  );
+                },
+              );
       },
     );
   }

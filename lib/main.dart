@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:store/app.dart';
 import 'package:provider/provider.dart';
 import 'package:store/bloc/add_address/add_address_bloc.dart';
+import 'package:store/bloc/add_order/add_order_bloc.dart';
 import 'package:store/bloc/all_products/all_product_bloc.dart';
 import 'package:store/bloc/authentication/authentication_bloc.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
@@ -17,6 +18,7 @@ import 'package:store/bloc/favourite/favourite_event.dart';
 import 'package:store/bloc/fetch_address/fetch_address_bloc.dart';
 import 'package:store/bloc/fetch_banners/fetch_banners_bloc.dart';
 import 'package:store/bloc/fetch_categories/fetch_categories_bloc.dart';
+import 'package:store/bloc/fetch_orders/fetch_orders_bloc.dart';
 import 'package:store/bloc/fetch_products/fetch_products_bloc.dart';
 import 'package:store/bloc/fetch_sub_category/fetch_sub_category_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
@@ -25,6 +27,7 @@ import 'package:store/bloc/google/google_bloc.dart';
 import 'package:store/bloc/login/login_bloc.dart';
 import 'package:store/bloc/register/register_bloc.dart';
 import 'package:store/bloc/selected_address/selected_bloc.dart';
+import 'package:store/bloc/selected_payment/selected_payment_bloc.dart';
 import 'package:store/bloc/togglelist/togglelist_bloc.dart';
 import 'package:store/bloc/update__detail_image/update_detail_image_bloc.dart';
 import 'package:store/bloc/update_name/update_name_bloc.dart';
@@ -99,6 +102,9 @@ Future<void> main() async {
         BlocProvider(create: (context) => CartItemBloc()),
         BlocProvider(
             create: (context) => FavouriteBloc()..add(GetAllFavourite())),
+        BlocProvider(create: (context) => SelectedPaymentBloc()),
+        BlocProvider(create: (context) => AddOrderBloc()),
+        BlocProvider(create: (context) => FetchOrderBloc()),
       ], child: const MyApp()),
     ),
   );
