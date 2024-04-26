@@ -1,14 +1,6 @@
-import 'package:equatable/equatable.dart';
 import 'package:store/features/chatbot/model/message_model.dart';
 
-sealed class PostChatBotState extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
-
-class PostChatBotInitial extends PostChatBotState {}
-
-class PostChatBotLoading extends PostChatBotState {}
+sealed class PostChatBotState {}
 
 class PostChatBotSuccess extends PostChatBotState {
   final List<MessageModel> message;

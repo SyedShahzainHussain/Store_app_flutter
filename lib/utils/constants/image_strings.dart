@@ -83,6 +83,7 @@ class TImageString {
   // ! chat image
   static const String chatBotImage = "assets/images/chat/chat_bot.png";
   static const String chatReply = "assets/images/chat/chat_reply.png";
+  static const String chatModelLoader = "assets/images/chat/chat_model_loader.json";
 
 
 }

@@ -1,8 +1,21 @@
 class MessageModel {
-  String msg;
-  int sentAt;
-  int senderId; //? 0->user 1->bot
+  String role;
+  List<RoleModel> parts;
 
-  MessageModel(
-      {required this.msg, required this.senderId, required this.sentAt});
+  MessageModel({
+    required this.role,
+    required this.parts,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {"role": role, "parts": parts.map((e) => e.toJson()).toList()};
+  }
+}
+
+class RoleModel {
+  String text;
+  RoleModel({required this.text});
+  Map<String, dynamic> toJson() {
+    return {"text": text};
+  }
 }
