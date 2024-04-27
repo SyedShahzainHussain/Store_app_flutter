@@ -11,6 +11,7 @@ import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/features/shop/view/store/widget/feature_brand_widget.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/shimmer/brand_shimmer.dart';
 
@@ -20,8 +21,8 @@ class AllBrandsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: Text("Brands"),
+      appBar: CustomAppBar(
+        title: Text(context.localizations!.brands),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
@@ -31,8 +32,9 @@ class AllBrandsScreen extends StatelessWidget {
             children: [
               // ! Heading
               TSectionHeading(
-                title: "Brands",
+                title: context.localizations!.brands,
                 showActionButton: false,
+                buttontitle: context.localizations!.viewAll,
               ),
               const SizedBox(
                 height: TSized.spacebetweenItem,
@@ -58,7 +60,7 @@ class AllBrandsScreen extends StatelessWidget {
                                 : TImageString.adidasIcon,
                             title: state.allBrand[index].name ?? "",
                             subTitle:
-                                "${state.allBrand[index].productCount.toString()} Products",
+                                "${state.allBrand[index].productCount.toString()} ${context.localizations!.products}",
                             onTap: () => THelperFunction.navigatedToScreen(
                               context,
                               BrandsProducts(

@@ -22,6 +22,7 @@ class ProductCartAddToCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = Localizations.localeOf(context);
     return BlocBuilder<VariationBloc, VariationState>(
       builder: (context, variation) {
         return BlocBuilder<CartItemBloc, CartItemState>(
@@ -53,9 +54,19 @@ class ProductCartAddToCart extends StatelessWidget {
                 decoration: BoxDecoration(
                   color:
                       productQuantityCount > 0 ? TColors.primary : TColors.dark,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(TSized.cardRadiusMd),
-                    bottomRight: Radius.circular(TSized.productImageRadius),
+                  borderRadius: BorderRadius.only(
+                    topLeft: localization.languageCode == "en"
+                        ? const Radius.circular(TSized.cardRadiusMd)
+                        : Radius.zero,
+                    bottomRight: localization.languageCode == "en"
+                        ? const Radius.circular(TSized.productImageRadius)
+                        : Radius.zero,
+                    topRight: localization.languageCode == "en"
+                        ? Radius.zero
+                        : const Radius.circular(TSized.cardRadiusMd),
+                    bottomLeft: localization.languageCode == "en"
+                        ? Radius.zero
+                        : const Radius.circular(TSized.productImageRadius),
                   ),
                 ),
                 child: SizedBox(

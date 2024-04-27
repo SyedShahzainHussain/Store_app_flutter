@@ -8,7 +8,7 @@ import 'package:store/features/authentication/views/reset_screen/reset_screen.da
 import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
-import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
 import 'package:store/utils/validator/validation.dart';
@@ -71,14 +71,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 children: [
                   // ! Headings
                   Text(
-                    TTexts.forgotPassTitle,
+                    context.localizations!.forgotPassTitle,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   const SizedBox(
                     height: TSized.spacebetweenItem,
                   ),
                   Text(
-                    TTexts.forgotPassSubTitle,
+                    context.localizations!.forgotPassSubTitle,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   const SizedBox(
@@ -89,9 +89,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   TextFormField(
                       controller: emailController,
                       validator: (value) => TValidation.validateEmail(value),
-                      decoration: const InputDecoration(
-                          labelText: TTexts.email,
-                          prefixIcon: Icon(
+                      decoration:  InputDecoration(
+                          labelText: context.localizations!.email,
+                          prefixIcon: const Icon(
                             Iconsax.direct_right,
                           ))),
                   const SizedBox(
@@ -105,7 +105,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       onPressed: () {
                         save();
                       },
-                      child: Text(TTexts.submit.capitalize()),
+                      child: Text(context.localizations!.submit.capitalize()),
                     ),
                   )
                 ],

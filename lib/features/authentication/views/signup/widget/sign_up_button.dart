@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:store/utils/extension/language.dart';
 
 class SignUpButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -14,7 +14,7 @@ class SignUpButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: const Text("Create Account"),
+        child: Text(context.localizations!.createAccount),
       ),
     );
   }

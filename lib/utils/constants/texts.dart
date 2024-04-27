@@ -15,7 +15,6 @@ class TTexts {
 
   // ! Home
   static const String homeAppBarTitle = "Good day for shopping";
-  static const String homeAppBarSubTitle = "Syed Shahzain";
 
   // ! Authentication from text
   static const String firstName = "First Name";

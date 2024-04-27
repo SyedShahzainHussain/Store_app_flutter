@@ -14,7 +14,8 @@ import 'package:store/features/authentication/views/login/widget/login_form.dart
 import 'package:store/features/authentication/views/login/widget/login_title.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
-import 'package:store/utils/constants/texts.dart';
+
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
@@ -95,7 +96,7 @@ class Login extends StatelessWidget {
                 // ! Divider
                 LoginDivider(
                   isDark: isDark,
-                  title: TTexts.orSignInWith,
+                  title: context.localizations!.orSignInWith,
                 ),
                 const SizedBox(
                   height: TSized.spacebetweenItem,

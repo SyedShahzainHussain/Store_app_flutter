@@ -1,18 +1,15 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:store/bloc/fetch_banners/fetch_banners_bloc.dart';
 import 'package:store/bloc/fetch_banners/fetch_banners_events.dart';
 import 'package:store/bloc/fetch_banners/fetch_banners_state.dart';
-import 'package:store/common/widgets/container/t_circular_container.dart';
 import 'package:store/common/widgets/image/t_rounded_image.dart';
 import 'package:store/data/status/status.dart';
-import 'package:store/features/shop/controller/home_controller.dart';
-import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/device/devices_utility.dart';
 import 'package:store/utils/shimmer/shimmer.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 
 class TBanners extends StatefulWidget {
   const TBanners({
@@ -24,6 +21,11 @@ class TBanners extends StatefulWidget {
 }
 
 class _TBannersState extends State<TBanners> {
+  final List<double> imageRotations = [
+    0.0,
+    -0.2,
+    0.2,
+  ];
   @override
   void initState() {
     super.initState();
@@ -36,50 +38,41 @@ class _TBannersState extends State<TBanners> {
       builder: (context, state) {
         switch (state.status) {
           case Status.loading:
-            return const ShimmerEffect(width: double.infinity, height: 190,radius: TSized.cardRadiusMd,);
+            return const ShimmerEffect(
+              width: double.infinity,
+              height: 190,
+              radius: TSized.cardRadiusMd,
+            );
           case Status.failure:
             return Center(
               child: Text(state.message),
             );
           case Status.success:
-            return Consumer<HomeController>(
-              builder: (context, value, _) => Column(
-                children: [
-                  CarouselSlider(
-                    items: state.bannerList
-                        .map((banner) => TRoundedImage(
-                              onPressed: () {},
-                              imageUrl: banner.imageUrl,
-                              isNetworkImage: true,
-                            ))
-                        .toList(),
-                    options: CarouselOptions(
-                      viewportFraction: 1.0,
-                      onPageChanged: (index, _) => value.setIndex(index),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: TSized.spacebetweenItem,
-                  ),
-                  Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        for (int i = 0; i <= state.bannerList.length - 1; i++)
-                          TCircularBorderRadius(
-                            width: 20,
-                            height: 4,
-                            backgroundColor: value.currentIndex == i
-                                ? TColors.primary
-                                : TColors.grey,
-                            margin: const EdgeInsets.only(right: 5),
-                          )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            );
+            return SizedBox(
+                width: TDeviceUtils.screenWidth(context) * .8 + 20,
+                height: TDeviceUtils.screenHeight(context) / 4 + 10,
+                child: AppinioSwiper(
+                  swipeOptions:
+                      const SwipeOptions.only(left: true, right: true),
+                  backgroundCardOffset: const Offset(0, 20),
+                  loop: true,
+                  cardBuilder: (BuildContext context, int index) {
+                    return Container(
+                        padding: const EdgeInsets.all(15.0),
+                        alignment: Alignment.topCenter,
+                        child: Transform(
+                          alignment: Alignment.center,
+                          transform: Matrix4.identity()
+                            ..rotateZ(imageRotations[index]),
+                          child: TRoundedImage(
+                            imageUrl: state.bannerList[index].imageUrl,
+                            isNetworkImage:
+                                state.bannerList[index].imageUrl.isNotEmpty,
+                          ),
+                        ));
+                  },
+                  cardCount: state.bannerList.length,
+                ));
         }
       },
     );

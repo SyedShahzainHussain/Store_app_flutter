@@ -10,6 +10,7 @@ import 'package:store/data/status/status.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/loaders/loader_animation.dart';
 
@@ -54,10 +55,10 @@ class _OrderListItemsState extends State<OrderListItems> {
             return state.orderList.isEmpty
                 ? Center(
                 child: AnimationLoaderWidget(
-                  text: "Whoops! Orders is Empty...",
+                  text: context.localizations!.orderIsEmpty,
                   animation: TImageString.noOrders,
                   showAction: true,
-                  actionText: "Let's order it",
+                  actionText: context.localizations!.letOrderIt,
                   onActionPressed: () {
                     THelperFunction.navigatedToScreen(
                         context, const BottomNavigationScreen());
@@ -140,7 +141,7 @@ class _OrderListItemsState extends State<OrderListItems> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text("Order",
+                                          Text(context.localizations!.order,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelMedium),
@@ -171,7 +172,7 @@ class _OrderListItemsState extends State<OrderListItems> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text("Shopping Date",
+                                          Text(context.localizations!.shoppingData,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelMedium),

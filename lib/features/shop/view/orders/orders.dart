@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/features/shop/view/orders/widget/order_list_item.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
@@ -11,7 +12,7 @@ class OrderScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title:
-            Text("My Orders", style: Theme.of(context).textTheme.headlineSmall),
+            Text(context.localizations!.order, style: Theme.of(context).textTheme.headlineSmall),
         showBackArrow: true,
       ),
       body: const Padding(

@@ -51,7 +51,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         body: BlocBuilder<PostChatBotBloc, PostChatBotState>(
             builder: (context, state) {
           switch (state.runtimeType) {
-            case PostChatBotSuccess:
+            case const (PostChatBotSuccess):
               final List<MessageModel> messages =
                   (state as PostChatBotSuccess).message;
               return Column(

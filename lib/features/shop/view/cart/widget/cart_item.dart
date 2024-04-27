@@ -9,6 +9,7 @@ import 'package:store/common/widgets/product_cart/product_cart_item.dart';
 import 'package:store/common/widgets/product_price/t_product_price_text.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/loaders/loader_animation.dart';
 
@@ -23,10 +24,10 @@ class CartListItem extends StatelessWidget {
         return state.cartItem.isEmpty
             ? Center(
                 child: AnimationLoaderWidget(
-                  text: "Whoops! Cart is Empty...",
+                  text: context.localizations!.cartIsEmpty,
                   animation: TImageString.cartEmpty,
                   showAction: true,
-                  actionText: "Let's fill it",
+                  actionText: context.localizations!.letFillIt,
                   onActionPressed: () {
                     THelperFunction.navigatedToScreen(
                         context, const BottomNavigationScreen());

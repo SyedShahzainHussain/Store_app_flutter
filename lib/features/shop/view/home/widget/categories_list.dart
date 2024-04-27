@@ -29,8 +29,12 @@ class _CategoriesListState extends State<CategoriesList> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = Localizations.localeOf(context);
     return Padding(
-      padding: const EdgeInsets.only(left: TSized.defaultSpace),
+      padding: EdgeInsets.only(
+        left: localization.languageCode == "en" ? TSized.defaultSpace : 0.0,
+        right: localization.languageCode == "en" ? 0.0 : TSized.defaultSpace,
+      ),
       child: BlocBuilder<FetchCategoriesBloc, FetchCategoriesState>(
         builder: (context, state) {
           switch (state.status) {
@@ -45,6 +49,7 @@ class _CategoriesListState extends State<CategoriesList> {
                 height: 100,
                 child: ListView.builder(
                   shrinkWrap: true,
+                  padding: EdgeInsets.zero,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => TVerticalImageText(
                     onTap: () => THelperFunction.navigatedToScreen(

@@ -9,6 +9,7 @@ import 'package:store/features/authentication/views/signup/signup.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/constants/texts.dart';
 import 'package:store/utils/device/devices_utility.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/validator/validation.dart';
 
@@ -64,9 +65,9 @@ class _LoginFormState extends State<LoginForm> {
             TextFormField(
               controller: emailController,
               validator: (value) => TValidation.validateEmail(value),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 prefixIcon: Icon(Iconsax.direct_right),
-                hintText: TTexts.email,
+                hintText: context.localizations!.email,
               ),
             ),
             const SizedBox(
@@ -90,7 +91,7 @@ class _LoginFormState extends State<LoginForm> {
                       isObsecure.value = !isObsecure.value;
                     },
                   ),
-                  hintText: TTexts.password,
+                  hintText: context.localizations!.password,
                 ),
               ),
             ),
@@ -114,7 +115,7 @@ class _LoginFormState extends State<LoginForm> {
                         },
                       ),
                     ),
-                    const Text(TTexts.rememberMe)
+                    Text(context.localizations!.rememberMe)
                   ],
                 ),
                 // ! Forget Password
@@ -123,7 +124,7 @@ class _LoginFormState extends State<LoginForm> {
                       THelperFunction.navigatedToScreen(
                           context, const ForgotPassword());
                     },
-                    child: const Text(TTexts.forgotPassword))
+                    child: Text(context.localizations!.forgotPassword))
               ],
             ),
             const SizedBox(
@@ -136,7 +137,7 @@ class _LoginFormState extends State<LoginForm> {
                     onPressed: () {
                       save();
                     },
-                    child: const Text(TTexts.signIn))),
+                    child: Text(context.localizations!.signIn))),
             const SizedBox(
               height: TSized.spacebetweenItem,
             ),
@@ -148,7 +149,7 @@ class _LoginFormState extends State<LoginForm> {
                       THelperFunction.navigatedToScreen(
                           context, const SignUp());
                     },
-                    child: const Text(TTexts.createAccount))),
+                    child: Text(context.localizations!.createAccount))),
           ],
         ),
       ),

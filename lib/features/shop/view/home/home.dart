@@ -20,6 +20,7 @@ import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/local_storage/storage_utility.dart';
 
@@ -42,13 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
     LocalStorage.init(FirebaseAuth.instance.currentUser!.uid).then((value) {
       context.read<FavouriteBloc>().add(GetAllFavourite());
       context.read<CartItemBloc>().add(LoadCartItem());
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
     bool isDark = THelperFunction.isDarkMode(context);
+    final localization = Localizations.localeOf(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -63,17 +64,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: TDeviceUtils.screenWidth(context) * 0.03,
                 ),
                 // ! Search Text Field
-                const TTextFieldContainer(
-                  text: "Search In Store",
+                TTextFieldContainer(
+                  text: context.localizations!.searchInStore,
                 ),
                 SizedBox(
                   height: TDeviceUtils.screenWidth(context) * 0.03,
                 ),
                 // ! Categories listview horizontal
                 Padding(
-                  padding: const EdgeInsets.only(left: TSized.defaultSpace),
+                  padding: EdgeInsets.only(
+                    left: localization.languageCode == "en"
+                        ? TSized.defaultSpace
+                        : 0.0,
+                    right: localization.languageCode == "en"
+                        ? 0.0
+                        : TSized.defaultSpace,
+                  ),
                   child: TSectionHeading(
-                    title: "Popular Categories",
+                    title: context.localizations!.popularCategory,
                     showActionButton: false,
                     textColor: isDark ? TColors.black : TColors.white,
                   ),
@@ -89,12 +97,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             )),
             // ! Main
+            // ! CarouselSlider
+            // ! Heading
             Padding(
               padding: const EdgeInsets.all(TSized.defaultSpace),
               child: Column(
                 children: [
-                  // ! CarouselSlider
-
+                  TSectionHeading(
+                    title: context.localizations!.swipeYourChoice,
+                    showActionButton: false,
+                  ),
                   const TBanners(),
                   const SizedBox(
                     height: TSized.spacebetweenItem,
@@ -102,7 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   // ! Heading
                   TSectionHeading(
-                    title: "Popular Products",
+                    buttontitle: context.localizations!.viewAll,
+                    title: context.localizations!.popularProducts,
                     onPressed: () {
                       THelperFunction.navigatedToScreen(
                           context, const AllProducts());

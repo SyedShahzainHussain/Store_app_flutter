@@ -9,6 +9,7 @@ import 'package:store/features/authentication/views/login/login.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
 import 'package:store/utils/validator/validation.dart';
@@ -39,7 +40,7 @@ class _ReAuthLoginFormState extends State<ReAuthLoginForm> {
       appBar: CustomAppBar(
         showBackArrow: true,
         title: Text(
-          "Re-Authenticate User",
+         context.localizations!.reAuthenticatedUser,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
@@ -68,9 +69,9 @@ class _ReAuthLoginFormState extends State<ReAuthLoginForm> {
                     TextFormField(
                       controller: emailController,
                       validator: (value) => TValidation.validateEmail(value),
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         prefixIcon: Icon(Iconsax.direct_right),
-                        hintText: TTexts.email,
+                        hintText: context.localizations!.email,
                       ),
                     ),
                     const SizedBox(
@@ -95,7 +96,7 @@ class _ReAuthLoginFormState extends State<ReAuthLoginForm> {
                               isObsecure.value = !isObsecure.value;
                             },
                           ),
-                          hintText: TTexts.password,
+                          hintText: context.localizations!.password,
                         ),
                       ),
                     ),
@@ -110,7 +111,7 @@ class _ReAuthLoginFormState extends State<ReAuthLoginForm> {
                     onPressed: () {
                       save();
                     },
-                    child: const Text("Verify")),
+                    child: Text(context.localizations!.verify)),
               )
             ],
           ),

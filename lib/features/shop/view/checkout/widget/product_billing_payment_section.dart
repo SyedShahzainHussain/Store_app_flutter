@@ -7,6 +7,7 @@ import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
 class ProductBillingPaymentSection extends StatelessWidget {
@@ -18,8 +19,8 @@ class ProductBillingPaymentSection extends StatelessWidget {
     return Column(
       children: [
         TSectionHeading(
-          title: "Payment Method",
-          buttontitle: "Change",
+          title: context.localizations!.paymentMethod,
+          buttontitle: context.localizations!.change,
           onPressed: () {
             THelperFunction.showPaymentDialog();
           },

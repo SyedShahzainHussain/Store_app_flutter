@@ -9,6 +9,8 @@ import 'package:store/features/authentication/views/onboarding/onboarding.dart';
 import 'package:store/features/authentication/views/verifyEmail/verify_email.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 import 'package:store/utils/theme/theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,6 +19,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: ContextUtility.navigatorKey,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: const Locale("en"),
+      supportedLocales: const [
+        Locale('en'), //* English
+        Locale('ur'), //* Urdu
+      ],
       debugShowCheckedModeBanner: false,
       title: 'Store App',
       theme: TAppTheme.lightTheme,

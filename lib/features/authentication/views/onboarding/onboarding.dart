@@ -7,7 +7,7 @@ import 'package:store/features/authentication/views/onboarding/widget/on_boardin
 import 'package:store/features/authentication/views/onboarding/widget/onboarding_page.dart';
 
 import 'package:store/utils/constants/image_strings.dart';
-import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/extension/language.dart';
 
 class OnBoard extends StatelessWidget {
   const OnBoard({super.key});
@@ -22,21 +22,21 @@ class OnBoard extends StatelessWidget {
             builder: (context, value, _) => PageView(
               controller: value.pageController,
               onPageChanged: value.onPageChange,
-              children: const [
+              children: [
                 OnBoardPage(
                   image: TImageString.onboard1,
-                  title: TTexts.onBoardingTitle1,
-                  subTitle: TTexts.onBoardingSubTitle1,
+                  title: context.localizations!.onBoardingTitle1,
+                  subTitle: context.localizations!.onBoardingSubTitle1,
                 ),
                 OnBoardPage(
                   image: TImageString.onboard2,
-                  title: TTexts.onBoardingTitle2,
-                  subTitle: TTexts.onBoardingSubTitle2,
+                  title: context.localizations!.onBoardingTitle2,
+                  subTitle: context.localizations!.onBoardingSubTitle2,
                 ),
                 OnBoardPage(
                   image: TImageString.onboard3,
-                  title: TTexts.onBoardingTitle3,
-                  subTitle: TTexts.onBoardingSubTitle3,
+                  title: context.localizations!.onBoardingTitle3,
+                  subTitle: context.localizations!.onBoardingSubTitle3,
                 ),
               ],
             ),

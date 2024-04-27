@@ -22,6 +22,7 @@ import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/enum.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/helper/pricing_calculator.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
@@ -78,7 +79,7 @@ class CheckOutScreen extends StatelessWidget {
       appBar: CustomAppBar(
         showBackArrow: true,
         title: Text(
-          "Order Review",
+          context.localizations!.orderReview,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),

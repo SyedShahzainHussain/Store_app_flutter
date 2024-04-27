@@ -9,6 +9,7 @@ import 'package:store/features/shop/view/allProducts/all_products.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/shimmer/boxex_shimmer.dart';
 import 'package:store/utils/shimmer/list_tile_shimmer.dart';
@@ -53,8 +54,8 @@ class CategoryTab extends StatelessWidget {
                       } else if (snapshot.hasData) {
                         final data = snapshot.data as List<BrandModel>;
                         return data.isEmpty
-                            ? const Center(
-                                child: Text("No Brand Found!"),
+                            ?  Center(
+                                child: Text(context.localizations!.noBrands),
                               )
                             : ListView.builder(
                                 shrinkWrap: true,
@@ -71,7 +72,8 @@ class CategoryTab extends StatelessWidget {
                       }
                     }),
                 TSectionHeading(
-                  title: "You might like",
+                  title: context.localizations!.youMightLike,
+                  buttontitle: context.localizations!.viewAll,
                   onPressed: () {
                     THelperFunction.navigatedToScreen(context, const AllProducts());
                   },
@@ -89,8 +91,8 @@ class CategoryTab extends StatelessWidget {
                       } else {
                         return // ! Products
                             snapshot.data!.isEmpty
-                                ? const Center(
-                                    child: Text("No Products Found!"),
+                                ?  Center(
+                                    child: Text(context.localizations!.noProducts),
                                   )
                                 : GridLayout(
                                     itemBuilder: (_, index) =>

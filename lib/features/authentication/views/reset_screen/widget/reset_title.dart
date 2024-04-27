@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:store/utils/constants/texts.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 class ResetTitleSubTitle extends StatelessWidget {
   const ResetTitleSubTitle({
     super.key,
@@ -13,7 +13,7 @@ class ResetTitleSubTitle extends StatelessWidget {
       children: [
         
         Text(
-          TTexts.changeYourPasswordTitle,
+          context.localizations!.changeYourPasswordTitle,
           style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.center,
         ),
@@ -21,7 +21,7 @@ class ResetTitleSubTitle extends StatelessWidget {
           height: TSized.spacebetweenItem,
         ),
         Text(
-          TTexts.changeYourPasswordSubTitle,
+          context.localizations!.changeYourPasswordSubTitle,
           style: Theme.of(context).textTheme.labelMedium,
           textAlign: TextAlign.center,
         ),

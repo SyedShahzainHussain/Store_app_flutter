@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 
-import '../../../../../utils/constants/texts.dart';
+
 
 class LoginTitle extends StatelessWidget {
   const LoginTitle({
@@ -20,12 +21,12 @@ class LoginTitle extends StatelessWidget {
           image: AssetImage(TImageString.logo),
         ),
         Text(
-          TTexts.loginTitle,
+          context.localizations!.loginTitle,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         const SizedBox(height: TSized.sm),
         Text(
-          TTexts.loginSubTitle,
+          context.localizations!.loginSubTitle,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],

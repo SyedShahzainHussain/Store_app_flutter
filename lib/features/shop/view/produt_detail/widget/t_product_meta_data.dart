@@ -10,6 +10,7 @@ import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/enum.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/helper/product_helper.dart';
 
@@ -84,7 +85,7 @@ class TProductMetaData extends StatelessWidget {
 
         Row(
           children: [
-            const TProductTitle(title: "Status"),
+             TProductTitle(title: context.localizations!.status),
             const SizedBox(
               width: TSized.spacebetweenItem,
             ),

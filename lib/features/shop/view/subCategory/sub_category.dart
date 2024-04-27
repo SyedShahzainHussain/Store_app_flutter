@@ -15,6 +15,7 @@ import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/shimmer/horizontal_product_shimmer.dart';
 import 'package:store/utils/shimmer/vertical_product_shimmer.dart';
@@ -52,8 +53,8 @@ class _SubCategoryState extends State<SubCategory> {
               );
             case Status.success:
               if (state.subCategoryList.isEmpty) {
-                return const Center(
-                  child: Text("No Product Found"),
+                return  Center(
+                  child: Text(context.localizations!.noProducts),
                 );
               }
               return SingleChildScrollView(
@@ -101,6 +102,7 @@ class _SubCategoryState extends State<SubCategory> {
                                       children: [
                                         // ! Heading
                                         TSectionHeading(
+                                          buttontitle: context.localizations!.viewAll,
                                           title: subCategory.name,
                                           onPressed: () {
                                             THelperFunction.navigatedToScreen(

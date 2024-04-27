@@ -14,6 +14,7 @@ import 'package:store/features/personalizations/view/address/add_new__address_sc
 import 'package:store/features/personalizations/view/address/widget/single_address.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
 class AddressScreen extends StatefulWidget {
@@ -44,8 +45,8 @@ class _AddressScreenState extends State<AddressScreen> {
           color: TColors.white,
         ),
       ),
-      appBar: const CustomAppBar(
-        title: Text("Address"),
+      appBar:  CustomAppBar(
+        title: Text(context.localizations!.address),
         showBackArrow: true,
       ),
       body: Padding(

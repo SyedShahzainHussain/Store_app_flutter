@@ -28,6 +28,7 @@ class TProductCartHorizontal extends StatelessWidget {
     final salePercentage = ProductHelper.calculatedSalePercentage(
         productModel!.price, productModel!.salePrice);
     final dark = THelperFunction.isDarkMode(context);
+    final localization = Localizations.localeOf(context);
     return GestureDetector(
       onTap: () {
         THelperFunction.navigatedToScreen(
@@ -99,12 +100,18 @@ class TProductCartHorizontal extends StatelessWidget {
             SizedBox(
               width: 172,
               child: Padding(
-                padding: const EdgeInsets.only(left: TSized.sm, top: TSized.sm),
+                padding: EdgeInsets.only(
+                    left: localization.languageCode == "en" ? TSized.sm : 0.0,
+                    top: TSized.sm),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: localization.languageCode == "en"
+                      ? CrossAxisAlignment.start
+                      : CrossAxisAlignment.end,
                   children: [
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: localization.languageCode == "en"
+                          ? CrossAxisAlignment.start
+                          : CrossAxisAlignment.end,
                       children: [
                         TProductTitle(
                           title: productModel?.title ?? "",
@@ -149,7 +156,9 @@ class TProductCartHorizontal extends StatelessWidget {
                             ],
                           ),
                         ),
-                        ProductCartAddToCart(productModel: productModel!,)
+                        ProductCartAddToCart(
+                          productModel: productModel!,
+                        )
                       ],
                     )
                   ],

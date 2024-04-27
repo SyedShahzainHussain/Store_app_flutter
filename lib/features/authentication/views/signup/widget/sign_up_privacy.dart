@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/utils/constants/colors.dart';
-import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/extension/language.dart';
 
 class SignUpPrivacy extends StatelessWidget {
   const SignUpPrivacy({
@@ -49,19 +49,19 @@ class SignUpPrivacy extends StatelessWidget {
         Flexible(
           child: Text.rich(TextSpan(children: [
             TextSpan(
-                text: '${TTexts.iAgreeTo} ',
+                text: '${context.localizations!.iAgreeTo} ',
                 style: Theme.of(context).textTheme.bodySmall),
             TextSpan(
-                text: '${TTexts.privacyPolicy} ',
+                text: '${context.localizations!.privacyPolicy} ',
                 style: Theme.of(context).textTheme.bodyMedium!.apply(
                     color: isDark ? TColors.white : TColors.primary,
                     decoration: TextDecoration.underline,
                     decorationColor: isDark ? TColors.white : TColors.primary)),
             TextSpan(
-                text: '${TTexts.and} ',
+                text: '${context.localizations!.and} ',
                 style: Theme.of(context).textTheme.bodySmall),
             TextSpan(
-                text: '${TTexts.termOfUse} ',
+                text: '${context.localizations!.termOfUse} ',
                 style: Theme.of(context).textTheme.bodyMedium!.apply(
                     color: isDark ? TColors.white : TColors.primary,
                     decoration: TextDecoration.underline,

@@ -79,7 +79,21 @@ class THelperFunction {
   }
 
   static void navigatedToScreen(BuildContext context, Widget screen) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+    Navigator.of(context).push(PageRouteBuilder(
+      reverseTransitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 400),
+      pageBuilder: (context, animation, secondaryAnimation) => screen,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        Animation<Offset> slideAnimation =
+            Tween(begin: begin, end: end).animate(animation);
+        return SlideTransition(
+          position: slideAnimation,
+          child: child,
+        );
+      },
+    ));
   }
 
   static void navigatedToScreenWithPop(BuildContext context, Widget screen) {
@@ -145,39 +159,43 @@ class THelperFunction {
       return null;
     }
   }
+
   static String formatDeliveryDate(DateTime deliveryDate) {
-  return DateFormat('dd MMM yyyy').format(deliveryDate);
-}
+    return DateFormat('dd MMM yyyy').format(deliveryDate);
+  }
 
   static showFullScreenDialog(String imageUrl) {
     Navigator.of(ContextUtility.context).push(MaterialPageRoute<void>(
         fullscreenDialog: true,
         builder: (_) => Scaffold(
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: TSized.defaultSpace * 2,
-                        horizontal: TSized.defaultSpace),
-                    child: CachedNetworkImage(imageUrl: imageUrl),
-                  ),
-                  const SizedBox(
-                    height: TSized.spacebetweenItem,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: 150,
-                      child: OutlinedButton(
-                          onPressed: () {
-                            Navigator.pop(ContextUtility.context);
-                          },
-                          child: const Text("Close")),
+              body: Hero(
+                tag: imageUrl,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: TSized.defaultSpace * 2,
+                          horizontal: TSized.defaultSpace),
+                      child: CachedNetworkImage(imageUrl: imageUrl),
                     ),
-                  )
-                ],
+                    const SizedBox(
+                      height: TSized.spacebetweenItem,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        width: 150,
+                        child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.pop(ContextUtility.context);
+                            },
+                            child: const Text("Close")),
+                      ),
+                    )
+                  ],
+                ),
               ),
             )));
   }

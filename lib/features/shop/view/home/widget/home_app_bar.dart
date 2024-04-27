@@ -9,7 +9,7 @@ import 'package:store/features/shop/view/cart/cart.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
-import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/shimmer/shimmer.dart';
 
@@ -25,7 +25,7 @@ class HomeAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            TTexts.homeAppBarTitle,
+            context.localizations!.homeAppBarTitle,
             style: Theme.of(context)
                 .textTheme
                 .labelMedium!
@@ -70,6 +70,7 @@ class HomeAppBar extends StatelessWidget {
           color: TColors.white,
           onPressed: () {
             THelperFunction.navigatedToScreen(context, const CartScreen());
+           
           },
         ),
       ],

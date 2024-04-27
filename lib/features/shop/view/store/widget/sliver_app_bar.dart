@@ -12,6 +12,7 @@ import 'package:store/features/shop/view/store/widget/feature_brand_widget.dart'
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/shimmer/brand_shimmer.dart';
 
@@ -41,8 +42,8 @@ class SliverApp extends StatelessWidget {
                 height: TSized.spacebetweenItem,
               ),
               // ! Search Bar
-              const TTextFieldContainer(
-                text: "Serarch in Store",
+               TTextFieldContainer(
+                text:context.localizations!.searchInStore,
                 showBackGround: false,
                 padding: EdgeInsets.zero,
               ),
@@ -51,11 +52,13 @@ class SliverApp extends StatelessWidget {
               ),
               // ! Feature Brands
               TSectionHeading(
-                title: "Featured Brands",
+                title: context.localizations!.featureBrands,
                 onPressed: () {
                   THelperFunction.navigatedToScreen(
                       context, const AllBrandsScreen());
+
                 },
+                buttontitle: context.localizations!.viewAll,
               ),
               const SizedBox(
                 height: TSized.spacebetweenItem / 1.5,
@@ -80,7 +83,7 @@ class SliverApp extends StatelessWidget {
                                 : TImageString.adidasIcon,
                             title: state.featuredBrand[index].name ?? "",
                             subTitle:
-                                "${state.featuredBrand[index].productCount.toString()} Products",
+                                "${state.featuredBrand[index].productCount.toString()} ${context.localizations!.products}",
                             onTap: () {
                               THelperFunction.navigatedToScreen(
                                 context,

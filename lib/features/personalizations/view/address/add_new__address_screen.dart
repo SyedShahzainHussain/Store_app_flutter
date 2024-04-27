@@ -8,6 +8,7 @@ import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/features/personalizations/model/address_model/address_model.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
 import 'package:store/utils/validator/validation.dart';
@@ -48,9 +49,9 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         showBackArrow: true,
-        title: Text("Add new Address"),
+        title: Text(context.localizations!.addNewAddress),
       ),
       body: BlocListener<AddAddressBloc, AddAddressState>(
         listener: (context, state) {
@@ -80,10 +81,11 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                   children: [
                     TextFormField(
                       controller: nameController,
-                      validator: (value) =>
-                          TValidation.validateEmptyText(value, "Name"),
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(Iconsax.user), labelText: "Name"),
+                      validator: (value) => TValidation.validateEmptyText(
+                          value, context.localizations!.name),
+                      decoration: InputDecoration(
+                          prefixIcon: const Icon(Iconsax.user),
+                          labelText: context.localizations!.name),
                     ),
                     const SizedBox(
                       height: TSized.spaceBtwInputFields,
@@ -94,9 +96,9 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                           TValidation.validatePhoneNumber(value),
                       maxLength: 11,
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(Iconsax.mobile),
-                          labelText: "Phone Number"),
+                      decoration: InputDecoration(
+                          prefixIcon: const Icon(Iconsax.mobile),
+                          labelText: context.localizations!.phoneNo),
                     ),
                     const SizedBox(
                       height: TSized.spaceBtwInputFields,
@@ -106,11 +108,11 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                         Expanded(
                           child: TextFormField(
                             controller: streetController,
-                            validator: (value) =>
-                                TValidation.validateEmptyText(value, "Street"),
-                            decoration: const InputDecoration(
-                                prefixIcon: Icon(Iconsax.building_31),
-                                labelText: "Street"),
+                            validator: (value) => TValidation.validateEmptyText(
+                                value, context.localizations!.street),
+                            decoration: InputDecoration(
+                                prefixIcon: const Icon(Iconsax.building_31),
+                                labelText: context.localizations!.street),
                           ),
                         ),
                         const SizedBox(
@@ -120,10 +122,10 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                           child: TextFormField(
                             controller: postalCodeController,
                             validator: (value) => TValidation.validateEmptyText(
-                                value, "Postal Code"),
-                            decoration: const InputDecoration(
-                                prefixIcon: Icon(Iconsax.code),
-                                labelText: "Postal Code"),
+                                value, context.localizations!.postalCode),
+                            decoration: InputDecoration(
+                                prefixIcon: const Icon(Iconsax.code),
+                                labelText: context.localizations!.postalCode),
                           ),
                         ),
                       ],
@@ -136,11 +138,11 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                         Expanded(
                           child: TextFormField(
                             controller: cityController,
-                            validator: (value) =>
-                                TValidation.validateEmptyText(value, "City"),
-                            decoration: const InputDecoration(
-                                prefixIcon: Icon(Iconsax.building),
-                                labelText: "City"),
+                            validator: (value) => TValidation.validateEmptyText(
+                                value, context.localizations!.city),
+                            decoration: InputDecoration(
+                                prefixIcon: const Icon(Iconsax.building),
+                                labelText: context.localizations!.city),
                           ),
                         ),
                         const SizedBox(
@@ -149,11 +151,11 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                         Expanded(
                           child: TextFormField(
                             controller: stateCodeController,
-                            validator: (value) =>
-                                TValidation.validateEmptyText(value, "State"),
-                            decoration: const InputDecoration(
-                                prefixIcon: Icon(Iconsax.activity),
-                                labelText: "State"),
+                            validator: (value) => TValidation.validateEmptyText(
+                                value, context.localizations!.state),
+                            decoration: InputDecoration(
+                                prefixIcon: const Icon(Iconsax.activity),
+                                labelText: context.localizations!.state),
                           ),
                         ),
                       ],
@@ -163,11 +165,11 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                     ),
                     TextFormField(
                       controller: countryController,
-                      validator: (value) =>
-                          TValidation.validateEmptyText(value, "Country"),
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(Iconsax.global),
-                          labelText: "Country"),
+                      validator: (value) => TValidation.validateEmptyText(
+                          value, context.localizations!.country),
+                      decoration: InputDecoration(
+                          prefixIcon: const Icon(Iconsax.global),
+                          labelText: context.localizations!.country),
                     ),
                     const SizedBox(
                       height: TSized.defaultSpace,
@@ -178,7 +180,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                           onPressed: () {
                             onSave();
                           },
-                          child: const Text("Save")),
+                          child: Text(context.localizations!.save)),
                     )
                   ],
                 )),
