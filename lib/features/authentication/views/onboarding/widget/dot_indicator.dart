@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:store/features/authentication/controller/on_board_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/features/authentication/bloc/on_board_controller_bloc.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
@@ -19,9 +19,9 @@ class DotIndicator extends StatelessWidget {
         bottom: TDeviceUtils.getAppbarHeight() + 25,
         left: TSized.defaultSpace,
         child: SmoothPageIndicator(
-          controller: context.read<OnBoardController>().pageController,
+          controller: context.read<OnBoardControllerBloc>().pageController,
           count: 3,
-          effect:  ExpandingDotsEffect(
+          effect: ExpandingDotsEffect(
             activeDotColor: isDark ? TColors.light : TColors.dark,
             dotHeight: 6,
           ),

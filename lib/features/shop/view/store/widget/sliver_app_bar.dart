@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/bloc/brand/brand_bloc.dart';
 import 'package:store/bloc/brand/brand_state.dart';
-import 'package:store/common/widgets/brands/brands_porducts.dart';
 import 'package:store/common/widgets/layouts/grid_layout.dart';
 import 'package:store/common/widgets/text_field_container/text_field_container.dart';
 import 'package:store/data/status/status.dart';
-import 'package:store/features/shop/view/allBrands/all_brands.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/features/shop/view/store/widget/feature_brand_widget.dart';
 import 'package:store/utils/constants/colors.dart';
@@ -14,14 +12,12 @@ import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/shimmer/brand_shimmer.dart';
 
 class SliverApp extends StatelessWidget {
   final PreferredSizeWidget preferredSizeWidget;
-  const SliverApp({
-    super.key,
-    required this.preferredSizeWidget
-  });
+  const SliverApp({super.key, required this.preferredSizeWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +38,8 @@ class SliverApp extends StatelessWidget {
                 height: TSized.spacebetweenItem,
               ),
               // ! Search Bar
-               TTextFieldContainer(
-                text:context.localizations!.searchInStore,
+              TTextFieldContainer(
+                text: context.localizations!.searchInStore,
                 showBackGround: false,
                 padding: EdgeInsets.zero,
               ),
@@ -55,8 +51,7 @@ class SliverApp extends StatelessWidget {
                 title: context.localizations!.featureBrands,
                 onPressed: () {
                   THelperFunction.navigatedToScreen(
-                      context, const AllBrandsScreen());
-
+                      context, RouteName.allBrandsScreen);
                 },
                 buttontitle: context.localizations!.viewAll,
               ),
@@ -87,9 +82,8 @@ class SliverApp extends StatelessWidget {
                             onTap: () {
                               THelperFunction.navigatedToScreen(
                                 context,
-                                BrandsProducts(
-                                  brandModel: state.featuredBrand[index],
-                                ),
+                                RouteName.brandsProducts,
+                                arguments: state.featuredBrand[index],
                               );
                             },
                             showBorder: true,

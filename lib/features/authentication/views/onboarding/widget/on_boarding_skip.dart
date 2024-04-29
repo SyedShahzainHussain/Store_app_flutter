@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/features/authentication/bloc/on_board_controller_bloc.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
-import 'package:provider/provider.dart';
-import 'package:store/features/authentication/controller/on_board_controller.dart';
 import 'package:store/utils/extension/language.dart';
 
 class OnBoardSkip extends StatelessWidget {
@@ -17,7 +17,9 @@ class OnBoardSkip extends StatelessWidget {
         right: TSized.defaultSpace,
         child: TextButton(
             onPressed: () {
-              context.read<OnBoardController>().skipPage();
+              context
+                  .read<OnBoardControllerBloc>()
+                  .add(OnBoardControllerSkipPage());
             },
             child: Text(
               context.localizations!.skip,

@@ -29,6 +29,8 @@ import 'package:store/bloc/update_name/update_name_bloc.dart';
 import 'package:store/bloc/upload_image/upload_image_bloc.dart';
 import 'package:store/bloc/variation/variation_bloc.dart';
 import 'package:store/bloc/verification/verification_bloc.dart';
+import 'package:store/bottom_navigation/bloc/bottom_navigation_bloc.dart';
+import 'package:store/features/authentication/bloc/on_board_controller_bloc.dart';
 import 'package:store/features/chatbot/bloc/post_chat_bot_api/post_chat_bot.bloc.dart';
 import 'package:store/features/personalizations/bloc/change_language/change_language_bloc.dart';
 import 'package:store/features/shop/model/product_model/product_model.dart';
@@ -43,6 +45,8 @@ class BlocProviders extends StatelessWidget {
       BlocProvider(
           create: (context) =>
               AuthenticationBloc()..add(CheckAuthentication())),
+      BlocProvider(create: (context) => BottomNavigationBloc()),
+      BlocProvider(create: (context) => OnBoardControllerBloc()),
       BlocProvider(create: (context) => RegisterBloc()),
       BlocProvider(create: (context) => VerificationBloc()),
       BlocProvider(create: (context) => LoginBloc()),

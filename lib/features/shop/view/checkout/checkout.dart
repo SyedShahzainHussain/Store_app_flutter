@@ -8,11 +8,10 @@ import 'package:store/bloc/cart_item/cart_item_bloc.dart';
 import 'package:store/bloc/cart_item/cart_item_state.dart';
 import 'package:store/bloc/selected_address/selected_bloc.dart';
 import 'package:store/bloc/selected_payment/selected_payment_bloc.dart';
-import 'package:store/bottom_navigtion.dart';
+
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/common/widgets/product_cart/product_coupon_code.dart';
-import 'package:store/common/widgets/success_screen/success_screen.dart';
 import 'package:store/features/shop/model/order_model/order_model.dart';
 import 'package:store/features/shop/view/cart/widget/cart_item.dart';
 import 'package:store/features/shop/view/checkout/widget/product_billing_address_section.dart';
@@ -26,6 +25,7 @@ import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/helper/pricing_calculator.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class CheckOutScreen extends StatelessWidget {
   const CheckOutScreen({super.key});
@@ -95,16 +95,16 @@ class CheckOutScreen extends StatelessWidget {
                   state.message, Icons.error, Colors.red);
             } else {
               THelperFunction.navigatedToScreen(
-                  context,
-                  SuccessScreen(
-                    image: TImageString.paymentSuccess,
-                    onPressed: () => THelperFunction.navigatedToScreenWithPop(
-                      context,
-                      const BottomNavigationScreen(),
-                    ),
-                    title: "Payment Success!",
-                    subTitle: 'Your item will be shipped soon!',
-                  ));
+                  context, RouteName.successScreen,
+                  arguments: {
+                    "image": TImageString.paymentSuccess,
+                    "onPressed": () => THelperFunction.navigatedToScreenWithPop(
+                          context,
+                           RouteName.bottomNavigationScreen,
+                        ),
+                    "title": "Payment Success!",
+                    "subTitle": 'Your item will be shipped soon!',
+                  });
               THelperFunction.showDelightToast("Your Order Has Been Sent");
             }
           },

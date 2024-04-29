@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:store/features/authentication/controller/on_board_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/features/authentication/bloc/on_board_controller_bloc.dart';
 import 'package:store/features/authentication/views/onboarding/widget/dot_indicator.dart';
 import 'package:store/features/authentication/views/onboarding/widget/on_board_button.dart';
 import 'package:store/features/authentication/views/onboarding/widget/on_boarding_skip.dart';
@@ -18,10 +18,12 @@ class OnBoard extends StatelessWidget {
       body: Stack(
         children: [
           // ! Page
-          Consumer<OnBoardController>(
-            builder: (context, value, _) => PageView(
-              controller: value.pageController,
-              onPageChanged: value.onPageChange,
+          BlocBuilder<OnBoardControllerBloc, OnBoardControllerState>(
+            builder: (context, state) => PageView(
+              controller: context.read<OnBoardControllerBloc>().pageController,
+              onPageChanged: (index) => context
+                  .read<OnBoardControllerBloc>()
+                  .add(OnBoardControllerPageChange(index)),
               children: [
                 OnBoardPage(
                   image: TImageString.onboard1,

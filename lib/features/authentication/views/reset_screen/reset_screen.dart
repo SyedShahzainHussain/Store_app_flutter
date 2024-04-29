@@ -4,13 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:store/bloc/forgot_password/forgot_password_bloc.dart';
 import 'package:store/bloc/forgot_password/forgot_password_state.dart';
-import 'package:store/features/authentication/views/login/login.dart';
+
 import 'package:store/features/authentication/views/reset_screen/widget/reset_button.dart';
 import 'package:store/features/authentication/views/reset_screen/widget/reset_title.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class ResetScreen extends StatelessWidget {
   final String email;
@@ -24,7 +25,7 @@ class ResetScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              THelperFunction.navigatedToScreenWithPop(context, const Login());
+              THelperFunction.navigatedToScreenWithPop(context, RouteName.login);
             },
             icon: const Icon(
               CupertinoIcons.clear,

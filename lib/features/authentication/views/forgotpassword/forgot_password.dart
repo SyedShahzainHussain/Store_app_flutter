@@ -4,13 +4,13 @@ import 'package:iconsax/iconsax.dart';
 import 'package:store/bloc/forgot_password/forgot_password_bloc.dart';
 import 'package:store/bloc/forgot_password/forgot_password_event.dart';
 import 'package:store/bloc/forgot_password/forgot_password_state.dart';
-import 'package:store/features/authentication/views/reset_screen/reset_screen.dart';
 import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/validator/validation.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -56,9 +56,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             } else if (state is ForgotPasswordSuccess) {
               THelperFunction.navigatedToScreenWithPop(
                   context,
-                  ResetScreen(
-                    email: state.email,
-                  ));
+                  RouteName.resetScreen,
+                  arguments:  state.email,
+                );
               THelperFunction.showDelightToast("Forgot Password Email Send",Iconsax.copy_success,Colors.green);
             }
           },

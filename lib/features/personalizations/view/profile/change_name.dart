@@ -4,13 +4,13 @@ import 'package:iconsax/iconsax.dart';
 import 'package:store/bloc/update_name/update_name_bloc.dart';
 import 'package:store/bloc/update_name/update_name_event.dart';
 import 'package:store/bloc/update_name/update_name_state.dart';
-import 'package:store/bottom_navigtion.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/validator/validation.dart';
 
 class ChangeName extends StatefulWidget {
@@ -65,7 +65,7 @@ class _ChangeNameState extends State<ChangeName> {
             THelperFunction.showDelightToast(state.message);
           } else if (state is UpdateNameSuccess) {
             THelperFunction.navigatedToScreenWithPop(
-                context, const BottomNavigationScreen());
+                context,  RouteName.bottomNavigationScreen);
             THelperFunction.showDelightToast(
                 "Update Username", Iconsax.copy_success, Colors.green);
           }

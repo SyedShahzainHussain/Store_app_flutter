@@ -4,13 +4,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:store/bloc/login/login_bloc.dart';
 import 'package:store/bloc/login/login_event.dart';
-import 'package:store/features/authentication/views/forgotpassword/forgot_password.dart';
-import 'package:store/features/authentication/views/signup/signup.dart';
+
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/constants/texts.dart';
 import 'package:store/utils/device/devices_utility.dart';
 import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/validator/validation.dart';
 
 class LoginForm extends StatefulWidget {
@@ -122,7 +122,7 @@ class _LoginFormState extends State<LoginForm> {
                 TextButton(
                     onPressed: () {
                       THelperFunction.navigatedToScreen(
-                          context, const ForgotPassword());
+                          context, RouteName.forgotPassword);
                     },
                     child: Text(context.localizations!.forgotPassword))
               ],
@@ -147,7 +147,7 @@ class _LoginFormState extends State<LoginForm> {
                 child: OutlinedButton(
                     onPressed: () {
                       THelperFunction.navigatedToScreen(
-                          context, const SignUp());
+                          context, RouteName.signUp);
                     },
                     child: Text(context.localizations!.createAccount))),
           ],

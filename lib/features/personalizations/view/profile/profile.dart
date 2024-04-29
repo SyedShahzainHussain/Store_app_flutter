@@ -12,13 +12,13 @@ import 'package:store/bloc/upload_image/upload_image_event.dart';
 import 'package:store/bloc/upload_image/upload_image_state.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/image/t_circular_image.dart';
-import 'package:store/features/personalizations/view/profile/change_name.dart';
 import 'package:store/features/personalizations/view/profile/widget/profile_menu.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/shimmer/shimmer.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  CustomAppBar(
+      appBar: CustomAppBar(
         showBackArrow: true,
         title: Text(context.localizations!.profile),
       ),
@@ -75,7 +75,8 @@ class ProfileScreen extends StatelessWidget {
                                   .read<UploadImageBloc>()
                                   .add(UploadImage(image));
                             },
-                            child:  Text(context.localizations!.changeProfilePicture),
+                            child: Text(
+                                context.localizations!.changeProfilePicture),
                           ),
                         ],
                       ),
@@ -103,11 +104,11 @@ class ProfileScreen extends StatelessWidget {
                       value: state.user?.fullName ?? "",
                       onPressed: () {
                         THelperFunction.navigatedToScreen(
-                            context,
-                            ChangeName(
-                              firstName: state.user?.firstName ?? "",
-                              lastName: state.user?.lastName ?? "",
-                            ));
+                            context, RouteName.changeName,
+                            arguments: {
+                              "firstName": state.user?.firstName ?? "",
+                              "lastName": state.user?.lastName ?? "",
+                            });
                       },
                     ),
                     TProfileMenu(
@@ -179,7 +180,7 @@ class ProfileScreen extends StatelessWidget {
                                 .add(DeleteAccountEvent());
                           });
                         },
-                        child:  Text(
+                        child: Text(
                           context.localizations!.closeAccount,
                           style: const TextStyle(color: Colors.red),
                         ),

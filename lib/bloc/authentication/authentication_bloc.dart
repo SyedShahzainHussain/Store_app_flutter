@@ -6,12 +6,12 @@ import 'package:store/bloc/authentication/authentication_events.dart';
 import 'package:store/bloc/authentication/authentication_state.dart';
 
 import 'package:store/data/repositories/authentication/authentication_repository.dart';
-import 'package:store/features/personalizations/view/profile/re_auth_login_form.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/local_storage/storage_utility.dart';
 import 'package:store/utils/network/network_manager.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
@@ -32,8 +32,7 @@ class AuthenticationBloc
       if (user != null) {
         if (user.emailVerified) {
           await LocalStorage.init(user.uid);
-          if (ContextUtility.context.mounted) {
-          }
+          if (ContextUtility.context.mounted) {}
           emit(AuthenticatedVerified());
         } else {
           emit(UnAuthenticatedVerified());
@@ -84,7 +83,7 @@ class AuthenticationBloc
           TFullScreenLoader.stopLoading();
           if (ContextUtility.context.mounted) {
             THelperFunction.navigatedToScreen(
-                ContextUtility.context, const ReAuthLoginForm());
+                ContextUtility.context, RouteName.reAuthLoginForm);
           }
         }
       } else {

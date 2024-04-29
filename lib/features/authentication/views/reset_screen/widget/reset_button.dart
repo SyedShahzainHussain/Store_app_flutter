@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/bloc/forgot_password/forgot_password_bloc.dart';
 import 'package:store/bloc/forgot_password/forgot_password_event.dart';
-import 'package:store/features/authentication/views/login/login.dart';
+
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class ResetButton extends StatelessWidget {
   final String email;
@@ -20,7 +21,7 @@ class ResetButton extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              THelperFunction.navigatedToScreenWithPop(context, const Login());
+              THelperFunction.navigatedToScreenWithPop(context, RouteName.login);
             },
             child: Text(context.localizations!.done.capitalize()),
           ),

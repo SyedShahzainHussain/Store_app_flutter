@@ -6,7 +6,7 @@ import 'package:store/bloc/google/google_bloc.dart';
 import 'package:store/bloc/google/google_state.dart';
 import 'package:store/bloc/login/login_bloc.dart';
 import 'package:store/bloc/login/login_state.dart';
-import 'package:store/bottom_navigtion.dart';
+import 'package:store/bottom_navigation/bottom_navigtion.dart';
 import 'package:store/common/styles/text_style_common.dart';
 import 'package:store/common/widgets/login_signup/login_divider.dart';
 import 'package:store/common/widgets/login_signup/social_button.dart';
@@ -47,7 +47,7 @@ class Login extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const BottomNavigationScreen()),
+                            builder: (_) =>  BottomNavigationScreen()),
                         (route) => false);
 
                     THelperFunction.showDelightToast(
@@ -74,7 +74,7 @@ class Login extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => const BottomNavigationScreen()),
+                        builder: (_) =>  BottomNavigationScreen()),
                     (route) => false);
                 THelperFunction.showDelightToast(
                     "Login Success", Iconsax.copy_success, Colors.green);

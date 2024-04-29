@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/bloc/cart_item/cart_item_bloc.dart';
 import 'package:store/bloc/cart_item/cart_item_event.dart';
 import 'package:store/bloc/cart_item/cart_item_state.dart';
-import 'package:store/bottom_navigtion.dart';
+import 'package:store/bottom_navigation/bloc/bottom_navigation_bloc.dart';
 import 'package:store/common/widgets/product_cart/product_cart_add_delete_button.dart';
 import 'package:store/common/widgets/product_cart/product_cart_item.dart';
 import 'package:store/common/widgets/product_price/t_product_price_text.dart';
@@ -11,7 +11,9 @@ import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+
 import 'package:store/utils/loaders/loader_animation.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class CartListItem extends StatelessWidget {
   final bool isShowAddOrRemove;
@@ -29,8 +31,11 @@ class CartListItem extends StatelessWidget {
                   showAction: true,
                   actionText: context.localizations!.letFillIt,
                   onActionPressed: () {
-                    THelperFunction.navigatedToScreen(
-                        context, const BottomNavigationScreen());
+                    context
+                        .read<BottomNavigationBloc>()
+                        .add(ChangeBottomIndexEvent(0));
+                    THelperFunction.navigatedToScreenWithPop(
+                        context, RouteName.bottomNavigationScreen);
                   },
                 ),
               )
@@ -61,13 +66,13 @@ class CartListItem extends StatelessWidget {
                                 ProductCartAddAndRemoveButton(
                                   quantity: state.cartItem[index].quantity,
                                   add: () {
-                                    BlocProvider.of<CartItemBloc>(context).add(
-                                        IncrementProduct(
+                                    BlocProvider.of<CartItemBloc>(context)
+                                        .add(IncrementProduct(
                                             state.cartItem[index]));
                                   },
                                   remove: () {
-                                    BlocProvider.of<CartItemBloc>(context).add(
-                                        DecrementProduct(
+                                    BlocProvider.of<CartItemBloc>(context)
+                                        .add(DecrementProduct(
                                             state.cartItem[index]));
                                   },
                                 ),

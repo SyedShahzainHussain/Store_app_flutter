@@ -7,7 +7,7 @@ import 'package:store/bloc/authentication/authentication_bloc.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
 import 'package:store/bloc/authentication/authentication_state.dart';
 import 'package:store/bloc/verification/verification_bloc.dart';
-import 'package:store/bottom_navigtion.dart';
+import 'package:store/bottom_navigation/bottom_navigtion.dart';
 import 'package:store/common/widgets/success_screen/success_screen.dart';
 import 'package:store/data/repositories/authentication/authentication_repository.dart';
 import 'package:store/utils/constants/extension.dart';
@@ -90,7 +90,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const BottomNavigationScreen()),
+                            builder: (_) =>  BottomNavigationScreen()),
                         (route) => false);
                   } else if (state is UnAuthenticatedVerified) {
                     Navigator.pushAndRemoveUntil(

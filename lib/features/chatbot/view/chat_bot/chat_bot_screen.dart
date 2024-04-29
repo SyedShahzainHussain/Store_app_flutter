@@ -94,7 +94,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       controller: promptController,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: TColors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25),
                           borderSide: const BorderSide(

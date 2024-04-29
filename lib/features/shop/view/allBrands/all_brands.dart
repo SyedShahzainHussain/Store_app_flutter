@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/bloc/brand/brand_bloc.dart';
 import 'package:store/bloc/brand/brand_state.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
-import 'package:store/common/widgets/brands/brands_porducts.dart';
 import 'package:store/common/widgets/layouts/grid_layout.dart';
 import 'package:store/data/status/status.dart';
 
@@ -13,6 +12,7 @@ import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/shimmer/brand_shimmer.dart';
 
 class AllBrandsScreen extends StatelessWidget {
@@ -63,9 +63,8 @@ class AllBrandsScreen extends StatelessWidget {
                                 "${state.allBrand[index].productCount.toString()} ${context.localizations!.products}",
                             onTap: () => THelperFunction.navigatedToScreen(
                               context,
-                              BrandsProducts(
-                                brandModel: state.allBrand[index],
-                              ),
+                              RouteName.brandsProducts,
+                              arguments: state.allBrand[index],
                             ),
                             showBorder: true,
                             isNetworkImage:
