@@ -97,7 +97,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 expands: false,
                 decoration:  InputDecoration(
                     labelText: context.localizations!.firstName,
-                    prefixIcon: Icon(Iconsax.user)),
+                    prefixIcon: const Icon(Iconsax.user)),
               )),
               const SizedBox(width: TSized.spaceBtwInputFields),
               Expanded(
@@ -110,7 +110,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       expands: false,
                       decoration:  InputDecoration(
                           labelText: context.localizations!.lastName,
-                          prefixIcon: Icon(Iconsax.user)))),
+                          prefixIcon: const Icon(Iconsax.user)))),
             ],
           ),
           const SizedBox(height: TSized.spaceBtwInputFields),
@@ -124,7 +124,7 @@ class _SignUpFormState extends State<SignUpForm> {
             expands: false,
             decoration:  InputDecoration(
                 labelText: context.localizations!.userName,
-                prefixIcon: Icon(Iconsax.user_edit)),
+                prefixIcon: const Icon(Iconsax.user_edit)),
           ),
           const SizedBox(height: TSized.spaceBtwInputFields),
           // ! email
@@ -136,7 +136,7 @@ class _SignUpFormState extends State<SignUpForm> {
             controller: email,
             expands: false,
             decoration:  InputDecoration(
-                labelText: context.localizations!.email, prefixIcon: Icon(Iconsax.direct)),
+                labelText: context.localizations!.email, prefixIcon: const Icon(Iconsax.direct)),
           ),
           const SizedBox(height: TSized.spaceBtwInputFields),
 
@@ -149,7 +149,7 @@ class _SignUpFormState extends State<SignUpForm> {
             maxLength: 11,
             expands: false,
             decoration:  InputDecoration(
-                labelText: context.localizations!.phoneNo, prefixIcon: Icon(Iconsax.call)),
+                labelText: context.localizations!.phoneNo, prefixIcon: const Icon(Iconsax.call)),
           ),
           const SizedBox(height: TSized.spaceBtwInputFields),
           //! Password

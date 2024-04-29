@@ -11,6 +11,8 @@ import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_event.dart';
 import 'package:store/common/widgets/banners/t_banners.dart';
 import 'package:store/common/widgets/text_field_container/text_field_container.dart';
+import 'package:store/features/personalizations/bloc/change_language/change_language_bloc.dart';
+import 'package:store/features/personalizations/bloc/change_language/change_language_event.dart';
 import 'package:store/features/shop/view/allProducts/all_products.dart';
 import 'package:store/features/shop/view/home/widget/categories_list.dart';
 import 'package:store/features/shop/view/home/widget/home_app_bar.dart';
@@ -43,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     LocalStorage.init(FirebaseAuth.instance.currentUser!.uid).then((value) {
       context.read<FavouriteBloc>().add(GetAllFavourite());
       context.read<CartItemBloc>().add(LoadCartItem());
+      context.read<ChangeLanguageBloc>().add(FetchLanguage());
     });
   }
 

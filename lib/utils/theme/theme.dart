@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/utils/constants/colors.dart';
+import 'package:store/utils/routes/page_transition.dart';
 import 'package:store/utils/theme/custom_theme/app_bar_theme.dart';
 import 'package:store/utils/theme/custom_theme/bottom_sheet_theme.dart';
 import 'package:store/utils/theme/custom_theme/check_box_theme.dart';
@@ -14,13 +15,15 @@ class TAppTheme {
   TAppTheme._();
 
   static ThemeData lightTheme = ThemeData(
+    pageTransitionsTheme: PageTransitionsTheme(builders: {
+      TargetPlatform.android: PageTransition(),
+    }),
     useMaterial3: true,
     scaffoldBackgroundColor: TColors.white,
     brightness: Brightness.light,
     primaryColor: Colors.blue,
     fontFamily: "Poppins",
     textTheme: TTextTheme.lightTextTheme,
-    
     appBarTheme: TAppBarTheme.lightAppBarTheme,
     elevatedButtonTheme: TElevatedTheme.lightElevatedTheme,
     bottomSheetTheme: TBottomSheetTheme.lightBottomSheetTheme,
@@ -32,6 +35,9 @@ class TAppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
+    pageTransitionsTheme: PageTransitionsTheme(builders: {
+      TargetPlatform.android: PageTransition(),
+    }),
     useMaterial3: true,
     scaffoldBackgroundColor: TColors.black,
     brightness: Brightness.dark,

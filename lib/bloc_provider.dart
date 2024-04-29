@@ -30,6 +30,7 @@ import 'package:store/bloc/upload_image/upload_image_bloc.dart';
 import 'package:store/bloc/variation/variation_bloc.dart';
 import 'package:store/bloc/verification/verification_bloc.dart';
 import 'package:store/features/chatbot/bloc/post_chat_bot_api/post_chat_bot.bloc.dart';
+import 'package:store/features/personalizations/bloc/change_language/change_language_bloc.dart';
 import 'package:store/features/shop/model/product_model/product_model.dart';
 
 class BlocProviders extends StatelessWidget {
@@ -71,6 +72,7 @@ class BlocProviders extends StatelessWidget {
       BlocProvider(create: (context) => AddOrderBloc()),
       BlocProvider(create: (context) => FetchOrderBloc()),
       BlocProvider(create: (context) => PostChatBotBloc()),
+      BlocProvider(create: (context) => ChangeLanguageBloc()),
     ], child: child);
   }
 }

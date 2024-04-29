@@ -79,21 +79,7 @@ class THelperFunction {
   }
 
   static void navigatedToScreen(BuildContext context, Widget screen) {
-    Navigator.of(context).push(PageRouteBuilder(
-      reverseTransitionDuration: const Duration(milliseconds: 400),
-      transitionDuration: const Duration(milliseconds: 400),
-      pageBuilder: (context, animation, secondaryAnimation) => screen,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(1.0, 0.0);
-        const end = Offset.zero;
-        Animation<Offset> slideAnimation =
-            Tween(begin: begin, end: end).animate(animation);
-        return SlideTransition(
-          position: slideAnimation,
-          child: child,
-        );
-      },
-    ));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
   }
 
   static void navigatedToScreenWithPop(BuildContext context, Widget screen) {

@@ -66,7 +66,7 @@ class _LoginFormState extends State<LoginForm> {
               controller: emailController,
               validator: (value) => TValidation.validateEmail(value),
               decoration: InputDecoration(
-                prefixIcon: Icon(Iconsax.direct_right),
+                prefixIcon: const Icon(Iconsax.direct_right),
                 hintText: context.localizations!.email,
               ),
             ),

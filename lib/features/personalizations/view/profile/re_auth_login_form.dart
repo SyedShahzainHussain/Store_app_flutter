@@ -70,7 +70,7 @@ class _ReAuthLoginFormState extends State<ReAuthLoginForm> {
                       controller: emailController,
                       validator: (value) => TValidation.validateEmail(value),
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Iconsax.direct_right),
+                        prefixIcon: const Icon(Iconsax.direct_right),
                         hintText: context.localizations!.email,
                       ),
                     ),

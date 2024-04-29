@@ -38,7 +38,6 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => OnBoardController(),
         ),
-       
       ],
       child: const BlocProviders(child: MyApp()),
     ),

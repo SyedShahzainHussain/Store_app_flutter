@@ -125,6 +125,8 @@
   "wishListIsEmpty": "Whoops! Wishlish is Empty...",
   "letAddSome": "Let's add some",
   "store": "Store",
+  "language":"Language",
+  "changeLanguage":"Change Language",
   "logout": "LogOut",
   "and": "and",
   "continues": "continue",

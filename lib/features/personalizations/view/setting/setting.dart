@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:store/bottom_navigtion.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/container/t_primary_header_container.dart';
 import 'package:store/common/widgets/listtile/list_tile.dart';
 import 'package:store/data/repositories/authentication/authentication_repository.dart';
+import 'package:store/features/personalizations/bloc/change_language/change_language_bloc.dart';
+import 'package:store/features/personalizations/bloc/change_language/change_language_event.dart';
+import 'package:store/features/personalizations/bloc/change_language/change_language_state.dart';
 import 'package:store/features/personalizations/view/address/address.dart';
 import 'package:store/features/personalizations/view/setting/widget/t_setting_menu_tile.dart';
 import 'package:store/features/shop/view/cart/cart.dart';
@@ -14,6 +18,7 @@ import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -127,11 +132,42 @@ class SettingScreen extends StatelessWidget {
                   const SizedBox(
                     height: TSized.spacebetweenItem,
                   ),
+
                   TSettingListTile(
                       icon: Iconsax.document_upload,
                       title: context.localizations!.loadData,
                       subTitle: context.localizations!.uplaodData,
                       onTap: () {}),
+                  BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+                    builder: (context, state) {
+                      return TSettingListTile(
+                          icon: Icons.mark_chat_unread,
+                          title: context.localizations!.language,
+                          subTitle: context.localizations!.changeLanguage,
+                          trailing: ToggleSwitch(
+                            minWidth: 50,
+                            minHeight: 30,
+                            cornerRadius: 20.0,
+                            fontSize: 10,
+                            activeBgColors: const [
+                              [TColors.primary],
+                              [TColors.primary],
+                            ],
+                            activeFgColor: Colors.white,
+                            inactiveBgColor: Colors.black,
+                            inactiveFgColor: Colors.white,
+                            initialLabelIndex:
+                                state.appLocale == const Locale("en") ? 0 : 1,
+                            totalSwitches: 2,
+                            labels: const ['Eng', 'Urdu'],
+                            radiusStyle: true,
+                            onToggle: (index) => context
+                                .read<ChangeLanguageBloc>()
+                                .add(ChangeLanguage(index!)),
+                          ),
+                          onTap: null);
+                    },
+                  ),
                   TSettingListTile(
                     icon: Iconsax.location,
                     title: context.localizations!.geoLocation,
