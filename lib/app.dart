@@ -10,7 +10,6 @@ import 'package:store/features/authentication/views/verifyEmail/verify_email.dar
 import 'package:store/features/personalizations/bloc/change_language/change_language_bloc.dart';
 import 'package:store/features/personalizations/bloc/change_language/change_language_state.dart';
 import 'package:store/utils/global_context/context_utils.dart';
-import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/routes/routes.dart';
 import 'package:store/utils/theme/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -40,7 +39,6 @@ class MyApp extends StatelessWidget {
           title: 'Store App',
           theme: TAppTheme.lightTheme,
           darkTheme: TAppTheme.darkTheme,
-          initialRoute: RouteName.bottomNavigationScreen,
           onGenerateRoute: AppRoutes.onGeneratedRoute,
           home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {

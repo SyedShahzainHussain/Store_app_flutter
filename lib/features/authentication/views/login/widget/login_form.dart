@@ -22,27 +22,17 @@ class LoginForm extends StatefulWidget {
   State<LoginForm> createState() => _LoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _LoginFormState extends State<LoginForm>
+    with SingleTickerProviderStateMixin {
   ValueNotifier<bool> isObsecure = ValueNotifier<bool>(true);
   ValueNotifier<bool> isCheck = ValueNotifier<bool>(false);
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GetStorage localStorage = GetStorage();
-
-  void save() {
-    final validate = _formKey.currentState!.validate();
-
-    if (!validate) {
-      return;
-    }
-    TDeviceUtils.hideKeyboard(context);
-    context.read<LoginBloc>().add(LoginWithEmailAndPasswordEvent(
-          emailController.text.trim(),
-          passwordController.text.toString(),
-          isCheck.value,
-        ));
-  }
+  late AnimationController controller;
+  late Animation<Offset> slideAnimation;
+  late Animation<double> scaleTransition;
 
   @override
   void initState() {
@@ -50,6 +40,24 @@ class _LoginFormState extends State<LoginForm> {
     GetStorage localStorage = GetStorage();
     emailController.text = localStorage.read("REMEMBER_ME_EMAIL") ?? "";
     passwordController.text = localStorage.read("REMEMBER_ME_PASSWORD") ?? "";
+
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1500));
+
+    slideAnimation = Tween(begin: const Offset(-1, -1), end: Offset.zero)
+        .animate(CurvedAnimation(parent: controller, curve: Curves.ease));
+
+    scaleTransition = Tween<double>(begin: 0, end: 1)
+        .animate(CurvedAnimation(parent: controller, curve: Curves.ease));
+
+    // ! start he animation
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
   }
 
   @override
@@ -62,36 +70,48 @@ class _LoginFormState extends State<LoginForm> {
         child: Column(
           children: [
             // ! Email
-            TextFormField(
-              controller: emailController,
-              validator: (value) => TValidation.validateEmail(value),
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Iconsax.direct_right),
-                hintText: context.localizations!.email,
+            SlideTransition(
+              position: slideAnimation,
+              child: ScaleTransition(
+                scale: scaleTransition,
+                child: TextFormField(
+                  controller: emailController,
+                  validator: (value) => TValidation.validateEmail(value),
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Iconsax.direct_right),
+                    hintText: context.localizations!.email,
+                  ),
+                ),
               ),
             ),
             const SizedBox(
               height: TSized.spaceBtwInputFields,
             ),
             // ! Password
-            ValueListenableBuilder(
-              valueListenable: isObsecure,
-              builder: (context, value, _) => TextFormField(
-                controller: passwordController,
-                validator: (value) =>
-                    TValidation.validateEmptyText(value, TTexts.password),
-                obscuringCharacter: "*",
-                obscureText: isObsecure.value,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Iconsax.password_check),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        isObsecure.value ? Iconsax.eye_slash : Iconsax.eye),
-                    onPressed: () {
-                      isObsecure.value = !isObsecure.value;
-                    },
+            SlideTransition(
+              position: slideAnimation,
+              child: ScaleTransition(
+                scale: scaleTransition,
+                child: ValueListenableBuilder(
+                  valueListenable: isObsecure,
+                  builder: (context, value, _) => TextFormField(
+                    controller: passwordController,
+                    validator: (value) =>
+                        TValidation.validateEmptyText(value, TTexts.password),
+                    obscuringCharacter: "*",
+                    obscureText: isObsecure.value,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Iconsax.password_check),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                            isObsecure.value ? Iconsax.eye_slash : Iconsax.eye),
+                        onPressed: () {
+                          isObsecure.value = !isObsecure.value;
+                        },
+                      ),
+                      hintText: context.localizations!.password,
+                    ),
                   ),
-                  hintText: context.localizations!.password,
                 ),
               ),
             ),
@@ -154,5 +174,19 @@ class _LoginFormState extends State<LoginForm> {
         ),
       ),
     );
+  }
+
+  void save() {
+    final validate = _formKey.currentState!.validate();
+
+    if (!validate) {
+      return;
+    }
+    TDeviceUtils.hideKeyboard(context);
+    context.read<LoginBloc>().add(LoginWithEmailAndPasswordEvent(
+          emailController.text.trim(),
+          passwordController.text.toString(),
+          isCheck.value,
+        ));
   }
 }
