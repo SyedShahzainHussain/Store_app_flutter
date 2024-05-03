@@ -4,10 +4,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_state.dart';
 import 'package:store/common/widgets/image/t_circular_image.dart';
-import 'package:store/features/personalizations/view/profile/profile.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class TUserProdileTile extends StatelessWidget {
   const TUserProdileTile({
@@ -47,7 +47,7 @@ class TUserProdileTile extends StatelessWidget {
             trailing: IconButton(
                 onPressed: () {
                   THelperFunction.navigatedToScreen(
-                      context, const ProfileScreen());
+                      context,RouteName.profileScreen);
                 },
                 icon: const Icon(
                   Iconsax.edit,

@@ -5,10 +5,10 @@ import 'package:store/bloc/fetch_categories/fetch_categories_event.dart';
 import 'package:store/bloc/fetch_categories/fetch_categories_state.dart';
 import 'package:store/data/status/status.dart';
 import 'package:store/features/shop/view/home/widget/t_vertical_image_text.dart';
-import 'package:store/features/shop/view/subCategory/sub_category.dart';
 import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/shimmer/category_shimmer.dart';
 
 class CategoriesList extends StatefulWidget {
@@ -29,8 +29,12 @@ class _CategoriesListState extends State<CategoriesList> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = Localizations.localeOf(context);
     return Padding(
-      padding: const EdgeInsets.only(left: TSized.defaultSpace),
+      padding: EdgeInsets.only(
+        left: localization.languageCode == "en" ? TSized.defaultSpace : 0.0,
+        right: localization.languageCode == "en" ? 0.0 : TSized.defaultSpace,
+      ),
       child: BlocBuilder<FetchCategoriesBloc, FetchCategoriesState>(
         builder: (context, state) {
           switch (state.status) {
@@ -45,13 +49,14 @@ class _CategoriesListState extends State<CategoriesList> {
                 height: 100,
                 child: ListView.builder(
                   shrinkWrap: true,
+                  padding: EdgeInsets.zero,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => TVerticalImageText(
                     onTap: () => THelperFunction.navigatedToScreen(
-                        context,
-                        SubCategory(
-                          categoryModel: state.featuresCategories[index],
-                        )),
+                      context,
+                      RouteName.subCategory,
+                      arguments: state.featuresCategories[index],
+                    ),
                     image: state.featuresCategories[index].image,
                     title: state.featuresCategories[index].name.capitalize(),
                   ),

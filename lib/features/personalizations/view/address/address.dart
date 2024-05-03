@@ -10,11 +10,12 @@ import 'package:store/bloc/selected_address/selected_state.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/data/status/status.dart';
-import 'package:store/features/personalizations/view/address/add_new__address_screen.dart';
 import 'package:store/features/personalizations/view/address/widget/single_address.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class AddressScreen extends StatefulWidget {
   const AddressScreen({super.key});
@@ -37,15 +38,15 @@ class _AddressScreenState extends State<AddressScreen> {
         backgroundColor: TColors.primary,
         onPressed: () {
           THelperFunction.navigatedToScreen(
-              context, const AddNewAddressScreen());
+              context, RouteName.addNewAddressScreen);
         },
         child: const Icon(
           Iconsax.add,
           color: TColors.white,
         ),
       ),
-      appBar: const CustomAppBar(
-        title: Text("Address"),
+      appBar:  CustomAppBar(
+        title: Text(context.localizations!.address),
         showBackArrow: true,
       ),
       body: Padding(

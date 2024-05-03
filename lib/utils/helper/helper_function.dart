@@ -13,7 +13,6 @@ import 'package:store/bloc/selected_address/selected_event.dart';
 import 'package:store/bloc/selected_address/selected_state.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/data/status/status.dart';
-import 'package:store/features/personalizations/view/address/add_new__address_screen.dart';
 import 'package:store/features/personalizations/view/address/widget/single_address.dart';
 import 'package:store/features/shop/model/payment_model/payment_model.dart';
 import 'package:store/features/shop/view/checkout/widget/list_tile_payment.dart';
@@ -22,6 +21,7 @@ import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/global_context/context_utils.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class THelperFunction {
   THelperFunction._();
@@ -78,16 +78,15 @@ class THelperFunction {
             ));
   }
 
-  static void navigatedToScreen(BuildContext context, Widget screen) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+  static void navigatedToScreen(BuildContext context, String routeName,
+      {Object? arguments}) {
+    Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
-  static void navigatedToScreenWithPop(BuildContext context, Widget screen) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => screen),
-      (context) => false,
-    );
+  static void navigatedToScreenWithPop(BuildContext context, String routeName,
+      {Object? arguments}) {
+    Navigator.pushNamedAndRemoveUntil(context, routeName, (context) => false,
+        arguments: arguments);
   }
 
   static String truncateText(String text, int maxLength) {
@@ -145,39 +144,43 @@ class THelperFunction {
       return null;
     }
   }
+
   static String formatDeliveryDate(DateTime deliveryDate) {
-  return DateFormat('dd MMM yyyy').format(deliveryDate);
-}
+    return DateFormat('dd MMM yyyy').format(deliveryDate);
+  }
 
   static showFullScreenDialog(String imageUrl) {
     Navigator.of(ContextUtility.context).push(MaterialPageRoute<void>(
         fullscreenDialog: true,
         builder: (_) => Scaffold(
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: TSized.defaultSpace * 2,
-                        horizontal: TSized.defaultSpace),
-                    child: CachedNetworkImage(imageUrl: imageUrl),
-                  ),
-                  const SizedBox(
-                    height: TSized.spacebetweenItem,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: 150,
-                      child: OutlinedButton(
-                          onPressed: () {
-                            Navigator.pop(ContextUtility.context);
-                          },
-                          child: const Text("Close")),
+              body: Hero(
+                tag: imageUrl,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: TSized.defaultSpace * 2,
+                          horizontal: TSized.defaultSpace),
+                      child: CachedNetworkImage(imageUrl: imageUrl),
                     ),
-                  )
-                ],
+                    const SizedBox(
+                      height: TSized.spacebetweenItem,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        width: 150,
+                        child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.pop(ContextUtility.context);
+                            },
+                            child: const Text("Close")),
+                      ),
+                    )
+                  ],
+                ),
               ),
             )));
   }
@@ -368,7 +371,7 @@ class THelperFunction {
                         onPressed: () {
                           THelperFunction.navigatedToScreen(
                               ContextUtility.context,
-                              const AddNewAddressScreen());
+                              RouteName.addNewAddressScreen);
                         },
                         child: const Text("Add new address")),
                   )

@@ -6,7 +6,7 @@ import 'package:store/bloc/google/google_bloc.dart';
 import 'package:store/bloc/google/google_state.dart';
 import 'package:store/bloc/login/login_bloc.dart';
 import 'package:store/bloc/login/login_state.dart';
-import 'package:store/bottom_navigtion.dart';
+import 'package:store/bottom_navigation/bottom_navigtion.dart';
 import 'package:store/common/styles/text_style_common.dart';
 import 'package:store/common/widgets/login_signup/login_divider.dart';
 import 'package:store/common/widgets/login_signup/social_button.dart';
@@ -14,7 +14,8 @@ import 'package:store/features/authentication/views/login/widget/login_form.dart
 import 'package:store/features/authentication/views/login/widget/login_title.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
-import 'package:store/utils/constants/texts.dart';
+
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
@@ -46,7 +47,7 @@ class Login extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const BottomNavigationScreen()),
+                            builder: (_) =>  BottomNavigationScreen()),
                         (route) => false);
 
                     THelperFunction.showDelightToast(
@@ -73,7 +74,7 @@ class Login extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => const BottomNavigationScreen()),
+                        builder: (_) =>  BottomNavigationScreen()),
                     (route) => false);
                 THelperFunction.showDelightToast(
                     "Login Success", Iconsax.copy_success, Colors.green);
@@ -95,7 +96,7 @@ class Login extends StatelessWidget {
                 // ! Divider
                 LoginDivider(
                   isDark: isDark,
-                  title: TTexts.orSignInWith,
+                  title: context.localizations!.orSignInWith,
                 ),
                 const SizedBox(
                   height: TSized.spacebetweenItem,

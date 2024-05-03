@@ -64,23 +64,26 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                             THelperFunction.showFullScreenDialog(
                                 state.selectedProductImage!);
                           },
-                          child: SizedBox(
-                            height: 400,
-                            child: Padding(
-                              padding: const EdgeInsets.all(
-                                  TSized.productImageRadius * 2),
-                              child: CachedNetworkImage(
-                                imageUrl: state.selectedProductImage!,
-                                errorWidget: (context, url, error) =>
-                                    const Icon(
-                                  Icons.error,
-                                  color: Colors.red,
-                                ),
-                                progressIndicatorBuilder:
-                                    (context, url, progress) =>
-                                        CircularProgressIndicator(
-                                  value: progress.progress,
-                                  color: TColors.primary,
+                          child: Hero(
+                            tag: state.selectedProductImage!,
+                            child: SizedBox(
+                              height: 400,
+                              child: Padding(
+                                padding: const EdgeInsets.all(
+                                    TSized.productImageRadius * 2),
+                                child: CachedNetworkImage(
+                                  imageUrl: state.selectedProductImage!,
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(
+                                    Icons.error,
+                                    color: Colors.red,
+                                  ),
+                                  progressIndicatorBuilder:
+                                      (context, url, progress) =>
+                                          CircularProgressIndicator(
+                                    value: progress.progress,
+                                    color: TColors.primary,
+                                  ),
                                 ),
                               ),
                             ),

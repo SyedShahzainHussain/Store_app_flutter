@@ -5,6 +5,7 @@ import 'package:store/features/shop/view/product_rating/widget/t_overall_product
 import 'package:store/features/shop/view/product_rating/widget/t_user_rating.dart';
 
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 
 class ProductRating extends StatelessWidget {
   const ProductRating({super.key});
@@ -12,8 +13,8 @@ class ProductRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: Text("Reviews & Rating"),
+      appBar:  CustomAppBar(
+        title: Text(context.localizations!.reviewRating),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
@@ -22,8 +23,8 @@ class ProductRating extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Ratings and reviews are verified and are from people who use the same type of device that you use.",
+               Text(
+               context.localizations!.reviewRatingDescription,
               ),
               const SizedBox(
                 height: TSized.defaultSpace,

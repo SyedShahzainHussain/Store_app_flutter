@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:store/features/authentication/controller/on_board_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/features/authentication/bloc/on_board_controller_bloc.dart';
 import 'package:store/features/authentication/views/onboarding/widget/dot_indicator.dart';
 import 'package:store/features/authentication/views/onboarding/widget/on_board_button.dart';
 import 'package:store/features/authentication/views/onboarding/widget/on_boarding_skip.dart';
 import 'package:store/features/authentication/views/onboarding/widget/onboarding_page.dart';
 
 import 'package:store/utils/constants/image_strings.dart';
-import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/extension/language.dart';
 
 class OnBoard extends StatelessWidget {
   const OnBoard({super.key});
@@ -18,25 +18,27 @@ class OnBoard extends StatelessWidget {
       body: Stack(
         children: [
           // ! Page
-          Consumer<OnBoardController>(
-            builder: (context, value, _) => PageView(
-              controller: value.pageController,
-              onPageChanged: value.onPageChange,
-              children: const [
+          BlocBuilder<OnBoardControllerBloc, OnBoardControllerState>(
+            builder: (context, state) => PageView(
+              controller: context.read<OnBoardControllerBloc>().pageController,
+              onPageChanged: (index) => context
+                  .read<OnBoardControllerBloc>()
+                  .add(OnBoardControllerPageChange(index)),
+              children: [
                 OnBoardPage(
                   image: TImageString.onboard1,
-                  title: TTexts.onBoardingTitle1,
-                  subTitle: TTexts.onBoardingSubTitle1,
+                  title: context.localizations!.onBoardingTitle1,
+                  subTitle: context.localizations!.onBoardingSubTitle1,
                 ),
                 OnBoardPage(
                   image: TImageString.onboard2,
-                  title: TTexts.onBoardingTitle2,
-                  subTitle: TTexts.onBoardingSubTitle2,
+                  title: context.localizations!.onBoardingTitle2,
+                  subTitle: context.localizations!.onBoardingSubTitle2,
                 ),
                 OnBoardPage(
                   image: TImageString.onboard3,
-                  title: TTexts.onBoardingTitle3,
-                  subTitle: TTexts.onBoardingSubTitle3,
+                  title: context.localizations!.onBoardingTitle3,
+                  subTitle: context.localizations!.onBoardingSubTitle3,
                 ),
               ],
             ),

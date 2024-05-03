@@ -5,7 +5,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:store/bloc/register/register_bloc.dart';
 import 'package:store/bloc/register/register_events.dart';
 import 'package:store/utils/constants/size.dart';
-import 'package:store/utils/constants/texts.dart';
+
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/validator/validation.dart';
 import 'package:store/features/authentication/views/signup/widget/sign_up_button.dart';
@@ -90,13 +91,13 @@ class _SignUpFormState extends State<SignUpForm> {
                   child: TextFormField(
                 validator: (value) => TValidation.validateEmptyText(
                   value,
-                  TTexts.firstName,
+                  context.localizations!.firstName,
                 ),
                 controller: firstName,
                 expands: false,
-                decoration: const InputDecoration(
-                    labelText: TTexts.firstName,
-                    prefixIcon: Icon(Iconsax.user)),
+                decoration:  InputDecoration(
+                    labelText: context.localizations!.firstName,
+                    prefixIcon: const Icon(Iconsax.user)),
               )),
               const SizedBox(width: TSized.spaceBtwInputFields),
               Expanded(
@@ -104,12 +105,12 @@ class _SignUpFormState extends State<SignUpForm> {
                       controller: lastName,
                       validator: (value) => TValidation.validateEmptyText(
                             value,
-                            TTexts.lastName,
+                            context.localizations!.lastName,
                           ),
                       expands: false,
-                      decoration: const InputDecoration(
-                          labelText: TTexts.lastName,
-                          prefixIcon: Icon(Iconsax.user)))),
+                      decoration:  InputDecoration(
+                          labelText: context.localizations!.lastName,
+                          prefixIcon: const Icon(Iconsax.user)))),
             ],
           ),
           const SizedBox(height: TSized.spaceBtwInputFields),
@@ -118,12 +119,12 @@ class _SignUpFormState extends State<SignUpForm> {
             controller: userName,
             validator: (value) => TValidation.validateEmptyText(
               value,
-              TTexts.userName,
+              context.localizations!.userName,
             ),
             expands: false,
-            decoration: const InputDecoration(
-                labelText: TTexts.userName,
-                prefixIcon: Icon(Iconsax.user_edit)),
+            decoration:  InputDecoration(
+                labelText: context.localizations!.userName,
+                prefixIcon: const Icon(Iconsax.user_edit)),
           ),
           const SizedBox(height: TSized.spaceBtwInputFields),
           // ! email
@@ -134,8 +135,8 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             controller: email,
             expands: false,
-            decoration: const InputDecoration(
-                labelText: TTexts.email, prefixIcon: Icon(Iconsax.direct)),
+            decoration:  InputDecoration(
+                labelText: context.localizations!.email, prefixIcon: const Icon(Iconsax.direct)),
           ),
           const SizedBox(height: TSized.spaceBtwInputFields),
 
@@ -147,8 +148,8 @@ class _SignUpFormState extends State<SignUpForm> {
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             maxLength: 11,
             expands: false,
-            decoration: const InputDecoration(
-                labelText: TTexts.phoneNo, prefixIcon: Icon(Iconsax.call)),
+            decoration:  InputDecoration(
+                labelText: context.localizations!.phoneNo, prefixIcon: const Icon(Iconsax.call)),
           ),
           const SizedBox(height: TSized.spaceBtwInputFields),
           //! Password
@@ -156,7 +157,7 @@ class _SignUpFormState extends State<SignUpForm> {
             valueListenable: isObsecure,
             builder: (context, value, _) => TextFormField(
               validator: (value) =>
-                  TValidation.validateEmptyText(value, TTexts.password),
+                  TValidation.validateEmptyText(value, context.localizations!.password),
               controller: password,
               obscuringCharacter: "*",
               obscureText: isObsecure.value,
@@ -169,7 +170,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     isObsecure.value = !isObsecure.value;
                   },
                 ),
-                labelText: TTexts.password,
+                labelText: context.localizations!.password,
               ),
             ),
           ),

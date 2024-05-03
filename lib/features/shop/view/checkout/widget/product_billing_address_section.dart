@@ -8,6 +8,7 @@ import 'package:store/bloc/selected_address/selected_state.dart';
 import 'package:store/data/status/status.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
 class ProductBillingAddressSection extends StatefulWidget {
@@ -41,8 +42,8 @@ class _ProductBillingAddressSectionState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TSectionHeading(
-                    title: "Shopping Address",
-                    buttontitle: "Change",
+                    title: context.localizations!.shoppingAddress,
+                    buttontitle: context.localizations!.change,
                     onPressed: () async {
                       await THelperFunction.showAddressDialog();
                     },

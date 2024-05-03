@@ -11,6 +11,7 @@ import 'package:store/features/shop/model/product_model/product_model.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
 class TProductAttributes extends StatelessWidget {
@@ -34,7 +35,7 @@ class TProductAttributes extends StatelessWidget {
                   Row(
                     children: [
                       TSectionHeading(
-                        title: "Variation",
+                        title: context.localizations!.variation,
                         showActionButton: false,
                       ),
                       const SizedBox(
@@ -45,8 +46,8 @@ class TProductAttributes extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              const TProductTitle(
-                                title: "Price : ",
+                              TProductTitle(
+                                title: "${context.localizations!.price} : ",
                                 smallSize: true,
                               ),
 
@@ -74,8 +75,8 @@ class TProductAttributes extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              const TProductTitle(
-                                title: "Stock : ",
+                               TProductTitle(
+                                title: "${context.localizations!.stock} : ",
                                 smallSize: true,
                               ),
                               Text(

@@ -11,6 +11,7 @@ import 'package:store/features/shop/model/product_model/product_model.dart';
 import 'package:store/features/shop/model/product_variation/product_variation.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
 class TBottomNavigationCard extends StatelessWidget {
@@ -91,7 +92,7 @@ class TBottomNavigationCard extends StatelessWidget {
                         padding: const EdgeInsets.all(TSized.md),
                         backgroundColor: TColors.black,
                         side: const BorderSide(color: TColors.black)),
-                    child: const Text("Add to Cart"),
+                    child:  Text(context.localizations!.addToCart),
                   )
                 ],
               );

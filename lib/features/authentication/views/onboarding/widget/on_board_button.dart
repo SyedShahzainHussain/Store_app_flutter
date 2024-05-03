@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:store/features/authentication/controller/on_board_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store/features/authentication/bloc/on_board_controller_bloc.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/device/devices_utility.dart';
@@ -20,7 +20,9 @@ class OnBoardbutton extends StatelessWidget {
       right: TSized.defaultSpace,
       child: ElevatedButton(
         onPressed: () {
-          context.read<OnBoardController>().nextPage(context);
+          context
+              .read<OnBoardControllerBloc>()
+              .add(OnBoardControllerNextPage());
         },
         style: ElevatedButton.styleFrom(
             shape: const CircleBorder(),

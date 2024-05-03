@@ -4,14 +4,15 @@ import 'package:iconsax/iconsax.dart';
 import 'package:store/bloc/fetch_orders/fetch_orders_bloc.dart';
 import 'package:store/bloc/fetch_orders/fetch_orders_event.dart';
 import 'package:store/bloc/fetch_orders/fetch_orders_state.dart';
-import 'package:store/bottom_navigtion.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/data/status/status.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/loaders/loader_animation.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class OrderListItems extends StatefulWidget {
   const OrderListItems({super.key});
@@ -53,17 +54,17 @@ class _OrderListItemsState extends State<OrderListItems> {
           case Status.success:
             return state.orderList.isEmpty
                 ? Center(
-                child: AnimationLoaderWidget(
-                  text: "Whoops! Orders is Empty...",
-                  animation: TImageString.noOrders,
-                  showAction: true,
-                  actionText: "Let's order it",
-                  onActionPressed: () {
-                    THelperFunction.navigatedToScreen(
-                        context, const BottomNavigationScreen());
-                  },
-                ),
-              )
+                    child: AnimationLoaderWidget(
+                      text: context.localizations!.orderIsEmpty,
+                      animation: TImageString.noOrders,
+                      showAction: true,
+                      actionText: context.localizations!.letOrderIt,
+                      onActionPressed: () {
+                        THelperFunction.navigatedToScreen(
+                            context, RouteName.bottomNavigationScreen);
+                      },
+                    ),
+                  )
                 : ListView.separated(
                     separatorBuilder: (context, index) => const SizedBox(
                       height: TSized.spacebetweenItem,
@@ -140,7 +141,7 @@ class _OrderListItemsState extends State<OrderListItems> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text("Order",
+                                          Text(context.localizations!.order,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelMedium),
@@ -171,7 +172,9 @@ class _OrderListItemsState extends State<OrderListItems> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text("Shopping Date",
+                                          Text(
+                                              context
+                                                  .localizations!.shoppingData,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelMedium),

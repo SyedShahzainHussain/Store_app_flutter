@@ -4,10 +4,12 @@ import 'package:store/bloc/fetch_user/fetch_user_bloc.dart';
 import 'package:store/bloc/fetch_user/fetch_user_state.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/product_cart/product_cart_widget.dart';
-import 'package:store/features/shop/view/cart/cart.dart';
 import 'package:store/utils/constants/colors.dart';
-import 'package:store/utils/constants/texts.dart';
+import 'package:store/utils/constants/image_strings.dart';
+import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/shimmer/shimmer.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -22,7 +24,7 @@ class HomeAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            TTexts.homeAppBarTitle,
+            context.localizations!.homeAppBarTitle,
             style: Theme.of(context)
                 .textTheme
                 .labelMedium!
@@ -46,10 +48,27 @@ class HomeAppBar extends StatelessWidget {
         ],
       ),
       actions: [
+        IconButton(
+          onPressed: () {
+            THelperFunction.navigatedToScreen(context, RouteName.chatBotScreen);
+          },
+          icon: Container(
+            padding: const EdgeInsets.all(TSized.xsm),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: TColors.accent,
+            ),
+            child: Image.asset(
+              TImageString.chatBotImage,
+              width: 30,
+              height: 30,
+            ),
+          ),
+        ),
         ProductCartWidget(
           color: TColors.white,
           onPressed: () {
-            THelperFunction.navigatedToScreen(context, const CartScreen());
+            THelperFunction.navigatedToScreen(context, RouteName.cartScreen);
           },
         ),
       ],

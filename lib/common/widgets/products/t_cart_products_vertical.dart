@@ -8,13 +8,13 @@ import 'package:store/common/widgets/products/widget/product_cart_bottom_add_to_
 import 'package:store/common/widgets/texts/t_brand_verification.dart';
 import 'package:store/common/widgets/texts/t_product_title.dart';
 import 'package:store/features/shop/model/product_model/product_model.dart';
-import 'package:store/features/shop/view/produt_detail/product_details.dart';
 import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/enum.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/helper/product_helper.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class TProductCartVertical extends StatelessWidget {
   final ProductModel? productModel;
@@ -33,9 +33,7 @@ class TProductCartVertical extends StatelessWidget {
       onTap: () {
         THelperFunction.navigatedToScreen(
             context,
-            ProductDetails(
-              productModel: productModel,
-            ));
+                RouteName.productDetails,arguments: productModel);
       },
       child: Container(
         width: 180,

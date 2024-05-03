@@ -10,7 +10,8 @@ import 'package:store/features/authentication/views/signup/widget/sign_up_form.d
 import 'package:store/features/authentication/views/verifyEmail/verify_email.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
-import 'package:store/utils/constants/texts.dart';
+
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
 import 'package:store/utils/popups/full_screen_loader.dart';
 
@@ -31,7 +32,7 @@ class SignUp extends StatelessWidget {
               children: [
                 // ! title
                 Text(
-                  TTexts.signUpTitle,
+                  context.localizations!.signUpTitle,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(
@@ -43,7 +44,8 @@ class SignUp extends StatelessWidget {
 
                 // ! Divider
                 const SizedBox(height: TSized.spacebetweenItem),
-                LoginDivider(isDark: isDark, title: TTexts.orSignupWith),
+                LoginDivider(
+                    isDark: isDark, title: context.localizations!.orSignupWith),
                 const SizedBox(height: TSized.spacebetweenItem),
                 // ! social button
                 const SoicalButton(),

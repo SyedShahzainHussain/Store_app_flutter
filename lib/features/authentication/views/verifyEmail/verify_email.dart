@@ -7,14 +7,14 @@ import 'package:store/bloc/authentication/authentication_bloc.dart';
 import 'package:store/bloc/authentication/authentication_events.dart';
 import 'package:store/bloc/authentication/authentication_state.dart';
 import 'package:store/bloc/verification/verification_bloc.dart';
-import 'package:store/bottom_navigtion.dart';
+import 'package:store/bottom_navigation/bottom_navigtion.dart';
 import 'package:store/common/widgets/success_screen/success_screen.dart';
 import 'package:store/data/repositories/authentication/authentication_repository.dart';
 import 'package:store/utils/constants/extension.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
-import 'package:store/utils/constants/texts.dart';
 import 'package:store/utils/device/devices_utility.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/global_context/context_utils.dart';
 import 'package:store/utils/helper/helper_function.dart';
 
@@ -72,8 +72,10 @@ class _VerifyEmailState extends State<VerifyEmail> {
                                   .read<AuthenticationBloc>()
                                   .add(CheckAuthentication());
                             },
-                            title: TTexts.yourAccountCreatedTitle,
-                            subTitle: TTexts.yourAccountCreatedSubTitle),
+                            title:
+                                context.localizations!.yourAccountCreatedTitle,
+                            subTitle: context
+                                .localizations!.yourAccountCreatedSubTitle),
                       ),
                     );
                   } else if (state is VerificationError) {
@@ -88,7 +90,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const BottomNavigationScreen()),
+                            builder: (_) =>  BottomNavigationScreen()),
                         (route) => false);
                   } else if (state is UnAuthenticatedVerified) {
                     Navigator.pushAndRemoveUntil(
@@ -123,7 +125,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                     // ! Title & Subtitle
 
                     Text(
-                      TTexts.confirmEmail,
+                      context.localizations!.confirmEmail,
                       style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -139,7 +141,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                       height: TSized.spacebetweenItem,
                     ),
                     Text(
-                      TTexts.confirmEmailSubTitle,
+                      context.localizations!.confirmEmailSubTitle,
                       style: Theme.of(context).textTheme.labelMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -157,7 +159,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
                               .read<VerificationBloc>()
                               .add(CheckEmailVerifiedEvent());
                         },
-                        child: Text(TTexts.continues.capitalize()),
+                        child:
+                            Text(context.localizations!.continues.capitalize()),
                       ),
                     ),
 
@@ -172,7 +175,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                               .read<VerificationBloc>()
                               .add(SendEmailVerificationEvent());
                         },
-                        child: const Text(TTexts.resendEmail),
+                        child: Text(context.localizations!.resendEmail),
                       ),
                     ),
                   ],

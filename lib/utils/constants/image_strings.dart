@@ -78,4 +78,12 @@ class TImageString {
       "assets/images/auth/check_verification.json";
   static const String cartEmpty = "assets/images/auth/cart_empty.json";
   static const String noOrders = "assets/images/auth/no_order.json";
+
+
+  // ! chat image
+  static const String chatBotImage = "assets/images/chat/chat_bot.png";
+  static const String chatReply = "assets/images/chat/chat_reply.png";
+  static const String chatModelLoader = "assets/images/chat/chat_model_loader.json";
+
+
 }

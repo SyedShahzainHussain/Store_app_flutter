@@ -12,12 +12,13 @@ import 'package:store/bloc/upload_image/upload_image_event.dart';
 import 'package:store/bloc/upload_image/upload_image_state.dart';
 import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/image/t_circular_image.dart';
-import 'package:store/features/personalizations/view/profile/change_name.dart';
 import 'package:store/features/personalizations/view/profile/widget/profile_menu.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/shimmer/shimmer.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -26,9 +27,9 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         showBackArrow: true,
-        title: Text("Profile"),
+        title: Text(context.localizations!.profile),
       ),
       body: BlocBuilder<FetchUserBloc, FetchUserState>(
         builder: (context, state) {
@@ -74,7 +75,8 @@ class ProfileScreen extends StatelessWidget {
                                   .read<UploadImageBloc>()
                                   .add(UploadImage(image));
                             },
-                            child: const Text("Change Profile Picture"),
+                            child: Text(
+                                context.localizations!.changeProfilePicture),
                           ),
                         ],
                       ),
@@ -90,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     // ! Heading Profile Info
                     TSectionHeading(
-                      title: "Profile Information",
+                      title: context.localizations!.profileInformation,
                       showActionButton: false,
                     ),
                     const SizedBox(
@@ -98,19 +100,19 @@ class ProfileScreen extends StatelessWidget {
                     ),
 
                     TProfileMenu(
-                      title: "Name",
+                      title: context.localizations!.name,
                       value: state.user?.fullName ?? "",
                       onPressed: () {
                         THelperFunction.navigatedToScreen(
-                            context,
-                            ChangeName(
-                              firstName: state.user?.firstName ?? "",
-                              lastName: state.user?.lastName ?? "",
-                            ));
+                            context, RouteName.changeName,
+                            arguments: {
+                              "firstName": state.user?.firstName ?? "",
+                              "lastName": state.user?.lastName ?? "",
+                            });
                       },
                     ),
                     TProfileMenu(
-                      title: "Username",
+                      title: context.localizations!.userName,
                       value: state.user?.userName ?? "",
                       onPressed: () {},
                     ),
@@ -124,14 +126,14 @@ class ProfileScreen extends StatelessWidget {
 
                     // ! Personal Information
                     TSectionHeading(
-                      title: "Personal Information",
+                      title: context.localizations!.personalInformation,
                       showActionButton: false,
                     ),
                     const SizedBox(
                       height: TSized.spacebetweenItem,
                     ),
                     TProfileMenu(
-                      title: "User Id",
+                      title: context.localizations!.userId,
                       value: state.user?.id ?? "",
                       icon: Iconsax.copy,
                       onPressed: () {
@@ -142,22 +144,22 @@ class ProfileScreen extends StatelessWidget {
                       },
                     ),
                     TProfileMenu(
-                      title: "E-mail",
+                      title: context.localizations!.email,
                       value: state.user?.email ?? "",
                       onPressed: () {},
                     ),
                     TProfileMenu(
-                      title: "Phone Number",
+                      title: context.localizations!.phoneNo,
                       value: state.user?.phoneNumber ?? "00000000000",
                       onPressed: () {},
                     ),
                     TProfileMenu(
-                      title: "Gender",
+                      title: context.localizations!.gender,
                       value: "Male",
                       onPressed: () {},
                     ),
                     TProfileMenu(
-                      title: "Date of Birth",
+                      title: context.localizations!.dob,
                       value: "10 Oct, 1823",
                       onPressed: () {},
                     ),
@@ -178,9 +180,9 @@ class ProfileScreen extends StatelessWidget {
                                 .add(DeleteAccountEvent());
                           });
                         },
-                        child: const Text(
-                          "Close Account",
-                          style: TextStyle(color: Colors.red),
+                        child: Text(
+                          context.localizations!.closeAccount,
+                          style: const TextStyle(color: Colors.red),
                         ),
                       ),
                     )

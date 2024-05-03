@@ -5,11 +5,12 @@ import 'package:store/common/widgets/layouts/grid_layout.dart';
 import 'package:store/common/widgets/products/t_cart_products_vertical.dart';
 import 'package:store/data/repositories/categories/categories_repository.dart';
 import 'package:store/features/shop/model/brand_model/brand_model.dart';
-import 'package:store/features/shop/view/allProducts/all_products.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
 
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/shimmer/boxex_shimmer.dart';
 import 'package:store/utils/shimmer/list_tile_shimmer.dart';
 import 'package:store/utils/shimmer/vertical_product_shimmer.dart';
@@ -53,8 +54,8 @@ class CategoryTab extends StatelessWidget {
                       } else if (snapshot.hasData) {
                         final data = snapshot.data as List<BrandModel>;
                         return data.isEmpty
-                            ? const Center(
-                                child: Text("No Brand Found!"),
+                            ? Center(
+                                child: Text(context.localizations!.noBrands),
                               )
                             : ListView.builder(
                                 shrinkWrap: true,
@@ -71,9 +72,11 @@ class CategoryTab extends StatelessWidget {
                       }
                     }),
                 TSectionHeading(
-                  title: "You might like",
+                  title: context.localizations!.youMightLike,
+                  buttontitle: context.localizations!.viewAll,
                   onPressed: () {
-                    THelperFunction.navigatedToScreen(context, const AllProducts());
+                    THelperFunction.navigatedToScreen(
+                        context, RouteName.allProducts);
                   },
                 ),
                 const SizedBox(
@@ -82,15 +85,16 @@ class CategoryTab extends StatelessWidget {
 
                 FutureBuilder(
                     future: CategoriesRepository()
-                        .getProductSpecifidCategory(categoryId: id,limit: 4),
+                        .getProductSpecifidCategory(categoryId: id, limit: 4),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const VerticalProductShimmer();
                       } else {
                         return // ! Products
                             snapshot.data!.isEmpty
-                                ? const Center(
-                                    child: Text("No Products Found!"),
+                                ? Center(
+                                    child:
+                                        Text(context.localizations!.noProducts),
                                   )
                                 : GridLayout(
                                     itemBuilder: (_, index) =>

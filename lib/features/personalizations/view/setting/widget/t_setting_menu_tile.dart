@@ -5,7 +5,7 @@ class TSettingListTile extends StatelessWidget {
   final IconData icon;
   final String title, subTitle;
   final Widget? trailing;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const TSettingListTile({
     super.key,
@@ -27,10 +27,14 @@ class TSettingListTile extends StatelessWidget {
       title: Text(
         title,
         style: Theme.of(context).textTheme.titleMedium,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
         subTitle,
         style: Theme.of(context).textTheme.labelMedium,
+          maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
       trailing: trailing,
       onTap: onTap,

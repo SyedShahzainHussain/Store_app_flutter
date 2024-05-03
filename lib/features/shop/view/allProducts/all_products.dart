@@ -7,6 +7,7 @@ import 'package:store/common/widgets/appBar/app_bar.dart';
 import 'package:store/common/widgets/products/sortable_products.dart';
 import 'package:store/data/status/status.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/shimmer/vertical_product_shimmer.dart';
 
 class AllProducts extends StatefulWidget {
@@ -26,8 +27,8 @@ class _AllProductsState extends State<AllProducts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: Text("Popular Products"),
+      appBar:  CustomAppBar(
+        title: Text(context.localizations!.popularProducts),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
@@ -46,8 +47,8 @@ class _AllProductsState extends State<AllProducts> {
                     );
                   case Status.success:
                     return state.productModel.isEmpty
-                        ? const Center(
-                            child: Text("No Products Found"),
+                        ?  Center(
+                            child: Text(context.localizations!.noProducts),
                           )
                         : SortableProducts(
                             productModel: state.productModel,

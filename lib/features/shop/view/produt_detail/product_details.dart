@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:store/features/shop/model/product_model/product_model.dart';
 import 'package:store/features/shop/view/home/widget/t_section_heading.dart';
-import 'package:store/features/shop/view/product_rating/product_rating.dart';
 import 'package:store/features/shop/view/produt_detail/widget/product_image_slider.dart';
 import 'package:store/features/shop/view/produt_detail/widget/t_bottom_navigation_card.dart';
 import 'package:store/features/shop/view/produt_detail/widget/t_product_attributes.dart';
@@ -12,6 +11,7 @@ import 'package:store/utils/constants/enum.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:readmore/readmore.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 
 class ProductDetails extends StatelessWidget {
   final ProductModel? productModel;
@@ -86,7 +86,7 @@ class ProductDetails extends StatelessWidget {
                   const SizedBox(
                     height: TSized.spacebetweenItem,
                   ),
-      
+
                   // ! Reviews
                   const Divider(),
                   const SizedBox(
@@ -103,12 +103,12 @@ class ProductDetails extends StatelessWidget {
                       IconButton(
                           onPressed: () {
                             THelperFunction.navigatedToScreen(
-                                context, const ProductRating());
+                                context, RouteName.productRating);
                           },
                           icon: const Icon(Iconsax.arrow_right_3))
                     ],
                   ),
-      
+
                   const SizedBox(
                     height: TSized.spacebetweenSections,
                   ),

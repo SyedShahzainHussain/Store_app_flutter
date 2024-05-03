@@ -1,32 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 
-import '../../../../../utils/constants/texts.dart';
-
-class LoginTitle extends StatelessWidget {
+class LoginTitle extends StatefulWidget {
   const LoginTitle({
     super.key,
   });
+
+  @override
+  State<LoginTitle> createState() => _LoginTitleState();
+}
+
+class _LoginTitleState extends State<LoginTitle>
+    with SingleTickerProviderStateMixin {
+  late Animation<double> opacity;
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1500));
+    opacity = Tween(begin: 0.0, end: 1.0).animate(controller);
+    controller.forward();
+    
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      
-        const Image(
-          height: 150,
-          image: AssetImage(TImageString.logo),
+        FadeTransition(
+          opacity: opacity,
+          child: const Image(
+            height: 150,
+            image: AssetImage(TImageString.logo),
+          ),
         ),
-        Text(
-          TTexts.loginTitle,
-          style: Theme.of(context).textTheme.headlineMedium,
+        FadeTransition(
+          opacity: opacity,
+          child: Text(
+            context.localizations!.loginTitle,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
         ),
         const SizedBox(height: TSized.sm),
-        Text(
-          TTexts.loginSubTitle,
-          style: Theme.of(context).textTheme.bodyMedium,
+        FadeTransition(
+          opacity: opacity,
+          child: Text(
+            context.localizations!.loginSubTitle,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         ),
       ],
     );

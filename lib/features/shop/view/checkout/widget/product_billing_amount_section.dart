@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/bloc/cart_item/cart_item_bloc.dart';
 import 'package:store/bloc/cart_item/cart_item_state.dart';
 import 'package:store/utils/constants/size.dart';
+import 'package:store/utils/extension/language.dart';
 import 'package:store/utils/helper/pricing_calculator.dart';
 
 class BillingAmountSection extends StatelessWidget {
@@ -19,7 +20,7 @@ class BillingAmountSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Subtotal",
+                  context.localizations!.subtotal,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
@@ -36,7 +37,7 @@ class BillingAmountSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Shipping Fee",
+                  context.localizations!.shippingFee,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
@@ -53,7 +54,7 @@ class BillingAmountSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Tax Fee",
+                  context.localizations!.taxFee,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
@@ -70,7 +71,7 @@ class BillingAmountSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Order Total",
+                  context.localizations!.orderTotal,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(

@@ -18,9 +18,9 @@ class SingleAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunction.isDarkMode(context);
+    final locale = Localizations.localeOf(context);
     return BlocBuilder<SelectedAddressBloc, SelectedAddressState>(
       builder: (context, state) {
-        
         return GestureDetector(
           onTap: onTap,
           child: TRoundedContainer(
@@ -40,16 +40,15 @@ class SingleAddress extends StatelessWidget {
               children: [
                 Positioned(
                   top: 0,
-                  right: 0,
+                  right: (locale.languageCode == "en") ? 0 : null,
+                  left: (locale.languageCode == "en") ? null : 0,
                   child: Icon(
                     state.isAddressSeleted!.id! == selectedAddress.id
                         ? Iconsax.tick_circle
                         : null,
                     size: 20,
                     color: state.isAddressSeleted!.id! == selectedAddress.id
-                        ? dark
-                            ? TColors.light
-                            : TColors.dark
+                        ? TColors.primary
                         : null,
                   ),
                 ),
@@ -73,7 +72,7 @@ class SingleAddress extends StatelessWidget {
                     const SizedBox(
                       height: TSized.sm / 2,
                     ),
-                     Text(
+                    Text(
                       '${selectedAddress.postalCode} ${selectedAddress.street} ${selectedAddress.city} ${selectedAddress.country}',
                       softWrap: true,
                     )

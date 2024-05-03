@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/bloc/brand_products/brand_products_bloc.dart';
 import 'package:store/bloc/brand_products/brand_products_event.dart';
 import 'package:store/bloc/brand_products/brand_products_state.dart';
-import 'package:store/common/widgets/brands/brands_porducts.dart';
 import 'package:store/common/widgets/container/t_rounded_container.dart';
 import 'package:store/data/status/status.dart';
 import 'package:store/features/shop/model/brand_model/brand_model.dart';
@@ -13,6 +12,7 @@ import 'package:store/utils/constants/colors.dart';
 import 'package:store/utils/constants/image_strings.dart';
 import 'package:store/utils/constants/size.dart';
 import 'package:store/utils/helper/helper_function.dart';
+import 'package:store/utils/routes/route_name.dart';
 import 'package:store/utils/shimmer/boxex_shimmer.dart';
 import 'package:store/utils/shimmer/list_tile_shimmer.dart';
 
@@ -37,7 +37,8 @@ class _TBrandShowCaseState extends State<TBrandShowCase> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => THelperFunction.navigatedToScreen(
-          context, BrandsProducts(brandModel: widget.brandModel)),
+          context, RouteName.brandsProducts,
+          arguments: widget.brandModel),
       child: TRoundedContainer(
         showBorder: true,
         borderColor: TColors.darkGrey,
@@ -53,7 +54,8 @@ class _TBrandShowCaseState extends State<TBrandShowCase> {
               title: widget.brandModel.name!,
               subTitle: widget.brandModel.productCount.toString(),
               onTap: () => THelperFunction.navigatedToScreen(
-                  context, BrandsProducts(brandModel: widget.brandModel)),
+                  context, RouteName.brandsProducts,
+                  arguments: widget.brandModel),
               showBorder: false,
               isNetworkImage: widget.brandModel.image!.isNotEmpty,
             ),
