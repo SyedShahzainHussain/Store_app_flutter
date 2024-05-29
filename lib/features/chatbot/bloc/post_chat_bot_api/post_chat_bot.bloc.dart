@@ -30,7 +30,7 @@ class PostChatBotBloc extends Bloc<PostChatBotEvent, PostChatBotState> {
       emit(PostChatBotSuccess().copyWith(message: List.from(listMsg)));
       loading = false;
     } catch (e) {
-      listMsg.add(MessageModel(role: "model", parts: [RoleModel(text: "")]));
+      listMsg.add(MessageModel(role: "model", parts: [RoleModel(text: "Error Occured")]));
       emit(PostChatBotSuccess().copyWith(message: List.from(listMsg)));
       loading = false;
     }

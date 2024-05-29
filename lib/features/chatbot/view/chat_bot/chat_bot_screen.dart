@@ -154,7 +154,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       isRepeatingAnimation: false,
                       animatedTexts: [
                         TypewriterAnimatedText(
-                          msgModel.parts.first.text,
+                          msgModel.parts!.first.text,
                         ),
                       ],
                     ),
@@ -171,7 +171,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    msgModel.parts.first.text,
+                    msgModel.parts!.first.text,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!

@@ -1,14 +1,14 @@
 class MessageModel {
   String role;
-  List<RoleModel> parts;
+  List<RoleModel>? parts;
 
   MessageModel({
     required this.role,
-    required this.parts,
+     this.parts,
   });
 
   Map<String, dynamic> toJson() {
-    return {"role": role, "parts": parts.map((e) => e.toJson()).toList()};
+    return {"role": role, "parts": parts!.map((e) => e.toJson()).toList()};
   }
 }
 

@@ -92,7 +92,7 @@ class TBottomNavigationCard extends StatelessWidget {
                         padding: const EdgeInsets.all(TSized.md),
                         backgroundColor: TColors.black,
                         side: const BorderSide(color: TColors.black)),
-                    child:  Text(context.localizations!.addToCart),
+                    child: Text(context.localizations!.addToCart),
                   )
                 ],
               );

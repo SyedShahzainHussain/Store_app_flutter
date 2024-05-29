@@ -41,9 +41,10 @@ class ChatBotRepository {
               }
             ]
           }));
-      log(response.statusCode.toString());
+    
       if (response.statusCode >= 200 && response.statusCode < 300) {
         var mData = jsonDecode(response.body);
+          log(mData.toString());
         return mData["candidates"].first["content"]["parts"].first["text"];
       } else {
         throw (HttpException("Server error:${response.statusCode}"));

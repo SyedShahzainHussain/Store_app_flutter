@@ -55,3 +55,14 @@ class SFormatException extends AppException {
 class SPlatformException extends AppException {
   SPlatformException([super.message]);
 }
+
+class DatabaseAlreadyOpenException extends AppException {
+  DatabaseAlreadyOpenException([super.message]);
+}
+
+class DatabaseExceptionMessage extends AppException {
+  DatabaseExceptionMessage([super.message]);
+}
+class DatabaseIsNotOpen extends AppException {
+  DatabaseIsNotOpen([super.message]);
+}
